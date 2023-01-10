@@ -84,12 +84,8 @@ namespace ScytheStation.Menus
             new QMSingleButton(GameMenu1, 4, 1, "Scyts pet snake", delegate { Functions.GameControls.realeasesnake(); }, "Go get em boy!");
             new QMSingleButton(GameMenu1, 1, 2, "Know it all", delegate { Functions.GameControls.findclues(); }, "I found pics of yo ma in bed");
             new QMSingleButton(GameMenu1, 2, 2, "Go to bed", delegate { Functions.GameControls.closelights(); }, "Lights out");
-            new QMToggleButton(GameMenu1, 3, 2, "be annoying as fuck", delegate
-            { Functions.GameControls.BlindLoopOn(); }, delegate { Functions.GameControls.BlindLoopOff(); }, "Hehe Ur Blind!!");
-            new QMToggleButton(GameMenu1, 4, 2, "be annoying as fuck with a gun", delegate
-            { Functions.GameControls.shootloop(); }, delegate { Functions.GameControls.ShootLoopOff(); }, "Hehe 2.08 shotgun shells in ur orb!!!!");
-            new QMSingleButton(GameMenu1, 1, 3, "Troll the detective", delegate { Functions.GameControls.shootweapon(); }, "He must be confused asf rn");
-            new QMSingleButton(GameMenu1, 2, 3, "Close doors", delegate { Functions.GameControls.closewtf(); }, "Idk what this does");
+            new QMSingleButton(GameMenu1, 3, 2, "Troll the detective", delegate { Functions.GameControls.shootweapon(); }, "He must be confused asf rn");
+            new QMSingleButton(GameMenu1, 4, 2, "Close doors", delegate { Functions.GameControls.closewtf(); }, "Idk what this does");
 
             // Among Us (Might Update later)
             new QMSingleButton(GameMenu2, 1, 0, "Force Start", delegate { Functions.GameControls.forcestartAmong(); }, "Also Wow!");
@@ -108,9 +104,6 @@ namespace ScytheStation.Menus
             // GAMEWORLD MENU //
 
             // EXPLOITS MENU //
-            //var AnotherMenu7 = new QMNestedButton(menu, 2, 1, "Fun Menu", "The real shit", "Fun Menu");
-            //new QMToggleButton(AnotherMenu7, 1, 0, "Bomb udom baby", delegate
-            //{ Functions.Exploits.UdonAssOff(); }, delegate { Functions.Exploits.UdonKill(); }, "Legalize nuclear bombs");
             // EXPLOITS MENU //
 
             // ITEMS MENU //

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Diagnostics;
 using MelonLoader;
 using UnityEngine;
@@ -9,13 +8,9 @@ using ScytheStation.Components.Extensions;
 using ScytheStation.Core.Wrappers;
 using ScytheStation.Components;
 using ScytheStation.Core.FileManager;
-using VRC;
-using UnhollowerBaseLib.Attributes;
 using VRC.Udon;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
-using VRC.SDKBase;
 
 namespace ScytheStation.Functions
 {
@@ -151,82 +146,9 @@ namespace ScytheStation.Functions
                 gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "SwitchDown");
             }
         }
-        public static void BlindLoopOn()
-        {
-            if (WorldWrappers.MurderWorld())
-            {
-                foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
-                {
-                    GameControls.flash = true;
-                }
-            }
-        }
-        public static void BlindLoopOff()
-        {
-            if (WorldWrappers.MurderWorld())
-            {
-                foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
-                {
-                    GameControls.flash = false;
-                }
-            }
-        }
-        public static void ShootLoopOff()
-        {
-            if (WorldWrappers.MurderWorld())
-            {
-                foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
-                {
-                    GameControls.shoot = false;
-                }
-            }
-        }
-        public static void ShootLoopOn()
-        {
-            if (WorldWrappers.MurderWorld())
-            {
-                foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
-                {
-                    GameControls.shoot = true;
-                }
-            }
-        }
         public static void shootweapon()
         {
             GameObject.Find("/Game Logic").transform.Find("Weapons/Revolver").gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "SyncFire");
-        }
-
-        public static IEnumerator blindloop(bool v)
-        {
-            GameControls.flash = false;
-            for (; ; )
-            {
-                if (true)
-                {
-                    foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
-                    {
-                        udonBehaviour.SendCustomNetworkEvent(0, "OnLocalPlayerFlashbanged");
-                    }
-                }
-                yield return new WaitForSeconds(2f);
-            }
-            yield break;
-        }
-        public static IEnumerator shootloop()
-        {
-            GameControls.shoot = !GameControls.shoot;
-            for (; ; )
-            {
-                if (GameControls.shoot)
-                {
-                    foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
-                    {
-                        GameObject.Find("/Game Logic").transform.Find("Weapons/Revolver").gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "SyncFire");
-                    }
-                }
-                yield return new WaitForSeconds(0.3f);
-            }
-            yield break;
         }
         public static void realeasesnake()
         {
@@ -348,8 +270,6 @@ namespace ScytheStation.Functions
                 }
             }
         }
-        private static bool flash = false;
-        private static bool shoot = false;
         public static bool Murderwallhack = false;
         public static bool doorscold = true;
     }

@@ -452,8 +452,4 @@
     </Reference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="API\RadialWheel\" />
-  </ItemGroup>
-
 </Project>

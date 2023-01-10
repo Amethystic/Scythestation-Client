@@ -3,7 +3,6 @@ using System.Collections;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
-using ScytheStation.Core.Etc;
 using ScytheStation.Core.FileManager;
 
 namespace ScytheStation.Core.Etc
@@ -25,7 +24,7 @@ namespace ScytheStation.Core.Etc
 			while (Utils.audioSource == null && !Utils.isSent)
             {
                 GameObject gameObject = GameObject.Find("LoadingBackground_TealGradient_Music/LoadingSound");
-				GameObject gameObject2 = GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/LoadingSound");
+				GameObject gameObject2 = GameObject.Find("MenuContent/Popups/LoadingPopup/LoadingSound");
 				Utils.audioSource = ((gameObject != null) ? gameObject.GetComponent<AudioSource>() : null);
 				Utils.audioSource = ((gameObject2 != null) ? gameObject2.GetComponent<AudioSource>() : null);
 				AudioSource qm = GameObject.Find("Canvas_QuickMenu(Clone)").gameObject.AddComponent<AudioSource>();

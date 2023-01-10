@@ -1,11 +1,4 @@
-﻿using ScytheStation.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MelonLoader;
-using System.Threading.Tasks;
-using VRC;
+﻿using VRC;
 
 namespace ScytheStation.Components
 {

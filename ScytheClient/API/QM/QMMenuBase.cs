@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using VRC.UI.Elements;
 using Object = UnityEngine.Object;

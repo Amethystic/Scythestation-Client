@@ -13,7 +13,7 @@ using ScytheStation.Core.FileManager;
 using ScytheStation.Core.Etc;
 using ScytheStation.Components;
 
-[assembly: MelonInfo(typeof(ScytheStation.Main), "ScytheStation", $"1.9", "Scythe Innovation's")]
+[assembly: MelonInfo(typeof(ScytheStation.Main), "ScytheStation", $"2.0", "Scythe Innovation's")]
 [assembly: MelonGame("VRChat", "VRChat")]
 [assembly: MelonAuthorColor(ConsoleColor.Magenta)]
 [assembly: MelonColor(ConsoleColor.DarkMagenta)]
@@ -26,16 +26,15 @@ namespace ScytheStation
     {
         /*Public Static Strings*/
 
-        public static string Version = "1.9";
+        public static string Version = "2.0";
         public static string Name = $"<color=#fc0ac0><b>ScytheStation</b></color> [v{Version}]";
         public static string Author = "Scythe Innovation's";
         public static string N2 = $"<color=#f50a70><b>S</b></color><color=#e10af5><b>c</b></color><color=#b60af5><b>y</b></color><color=#8f0af5><b>t</b></color><color=#5c0af5><b>h</b></color><color=#2d0af5><b>e</b></color> <color=#fcfcfc><b>[v{Version}]</b></color>";
 
         /*Module Listing lol*/
-
+        /* From Peebo29 (MEOWENGINE DEV/PRIVER.PARTY HELPER/ur MOD helper) - "Holy shit your mod was so unoptimized i had to help you update it so it can be useable Heres aall the fixes n shit u needed.. some u dont really need,, btw ur blacklisted from vanix for a decent reason,, some of the shit u have is from scrims old mods which may had licencing on them,, and some u might of ripped from foonix which also prob stole from moonlight,, i would rather yoink shit from hellsing cuz its not scrims code whatsoever + they allowed it too,, im trying to help you for the better but you took the odd way,, so here u go scythe,, enjoy the optimization" */
         public static List<Module> Mod = new List<Module>();
-        /* From Peebo29 (MEOWENGINE DEV/PRIVER.PARTY HELPER) - "Holy shit your mod was so unoptimized i had to help you update it so it can be useable Heres aall the fixes n shit u needed.. some u dont really need,, btw ur blacklisted from vanix for a decent reason,, some of the shit u have is from scrims old mods which may had licencing on them,, and some u might of ripped from foonix which also prob stole from moonlight,, i would rather yoink shit from hellsing cuz its not scrims code whatsoever + they allowed it too,, im trying to help you for the better but you took the odd way,, so here u go scythe,, enjoy the optimization" */
-        /*Get latest DLL or go into master for real source*/
+
         public override void OnInitializeMelon()
         {
             // Mod things b4 loading
@@ -128,7 +127,7 @@ namespace ScytheStation
             audioSource.Play();
             while (audioSource2 == null)
             {
-                GameObject gameObject2 = GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/LoadingSound");
+                GameObject gameObject2 = GameObject.Find("MenuContent/Popups/LoadingPopup/LoadingSound");
                 audioSource2 = ((gameObject2 != null) ? gameObject2.GetComponent<AudioSource>() : null);
                 yield return null;
             }

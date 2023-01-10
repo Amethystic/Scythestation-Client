@@ -1,8 +1,6 @@
 ﻿using ScytheStation.Core.Discord;
-using System;
 using System.Collections.Generic;
 using VRC;
-using MelonLoader;
 
 namespace ScytheStation.Components
 {

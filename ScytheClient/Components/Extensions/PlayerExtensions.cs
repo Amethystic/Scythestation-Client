@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using VRC;
-using VRC.Core;
-using VRC.SDKBase;
-using VRC.UI;
-using VRC.UI.Elements;
+﻿using VRC;
 
 namespace ScytheStation.Components.Extensions
 {

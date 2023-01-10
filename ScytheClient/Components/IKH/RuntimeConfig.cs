@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ScytheStation.Components.IKH
+﻿namespace ScytheStation.Components.IKH
 {
 	public class RuntimeConfig
 	{

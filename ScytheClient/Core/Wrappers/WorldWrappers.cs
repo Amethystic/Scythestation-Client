@@ -2,8 +2,6 @@
 using VRC;
 using VRC.Core;
 using VRC.SDKBase;
-using System;
-using UnityEngine;
 using VRC.Udon;
 
 

@@ -2,7 +2,6 @@
 using MelonLoader;
 using UnityEngine;
 using ApolloCore.API.QM;
-using ScytheStation.Core.FileManager;
 using ScytheStation.API.Utils;
 
 namespace ScytheStation.Menus

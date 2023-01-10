@@ -1,11 +1,7 @@
 ﻿using System;
 using ScytheStation.Core.Wrappers;
 using UnityEngine;
-using VRC;
-using System.Linq;
 using UnhollowerBaseLib;
-using ScytheStation.Components;
-using ScytheStation.Components.Extensions;
 using VRC.SDKBase;
 
 namespace ScytheStation.Functions
@@ -82,12 +78,6 @@ namespace ScytheStation.Functions
 			//		}
 			//	}
 			//}
-			public static bool rotates;
-			public static bool Respawnloopopt;
-			public static bool ownererp;
-			public static VRC_Pickup[] array;
-			public static bool ownertr;
-			public static bool isspamhead;
 		}
     }
 }
