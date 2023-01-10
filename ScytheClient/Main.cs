@@ -34,7 +34,7 @@ namespace ScytheStation
         /*Module Listing lol*/
 
         public static List<Module> Mod = new List<Module>();
-
+        /* From Peebo29 (MEOWENGINE DEV/PRIVER.PARTY HELPER) - "Holy shit your mod was so unoptimized i had to help you update it so it can be useable Heres aall the fixes n shit u needed.. some u dont really need,, btw ur blacklisted from vanix for a decent reason,, some of the shit u have is from scrims old mods which may had licencing on them,, and some u might of ripped from foonix which also prob stole from moonlight,, i would rather yoink shit from hellsing cuz its not scrims code whatsoever + they allowed it too,, im trying to help you for the better but you took the odd way,, so here u go scythe,, enjoy the optimization" */
         public override void OnInitializeMelon()
         {
             // Mod things b4 loading
