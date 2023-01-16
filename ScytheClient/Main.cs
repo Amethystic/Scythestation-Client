@@ -12,7 +12,7 @@ using ScytheStation.Core.FileManager;
 using ScytheStation.Core.Etc;
 using ScytheStation.Components;
 
-[assembly: MelonInfo(typeof(ScytheStation.Main), "ScytheStation (Unpasting process #1)", "2.1", "Scythe Innovation's")]
+[assembly: MelonInfo(typeof(ScytheStation.Main), "ScytheStation", "2.2", "Scythe Innovation's (Unpasting Process #2)")]
 [assembly: MelonGame("VRChat", "VRChat")]
 [assembly: MelonAuthorColor(ConsoleColor.Magenta)]
 [assembly: MelonColor(ConsoleColor.DarkMagenta)]
@@ -25,12 +25,13 @@ namespace ScytheStation
     {
         /*Public Static Strings*/
 
-        public static string Version = "2.1";
+        public static string Version = "2.2";
         public static string Name = $"<color=#fc0ac0><b>ScytheStation</b></color> [v{Version}]";
         public static string Author = "Scythe Innovation's";
         public static string N2 = $"<color=#f50a70><b>S</b></color><color=#e10af5><b>c</b></color><color=#b60af5><b>y</b></color><color=#8f0af5><b>t</b></color><color=#5c0af5><b>h</b></color><color=#2d0af5><b>e</b></color> <color=#fcfcfc><b>[v{Version}]</b></color>";
 
         /*Module Listing lol*/
+
         /* From Scyt - "Unskidded :3" */
         public static List<Module> Mod = new List<Module>();
 
@@ -44,18 +45,19 @@ namespace ScytheStation
             MelonLogger.Msg(ConsoleColor.Gray, "___________________________________________________");
             MelonLogger.WriteSpacer();
             MelonLogger.Msg(ConsoleColor.Gray, "[LOADER] Initializing ScytheStation...");
+            Functions.GameControls.UnCapLol();
             Directories.CreateFolders();
             Installer.Init();
-            MelonUtils.SetConsoleTitle($"ScytheStation [v{Version}]");
             Directories.ValidateFolders();
+            MelonUtils.SetConsoleTitle($"ScytheStation [v{Version}]");
             Patches.Init();
-            Core.Discord.Manager.InitRPC();
         }
 
         public override void OnApplicationLateStart()
         {
             // load u faggot
             VRC.Integrations.DiscordManager.field_Private_Static_Int64_0.Equals(false);
+            Core.Discord.Manager.InitRPC();
             Etc.D();
             Settings.DiscordRPCOn();
             Etc.C();

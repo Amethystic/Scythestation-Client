@@ -7,7 +7,6 @@ using VRC.Core;
 using ScytheStation.Components.Extensions;
 using ScytheStation.Core.Wrappers;
 using ScytheStation.Components;
-using ScytheStation.Core.FileManager;
 using VRC.Udon;
 using System.Collections.Generic;
 
@@ -15,17 +14,6 @@ namespace ScytheStation.Functions
 {
     internal class GameControls
     {
-        public static void ReInject()
-        {
-            MelonLogger.Msg(ConsoleColor.Red, "[GC] [EACMELON] ReInjecting...");
-            Process.Start($"{Directories.Folder}\\Dependencies\\EacMelon.exe");
-            //MelonPreferences.Save(); // stop using this please
-            Settings.DiscordRPCOff();
-            Process.Start("start_protected_game.exe");
-            MelonLogger.Msg(ConsoleColor.Green, "[GC] [GAME] ReInjection Complete! Now Exiting the game");
-            Thread.Sleep(5);
-            Process.GetCurrentProcess().Kill();
-        }
         public static void LagGame()
         {
             Application.targetFrameRate = 1;
@@ -68,23 +56,6 @@ namespace ScytheStation.Functions
         }
 
         // World Bs (MURDER)
-        public static void forcestartMurd()
-        {
-            if (WorldWrappers.MurderWorld())
-            {
-                foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
-                {
-                    udonBehaviour.SendCustomNetworkEvent(0, "SyncStartGame");
-                }
-            }
-        }
-        public static void forceendMurd()
-        {
-            foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
-            {
-                udonBehaviour.SendCustomNetworkEvent(0, "SyncAbort");
-            }
-        }
         public static void BystanderWin()
         {
             foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
@@ -220,23 +191,6 @@ namespace ScytheStation.Functions
             }
         }
         // World Bs (AMONG US)
-        public static void forcestartAmong()
-        {
-            if (WorldWrappers.Amongunsworld())
-            {
-                foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
-                {
-                    udonBehaviour.SendCustomNetworkEvent(0, "Btn_Start");
-                }
-            }
-        }
-        public static void forceendAmong()
-        {
-            foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
-            {
-                udonBehaviour.SendCustomNetworkEvent(0, "SyncAbort");
-            }
-        }
         public static void ejecteveryone()
         {
             if (WorldWrappers.Amongunsworld())
@@ -314,28 +268,19 @@ namespace ScytheStation.Functions
                 }
             }
         }
-        public static void KillAllSpam()
+        public static void FS()
         {
-            Game.Die = true;
-
-            if (Game.Die == true)
+            foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
             {
-                int Loop = 0;
-                for (; ; )
-                {
-                    if (Loop < 50)
-                    {
-                        foreach (GameObject gameObject in Resources.FindObjectsOfTypeAll<GameObject>())
-                        {
-                            if (gameObject.name.Contains("Game Logic"))
-                            {
-                                gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "KillLocalPlayer");
-                            }
-                        }
-                        Loop++;
-                    } else { break; }
-                } // By Peebo29 [From https://www.tutorialsteacher.com/csharp/csharp-for-loop]
-            } else if (Game.Die == false) { Game.Die = false; }
+                udonBehaviour.SendCustomNetworkEvent(0, "Btn_Start");
+            }
+        }
+        public static void FE()
+        {
+            foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+            {
+                udonBehaviour.SendCustomNetworkEvent(0, "SyncAbort");
+            }
         }
     }
 }

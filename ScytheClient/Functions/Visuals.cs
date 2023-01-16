@@ -36,7 +36,7 @@ namespace ScytheStation.Functions
                         }
                         catch { MelonLogger.Msg(ConsoleColor.DarkBlue, "[VISUALS] Failed to start ESP On Players"); }
                     }
-                } else { MainSettings.ESPCapsules = false; HighlightsFX.field_Private_Static_HighlightsFX_0.enabled = false; MelonLogger.Msg(ConsoleColor.DarkBlue, "[VISUALS] ESP Off"); }
+                } else if (MainSettings.ESPCapsules == false) { MainSettings.ESPCapsules = false; HighlightsFX.field_Private_Static_HighlightsFX_0.enabled = false; MelonLogger.Msg(ConsoleColor.DarkBlue, "[VISUALS] ESP Off"); }
             }
         }
     }
