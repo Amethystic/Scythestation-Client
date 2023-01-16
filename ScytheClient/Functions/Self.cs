@@ -26,18 +26,19 @@ namespace ScytheStation.Functions
         }
         public static void DefaultAVI()
         {
+            MelonLogger.Msg(ConsoleColor.Blue, "[AVATAR] [REP] :D");
             PlayerWrappers.ChangeAvatar("avtr_23a69f06-1311-442f-986c-bbe520bef6a3");
         }
         public static void AVIID()
         {
             MelonLogger.Msg(ConsoleColor.Yellow, "[AVATAR] [NOTICE] Make sure to have an avatar ID copied to your clipboard!");
+
             if (SendToClip.GetClipboard().StartsWith("avtr"))
             {
                 PlayerWrappers.ChangeAvatar(SendToClip.GetClipboard());
                 MelonLogger.Msg(ConsoleColor.Green, "[AVATAR] Changed By ID");
                 return;
-            }
-            MelonLogger.Msg(ConsoleColor.Red, "[AVATAR] [ERROR] Failed to send ID");
+            } MelonLogger.Msg(ConsoleColor.Red, "[AVATAR] [ERROR] Failed to send ID");
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using VRC.SDKBase;
-using ScytheStation.Components.Extensions;
 using ScytheStation.Components;
 using VRC;
 
@@ -8,107 +7,109 @@ namespace ScytheStation.Functions
 {
     internal class Movements
     {
-        public static void SpeedRunOn()
+        // Fly = Replaced
+        // Speedhack = Replaced n simpler
+        public static float NewSpeedValue = 10f;
+        public static int speed = 25;
+        public static float FlySpeed = 25f;
+        public static bool IsRunning = false;
+        public static Vector3 origGrav = default(Vector3);
+        public static void SpeedRunToggle()
         {
-            Networking.LocalPlayer.SetWalkSpeed(Networking.LocalPlayer.GetWalkSpeed() * Movements.NewSpeedValue);
-            Networking.LocalPlayer.SetRunSpeed(Networking.LocalPlayer.GetRunSpeed() * Movements.NewSpeedValue);
-            Networking.LocalPlayer.SetStrafeSpeed(Networking.LocalPlayer.GetStrafeSpeed() * Movements.NewSpeedValue);
-        }
-        public static void SpeedRunOff()
-        {
-            Networking.LocalPlayer.SetWalkSpeed(2f);
-            Networking.LocalPlayer.SetRunSpeed(4f);
-            Networking.LocalPlayer.SetStrafeSpeed(2f);
+            if (MainSettings.Run == true)
+            {
+                MainSettings.Run = true;
+                Networking.LocalPlayer.SetWalkSpeed(NewSpeedValue);
+                Networking.LocalPlayer.SetRunSpeed(speed);
+                Networking.LocalPlayer.SetStrafeSpeed(speed);
+            }
+            else if (MainSettings.Run == false)
+            {
+                MainSettings.Run = false;
+                Networking.LocalPlayer.SetWalkSpeed(2f);
+                Networking.LocalPlayer.SetRunSpeed(4f);
+                Networking.LocalPlayer.SetStrafeSpeed(2f);
+            }
         }
 		public static void FlyOn()
         {
-			MainSettings.flytoggle = true;
-			VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<CharacterController>().enabled = false;
-			Movements.origGrav = Physics.gravity;
-			Physics.gravity = Vector3.zero;
-		}
-		public static void FlyOff()
-		{
+            MainSettings.flytoggle = true;
+
+            if (MainSettings.flytoggle == true)
+            {
+                VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<CharacterController>().enabled = false;
+                origGrav = Physics.gravity;
+                Physics.gravity = Vector3.zero;
+            }
+        }
+        public static void FlyOff()
+        {
             MainSettings.flytoggle = false;
-			VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<CharacterController>().enabled = true;
-            Physics.gravity = Movements.origGrav;
+
+            if (MainSettings.flytoggle == false)
+            {
+                VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<CharacterController>().enabled = true;
+                Physics.gravity = origGrav;
+            }
         }
         public static void OnUpdate()
         {
             if (MainSettings.flytoggle)
             {
-                if (RoomManager.field_Internal_Static_ApiWorld_0 == null)
+                if (Player.prop_Player_0.field_Private_VRCPlayerApi_0.IsUserInVR())
                 {
-                    return;
+                    if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") < 0f)
+                    {
+                        Player.prop_Player_0.transform.position -= VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.up * FlySpeed;
+                    }
+                    if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") > 0f)
+                    {
+                        Player.prop_Player_0.transform.position += VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.up * FlySpeed;
+                    }
+                    if (Input.GetAxis("Vertical") != 0f)
+                    {
+                        Player.prop_Player_0.transform.position += VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.forward * (FlySpeed * Input.GetAxis("Vertical"));
+                    }
+                    if (Input.GetAxis("Horizontal") != 0f)
+                    {
+                        Player.prop_Player_0.transform.position += VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.right * (FlySpeed * Input.GetAxis("Horizontal"));
+                    }
+                    Networking.LocalPlayer.SetVelocity(Vector3.zero);
                 }
-                if (Movements.LocalPlayer == null || Movements.CameraTransform == null)
+                else
                 {
-                    Movements.LocalPlayer = PlayerExtensions.LocalPlayer;
-                    Movements.CameraTransform = Camera.main.transform;
-                }
-                if (Input.GetAxis("Vertical") != 10f)
-                {
-                    Movements.LocalPlayer.transform.position += Movements.CameraTransform.forward * 7f * Time.deltaTime * Input.GetAxis("Vertical");
-                }
-                if (Input.GetAxis("Horizontal") != 10f)
-                {
-                    Movements.LocalPlayer.transform.position += Movements.CameraTransform.right * 7f * Time.deltaTime * Input.GetAxis("Horizontal");
-                }
-                if (Input.GetKey(KeyCode.E))
-                {
-                    Movements.LocalPlayer.transform.position += Movements.CameraTransform.up * 7f * Time.deltaTime;
-                }
-                if (Input.GetKey(KeyCode.Q))
-                {
-                    Movements.LocalPlayer.transform.position += Movements.CameraTransform.up * (float)(-(float)Movements.speed) * 2f * Time.deltaTime;
-                }
-                if (Input.GetKey(KeyCode.A))
-                {
-                    Movements.LocalPlayer.transform.position += Movements.CameraTransform.right * (float)(-(float)Movements.speed) * 2f * Time.deltaTime;
-                }
-                if (Input.GetKey(KeyCode.D))
-                {
-                    Movements.LocalPlayer.transform.position += Movements.CameraTransform.right * 7f * Time.deltaTime;
-                }
+                    if (Input.GetKey(KeyCode.W))
+                    {
+                        Player.prop_Player_0.transform.position += VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.forward * FlySpeed;
+                    }
+                    if (Input.GetKey(KeyCode.S))
+                    {
+                        Player.prop_Player_0.transform.position -= VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.forward * FlySpeed;
+                    }
+                    if (Input.GetKey(KeyCode.A))
+                    {
+                        Player.prop_Player_0.transform.position -= VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.right * (FlySpeed);
+                    }
+                    if (Input.GetKey(KeyCode.D))
+                    {
+                        Player.prop_Player_0.transform.position += VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.right * (FlySpeed);
+                    }
+                    if (Input.GetKey(KeyCode.Q))
+                    {
+                        Player.prop_Player_0.transform.position -= VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.up * (FlySpeed);
+                    }
+                    if (Input.GetKey(KeyCode.E))
+                    {
+                        Player.prop_Player_0.transform.position += VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.up * (FlySpeed);
+                    }
+                    Networking.LocalPlayer.SetVelocity(Vector3.zero);
+                } return;
             }
         }
-        public static void JumpingShitOn()
-        {
-            MainSettings.Idek = true;
-        }
-        public static void JumpingShitOff()
-        {
-            MainSettings.Idek = false;
-        }
-        public static void ClickTPOn()
+        public static void ClickTPToggle()
         {
             MainSettings.ClickTP = true;
-        }
-        public static void ClickTPOff()
-        {
-            MainSettings.ClickTP = false;
-        }
-        public static void JumpingShit()
-        {
-            if (MainSettings.Idek == true)
-            {
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    Vector3 velocity = Networking.LocalPlayer.GetVelocity();
-                    velocity.y = Networking.LocalPlayer.GetJumpImpulse();
-                    Networking.LocalPlayer.SetVelocity(velocity);
-                }
-                else if (Input.GetButtonDown("Jump"))
-                {
-                    Vector3 velocity = Networking.LocalPlayer.GetVelocity();
-                    velocity.y = Networking.LocalPlayer.GetJumpImpulse();
-                    Networking.LocalPlayer.SetVelocity(velocity);
-                }
-            }
-            else { }
-        }
-        public static void ClickTPHandle()
-        {
+
             if (MainSettings.ClickTP == true)
             {
                 if (RoomManager.field_Internal_Static_ApiWorld_0 != null && RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
@@ -119,16 +120,7 @@ namespace ScytheStation.Functions
                         if (Physics.Raycast(ray, out RaycastHit raycastHit)) VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position = raycastHit.point;
                     }
                 }
-            }
-            else { }
+            } else { MainSettings.ClickTP = false; }
         }
-
-        public static float NewSpeedValue = 10f;
-		public static int speed = 5;
-		private static Player LocalPlayer;
-		private static Transform CameraTransform;
-		public static float FlySpeed = 25f;
-		public static bool IsRunning = false;
-		public static Vector3 origGrav = default(Vector3);
 	}
 }

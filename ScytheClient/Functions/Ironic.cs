@@ -44,8 +44,7 @@ namespace ScytheStation.Functions
                     Loop++;
                 }
                 else { break; }
-            }
-            // By Peebo29 [From https://www.tutorialsteacher.com/csharp/csharp-for-loop]
+            } // By Peebo29 [From https://www.tutorialsteacher.com/csharp/csharp-for-loop]
         }
     }
 }

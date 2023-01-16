@@ -1,7 +1,6 @@
 ﻿using ApolloCore.API.QM;
 using MelonLoader;
 using System;
-using ScytheStation.Components;
 
 namespace ScytheStation.Menus
 {
@@ -37,14 +36,14 @@ namespace ScytheStation.Menus
             // MOVEMENT MENU //
             var AnotherMenu3 = new QMNestedButton(menu, 2, 0, "Movement Controls", "Localplayer or fucking whatever idk", "Movement Controls");
             new QMToggleButton(AnotherMenu3, 1, 0, "SpeedRunner time", delegate
-            { Functions.Movements.SpeedRunOn(); MelonLogger.Msg(ConsoleColor.Blue, "[MC] [ON] You're too fast"); }, delegate
-            { Functions.Movements.SpeedRunOff(); MelonLogger.Msg(ConsoleColor.DarkBlue, "[MC] [OFF] U too slow"); }, "This fucks with ur speed");
+            { Functions.Movements.SpeedRunToggle(); MelonLogger.Msg(ConsoleColor.Blue, "[MC] [ON] You're too fast"); }, delegate
+            { Functions.Movements.SpeedRunToggle(); MelonLogger.Msg(ConsoleColor.DarkBlue, "[MC] [OFF] U too slow"); }, "This fucks with ur speed");
             new QMToggleButton(AnotherMenu3, 2, 0, "I believe i can Fly", delegate
             { Functions.Movements.FlyOn(); MelonLogger.Msg(ConsoleColor.Blue, "[MC] [ON] Im an angel"); }, delegate
             { Functions.Movements.FlyOff(); MelonLogger.Msg(ConsoleColor.DarkBlue, "[MC] [OFF] Hex Hex Hex Hex Hex Hex Hex Hex Hex Hex Hex Hex Hex Hex Hex Hex "); }, "This makes u fly lol");
             new QMToggleButton(AnotherMenu3, 3, 0, "Click TP", delegate
-            { Functions.Movements.ClickTPOn(); MelonLogger.Msg(ConsoleColor.Blue, "[MC] [ON] Click anywhere to teleport"); }, delegate
-            { Functions.Movements.ClickTPOff(); MelonLogger.Msg(ConsoleColor.DarkBlue, "[MC] [OFF] Ok then fuck u then"); }, "This makes u teleport by clicking places lol (Ctrl + Mousebutton0 (Idk neither))");
+            { Functions.Movements.ClickTPToggle(); MelonLogger.Msg(ConsoleColor.Blue, "[MC] [ON] Click anywhere to teleport"); }, delegate
+            { Functions.Movements.ClickTPToggle(); MelonLogger.Msg(ConsoleColor.DarkBlue, "[MC] [OFF] Ok then fuck u then"); }, "This makes u teleport by clicking places lol (Ctrl + Mousebutton0 (Idk neither))");
             // MOVEMENT MENU //
 
             // SELF MENU //
@@ -56,12 +55,9 @@ namespace ScytheStation.Menus
 
             // VISUAL MENU //
             var AnotherMenu5 = new QMNestedButton(menu, 4, 0, "Visuals", "I can see you!", "Visuals");
-            new QMToggleButton(AnotherMenu5, 1, 0, "Visualize all Items", delegate
-            { Functions.Items.ObjectESP.Enable(); MainSettings.PickupESP = true; MelonLogger.Msg(ConsoleColor.Blue, "[V | IESP] [ON] I see things"); }, delegate
-            { Functions.Items.ObjectESP.Disable(); MainSettings.PickupESP = false; MelonLogger.Msg(ConsoleColor.DarkBlue, "[V | IESP] [OFF] Im healed"); }, "Shows items around the instance");
-            new QMToggleButton(AnotherMenu5, 2, 0, "Visualize all Players", delegate
-            { Functions.Visuals.PlayerESP.ESPOn(); MainSettings.ESPCapsules = true; }, delegate
-            { Functions.Visuals.PlayerESP.ESPOff(); MainSettings.ESPCapsules = false; }, "Highlights players with capsules");
+            new QMToggleButton(AnotherMenu5, 1, 0, "Visualize all Players", delegate
+            { Functions.Visuals.PlayerESP.ESPToggle(); }, delegate
+            { Functions.Visuals.PlayerESP.ESPToggle(); }, "Highlights players with capsules");
             // VISUAL MENU //
 
             // GAMEWORLD MENU //
@@ -78,14 +74,22 @@ namespace ScytheStation.Menus
             new QMSingleButton(GameMenu1, 2, 0, "Force End", delegate { Functions.GameControls.forceendMurd(); }, "Wow!");
             new QMSingleButton(GameMenu1, 3, 0, "Murder Wins", delegate { Functions.GameControls.MurderWin(); }, "Hackrt!");
             new QMSingleButton(GameMenu1, 4, 0, "The blinder", delegate { Functions.GameControls.blindall(); }, "wtf!");
-            new QMSingleButton(GameMenu1, 1, 1, "Bystander Gets a W", delegate { Functions.GameControls.BystanderW(); }, "how u gon hak! then lose.. wtf!! - Plasma");
+            new QMSingleButton(GameMenu1, 1, 1, "Bystander Gets a W", delegate { Functions.GameControls.BystanderWin(); }, "how u gon hak! then lose.. wtf!! - Plasma");
             new QMSingleButton(GameMenu1, 2, 1, "Start a Minigame", delegate { Functions.GameControls.unlockminigame(); }, "no way bruh");
             new QMSingleButton(GameMenu1, 3, 1, "Deathmatch", delegate { Functions.GameControls.deathmatch(); }, "well someone browk da gawm *snort*");
             new QMSingleButton(GameMenu1, 4, 1, "Scyts pet snake", delegate { Functions.GameControls.realeasesnake(); }, "Go get em boy!");
             new QMSingleButton(GameMenu1, 1, 2, "Know it all", delegate { Functions.GameControls.findclues(); }, "I found pics of yo ma in bed");
-            new QMSingleButton(GameMenu1, 2, 2, "Go to bed", delegate { Functions.GameControls.closelights(); }, "Lights out");
+            new QMSingleButton(GameMenu1, 2, 2, "Go to bed", delegate { Functions.GameControls.flickthelights(); }, "Lights out");
             new QMSingleButton(GameMenu1, 3, 2, "Troll the detective", delegate { Functions.GameControls.shootweapon(); }, "He must be confused asf rn");
-            new QMSingleButton(GameMenu1, 4, 2, "Close doors", delegate { Functions.GameControls.closewtf(); }, "Idk what this does");
+            new QMSingleButton(GameMenu1, 4, 2, "Close doors", delegate { Functions.GameControls.closedoors(); }, "Idk what this does");
+
+            var GameMenuExtras = new QMNestedButton(GameMenu1, 1, 3f, "->", "", "Next Page");
+            new QMToggleButton(GameMenuExtras, 1, 0, "Gun Spammer", delegate
+            { Functions.GameControls.SpamGun(); }, delegate
+            { Functions.GameControls.SpamGun(); }, "AAAAAAAAAAAAAAAA");
+            new QMToggleButton(GameMenuExtras, 2, 0, "Hard of seeing Spammer", delegate
+            { Functions.GameControls.SpamBlind(); }, delegate
+            { Functions.GameControls.SpamBlind(); }, "AAAAAAAAAAAAAAAA V2");
 
             // Among Us (Might Update later)
             new QMSingleButton(GameMenu2, 1, 0, "Force Start", delegate { Functions.GameControls.forcestartAmong(); }, "Also Wow!");
@@ -99,20 +103,11 @@ namespace ScytheStation.Menus
 
             // Etc (Might Update later)
             new QMSingleButton(GameMenu3, 1, 0, "Kill Everyone", delegate { Functions.GameControls.KillAll(); }, "Scythe after the | after the v1.5 ScytheStation Update");
-
+            new QMToggleButton(GameMenu3, 2, 4, "Death Forever", delegate
+            { Functions.GameControls.KillAllSpam(); }, delegate
+            { Functions.GameControls.KillAllSpam(); }, "AAAAAAAAAAAAAAAA V3");
             // -0--------------------------------8-
             // GAMEWORLD MENU //
-
-            // EXPLOITS MENU //
-            // EXPLOITS MENU //
-
-            // ITEMS MENU //
-            //var AnotherMenu8 = new QMNestedButton(menu, 3, 1, "Item Controls", "Funny paste take items lelel lelel", "Item Controls");
-            //new QMSingleButton(AnotherMenu8, 1, 0, "Respawn Pickups", delegate { Functions.Items.Objects.respawnpickups(); }, "Yu know");
-            //new QMSingleButton(AnotherMenu8, 2, 0, "Own Pickups", delegate { Functions.Items.Objects.objectowner(); }, "Yu know pt2");
-            //new QMSingleButton(AnotherMenu8, 3, 0, "Rotate Pickups", delegate { Functions.Items.Objects.rotateobj(); }, "What does this even do??????????????");
-            //new QMSingleButton(AnotherMenu8, 4, 0, "Bring Pickups", delegate { Functions.Items.Objects.BPickups(); }, "Yoinks pickups");
-            // ITEMS MENU //
         }
     }
 }

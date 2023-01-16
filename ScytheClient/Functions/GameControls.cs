@@ -9,7 +9,6 @@ using ScytheStation.Core.Wrappers;
 using ScytheStation.Components;
 using ScytheStation.Core.FileManager;
 using VRC.Udon;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace ScytheStation.Functions
@@ -20,7 +19,7 @@ namespace ScytheStation.Functions
         {
             MelonLogger.Msg(ConsoleColor.Red, "[GC] [EACMELON] ReInjecting...");
             Process.Start($"{Directories.Folder}\\Dependencies\\EacMelon.exe");
-            MelonPreferences.Save();
+            //MelonPreferences.Save(); // stop using this please
             Settings.DiscordRPCOff();
             Process.Start("start_protected_game.exe");
             MelonLogger.Msg(ConsoleColor.Green, "[GC] [GAME] ReInjection Complete! Now Exiting the game");
@@ -49,14 +48,15 @@ namespace ScytheStation.Functions
         }
         public static void Quit()
         {
-            MelonPreferences.Save();
+            //MelonPreferences.Save(); // stop using this please
             Settings.DiscordRPCOff();
             Thread.Sleep(5);
             Process.GetCurrentProcess().Kill();
         }
 
         // World Bs
-
+        public static bool Murderwallhack = false;
+        public static bool doorscold = true;
         public static void WorldID()
         {
             if (WorldWrappers.GetLocation() != "")
@@ -64,16 +64,10 @@ namespace ScytheStation.Functions
                 SendToClip.SetClipboard(" ```SCYTHESTATION``` \n" + WorldWrappers.GetLocation() + "\n ```SCYTHESTATION``` ");
             }
             MelonLogger.WriteSpacer();
-            {
-            };
-            MelonLogger.Msg(ConsoleColor.Green, "SCYTHE >> World ID: " + WorldWrappers.GetLocation() + " copied to clipboard.");
+            { }; MelonLogger.Msg(ConsoleColor.Green, "SCYTHE >> World ID: " + WorldWrappers.GetLocation() + " copied to clipboard.");
         }
 
         // World Bs (MURDER)
-        private static void Sendmurdergmj(string udonevent)
-        {
-            GameObject.Find("/Game Logic").GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, udonevent);
-        }
         public static void forcestartMurd()
         {
             if (WorldWrappers.MurderWorld())
@@ -86,23 +80,23 @@ namespace ScytheStation.Functions
         }
         public static void forceendMurd()
         {
-            if (WorldWrappers.MurderWorld())
+            foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
             {
-                GameControls.Sendmurdergmj("SyncAbort");
+                udonBehaviour.SendCustomNetworkEvent(0, "SyncAbort");
             }
         }
-        public static void BystanderW()
+        public static void BystanderWin()
         {
-            if (WorldWrappers.MurderWorld())
+            foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
             {
-                GameControls.Sendmurdergmj("SyncVictoryB");
+                udonBehaviour.SendCustomNetworkEvent(0, "SyncVictoryB");
             }
         }
         public static void MurderWin()
         {
-            if (WorldWrappers.MurderWorld())
+            foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
             {
-                GameControls.Sendmurdergmj("SyncVictoryM");
+                udonBehaviour.SendCustomNetworkEvent(0, "SyncVictoryM");
             }
         }
         public static void blindall()
@@ -135,7 +129,7 @@ namespace ScytheStation.Functions
                 }
             }
         }
-        public static void closelights()
+        public static void flickthelights()
         {
             List<GameObject> list = new List<GameObject>
             {
@@ -164,7 +158,7 @@ namespace ScytheStation.Functions
                 }
             }
         }
-        public static void closewtf()
+        public static void closedoors()
         {
             if (WorldWrappers.MurderWorld())
             {
@@ -174,7 +168,57 @@ namespace ScytheStation.Functions
                 }
             }
         }
-
+        public static void SpamGun()
+        {
+            if (WorldWrappers.MurderWorld())
+            {
+                Game.SpamGun = true;
+                // Peebo29 [From https://www.tutorialsteacher.com/csharp/csharp-for-loop]
+                if (Game.SpamGun == true)
+                {
+                    int Loop = 0;
+                    foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+                    {
+                        if (Loop < 100)
+                        {
+                            GameObject.Find("/Game Logic").transform.Find("Weapons/Revolver").gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "SyncFire");
+                            Loop++;
+                        } else { break; }
+                    }
+                } else if (Game.SpamGun == false) { Game.SpamGun = false; }
+            }
+        }
+        public static void SpamBlind()
+        {
+            if (WorldWrappers.MurderWorld())
+            {
+                Game.SpamBlind = true;
+                // By Peebo29 [From https://www.tutorialsteacher.com/csharp/csharp-for-loop]
+                if (Game.SpamBlind == true)
+                {
+                    int Loop = 0;
+                    foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+                    {
+                        if (Loop < 100)
+                        {
+                            udonBehaviour.SendCustomNetworkEvent(0, "OnLocalPlayerFlashbanged");
+                            udonBehaviour.SendCustomNetworkEvent(0, "OnLocalPlayerBlinded");
+                            Loop++;
+                        } else { break; }
+                    }
+                } else if (Game.SpamBlind == false) { Game.SpamBlind = false; }
+            }
+        }
+        public static void LemmeCDem()
+        {
+            if (WorldWrappers.MurderWorld())
+            {
+                foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+                {
+                    udonBehaviour.SendCustomNetworkEvent(0, "OnLocalPlayerAssignedRole");
+                }
+            }
+        }
         // World Bs (AMONG US)
         public static void forcestartAmong()
         {
@@ -188,9 +232,9 @@ namespace ScytheStation.Functions
         }
         public static void forceendAmong()
         {
-            if (WorldWrappers.Amongunsworld())
+            foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
             {
-                GameControls.Sendmurdergmj("SyncAbort");
+                udonBehaviour.SendCustomNetworkEvent(0, "SyncAbort");
             }
         }
         public static void ejecteveryone()
@@ -270,7 +314,28 @@ namespace ScytheStation.Functions
                 }
             }
         }
-        public static bool Murderwallhack = false;
-        public static bool doorscold = true;
+        public static void KillAllSpam()
+        {
+            Game.Die = true;
+
+            if (Game.Die == true)
+            {
+                int Loop = 0;
+                for (; ; )
+                {
+                    if (Loop < 50)
+                    {
+                        foreach (GameObject gameObject in Resources.FindObjectsOfTypeAll<GameObject>())
+                        {
+                            if (gameObject.name.Contains("Game Logic"))
+                            {
+                                gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "KillLocalPlayer");
+                            }
+                        }
+                        Loop++;
+                    } else { break; }
+                } // By Peebo29 [From https://www.tutorialsteacher.com/csharp/csharp-for-loop]
+            } else if (Game.Die == false) { Game.Die = false; }
+        }
     }
 }
