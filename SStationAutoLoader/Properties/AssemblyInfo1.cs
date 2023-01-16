@@ -17,7 +17,6 @@ using MelonLoader;
 [assembly: AssemblyCompany("Microsoft Inc")]
 [assembly: AssemblyConfiguration("Debug")]
 [assembly: AssemblyProduct("Windows 11")]
-[assembly: MelonPriority(0)]
 
 // Setting ComVisible to false makes the types in this assembly not visible to COM
 // components.  If you need to access a type in this assembly from COM, set the ComVisible
