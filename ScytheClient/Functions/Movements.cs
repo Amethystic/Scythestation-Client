@@ -11,21 +11,22 @@ namespace ScytheStation.Functions
         // Speedhack = Replaced n simpler
         public static float NewSpeedValue = 10f;
         public static int speed = 25;
-        public static float FlySpeed = 25f;
-        public static bool IsRunning = false;
+        public static float FlySpeed = 5f;
         public static Vector3 origGrav = default(Vector3);
         public static void SpeedRunToggle()
         {
             if (MainSettings.Run == true)
             {
                 MainSettings.Run = true;
+
                 Networking.LocalPlayer.SetWalkSpeed(NewSpeedValue);
-                Networking.LocalPlayer.SetRunSpeed(speed);
-                Networking.LocalPlayer.SetStrafeSpeed(speed);
+                Networking.LocalPlayer.SetRunSpeed(NewSpeedValue);
+                Networking.LocalPlayer.SetStrafeSpeed(NewSpeedValue);
             }
             else if (MainSettings.Run == false)
             {
                 MainSettings.Run = false;
+
                 Networking.LocalPlayer.SetWalkSpeed(2f);
                 Networking.LocalPlayer.SetRunSpeed(4f);
                 Networking.LocalPlayer.SetStrafeSpeed(2f);
@@ -103,9 +104,11 @@ namespace ScytheStation.Functions
                         Player.prop_Player_0.transform.position += VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.up * (FlySpeed);
                     }
                     Networking.LocalPlayer.SetVelocity(Vector3.zero);
-                } return;
+                }
+                return;
             }
         }
+        // SCRIIAAAAMM!!!!!!!
         public static void ClickTPToggle()
         {
             MainSettings.ClickTP = true;

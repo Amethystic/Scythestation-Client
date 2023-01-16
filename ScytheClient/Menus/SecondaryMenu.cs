@@ -19,9 +19,8 @@ namespace ScytheStation.Menus
             // GAME MENU //
             /* Main Settings Buttons */
             var AnotherMenu2 = new QMNestedButton(menu, 4, 3f, "Game Controls", "This tooltip goes hard fr fr - Scrim", "Game Controls");
-            new QMSingleButton(AnotherMenu2, 1, 3f, "<color=#fa0702><b>Reinject & Restart Game</b></color>", delegate { Functions.GameControls.ReInject(); }, "Reinjects and Restarts with EACMELON <color=#fa0702><b>(This will may not Restart your game immediantly!)</b></color>");
-            new QMSingleButton(AnotherMenu2, 2, 3f, "<color=#fa0702><b>Chris Brown</b></color>", delegate { Functions.GameControls.Quit(); }, "Kills the process of the game");
-            new QMSingleButton(AnotherMenu2, 3, 3f, "<color=#fa0702><b>Quick LogOut</b></color>", delegate { MelonLogger.Msg("[GC] Buh bye"); Functions.GameControls.LogOut(); }, "Logs you out lol?");
+            new QMSingleButton(AnotherMenu2, 1, 3f, "<color=#fa0702><b>Chris Brown</b></color>", delegate { Functions.GameControls.Quit(); }, "Kills the process of the game");
+            new QMSingleButton(AnotherMenu2, 2, 3f, "<color=#fa0702><b>Quick LogOut</b></color>", delegate { MelonLogger.Msg("[GC] Buh bye"); Functions.GameControls.LogOut(); }, "Logs you out lol?");
             /* Main Settings Buttons */
             /* Settings Buttons */
             new QMToggleButton(AnotherMenu2, 1, 0, "Lag yo ass out!", delegate
@@ -70,20 +69,18 @@ namespace ScytheStation.Menus
             // -0--------------------------------8-
 
             // Murder (Might Update later)
-            new QMSingleButton(GameMenu1, 1, 0, "Force Start", delegate { Functions.GameControls.forcestartMurd(); }, "Also Wow!");
-            new QMSingleButton(GameMenu1, 2, 0, "Force End", delegate { Functions.GameControls.forceendMurd(); }, "Wow!");
-            new QMSingleButton(GameMenu1, 3, 0, "Murder Wins", delegate { Functions.GameControls.MurderWin(); }, "Hackrt!");
-            new QMSingleButton(GameMenu1, 4, 0, "The blinder", delegate { Functions.GameControls.blindall(); }, "wtf!");
-            new QMSingleButton(GameMenu1, 1, 1, "Bystander Gets a W", delegate { Functions.GameControls.BystanderWin(); }, "how u gon hak! then lose.. wtf!! - Plasma");
-            new QMSingleButton(GameMenu1, 2, 1, "Start a Minigame", delegate { Functions.GameControls.unlockminigame(); }, "no way bruh");
-            new QMSingleButton(GameMenu1, 3, 1, "Deathmatch", delegate { Functions.GameControls.deathmatch(); }, "well someone browk da gawm *snort*");
-            new QMSingleButton(GameMenu1, 4, 1, "Scyts pet snake", delegate { Functions.GameControls.realeasesnake(); }, "Go get em boy!");
-            new QMSingleButton(GameMenu1, 1, 2, "Know it all", delegate { Functions.GameControls.findclues(); }, "I found pics of yo ma in bed");
-            new QMSingleButton(GameMenu1, 2, 2, "Go to bed", delegate { Functions.GameControls.flickthelights(); }, "Lights out");
-            new QMSingleButton(GameMenu1, 3, 2, "Troll the detective", delegate { Functions.GameControls.shootweapon(); }, "He must be confused asf rn");
-            new QMSingleButton(GameMenu1, 4, 2, "Close doors", delegate { Functions.GameControls.closedoors(); }, "Idk what this does");
+            new QMSingleButton(GameMenu1, 1, 0, "Murder Wins", delegate { Functions.GameControls.MurderWin(); }, "Hackrt!");
+            new QMSingleButton(GameMenu1, 2, 0, "The blinder", delegate { Functions.GameControls.blindall(); }, "wtf!");
+            new QMSingleButton(GameMenu1, 3, 0, "Bystander Gets a W", delegate { Functions.GameControls.BystanderWin(); }, "how u gon hak! then lose.. wtf!! - Plasma");
+            new QMSingleButton(GameMenu1, 4, 0, "Start a Minigame", delegate { Functions.GameControls.unlockminigame(); }, "no way bruh");
+            new QMSingleButton(GameMenu1, 1, 1, "Deathmatch", delegate { Functions.GameControls.deathmatch(); }, "well someone browk da gawm *snort*");
+            new QMSingleButton(GameMenu1, 2, 1, "Scyts pet snake", delegate { Functions.GameControls.realeasesnake(); }, "Go get em boy!");
+            new QMSingleButton(GameMenu1, 3, 2, "Know it all", delegate { Functions.GameControls.findclues(); }, "I found pics of yo ma in bed");
+            new QMSingleButton(GameMenu1, 4, 2, "Go to bed", delegate { Functions.GameControls.flickthelights(); }, "Lights out");
+            new QMSingleButton(GameMenu1, 1, 2, "Troll the detective", delegate { Functions.GameControls.shootweapon(); }, "He must be confused asf rn");
+            new QMSingleButton(GameMenu1, 2, 2, "Close doors", delegate { Functions.GameControls.closedoors(); }, "Idk what this does");
 
-            var GameMenuExtras = new QMNestedButton(GameMenu1, 1, 3f, "->", "", "Next Page");
+            var GameMenuExtras = new QMNestedButton(GameMenu1, 1, 3f, "->", "Next Page", "2");
             new QMToggleButton(GameMenuExtras, 1, 0, "Gun Spammer", delegate
             { Functions.GameControls.SpamGun(); }, delegate
             { Functions.GameControls.SpamGun(); }, "AAAAAAAAAAAAAAAA");
@@ -92,8 +89,6 @@ namespace ScytheStation.Menus
             { Functions.GameControls.SpamBlind(); }, "AAAAAAAAAAAAAAAA V2");
 
             // Among Us (Might Update later)
-            new QMSingleButton(GameMenu2, 1, 0, "Force Start", delegate { Functions.GameControls.forcestartAmong(); }, "Also Wow!");
-            new QMSingleButton(GameMenu2, 2, 0, "Force End", delegate { Functions.GameControls.forceendAmong(); }, "Wow!");
             new QMSingleButton(GameMenu2, 3, 0, "Eject EVERYONE", delegate { Functions.GameControls.ejecteveryone(); }, "FUNNY!!!");
             new QMSingleButton(GameMenu2, 4, 0, "Become SUS", delegate { Functions.GameControls.GiveSussy(); }, "Sex time");
             new QMSingleButton(GameMenu2, 1, 1, "Shut The Fuck Up Everyone", delegate { Functions.GameControls.ShutTheFuckUp(); }, "Oh");
@@ -103,9 +98,8 @@ namespace ScytheStation.Menus
 
             // Etc (Might Update later)
             new QMSingleButton(GameMenu3, 1, 0, "Kill Everyone", delegate { Functions.GameControls.KillAll(); }, "Scythe after the | after the v1.5 ScytheStation Update");
-            new QMToggleButton(GameMenu3, 2, 4, "Death Forever", delegate
-            { Functions.GameControls.KillAllSpam(); }, delegate
-            { Functions.GameControls.KillAllSpam(); }, "AAAAAAAAAAAAAAAA V3");
+            new QMSingleButton(GameMenu3, 2, 0, "Force Start", delegate { Functions.GameControls.FS(); }, "Also Wow!");
+            new QMSingleButton(GameMenu3, 3, 0, "Force End", delegate { Functions.GameControls.FE(); }, "Wow!");
             // -0--------------------------------8-
             // GAMEWORLD MENU //
         }
