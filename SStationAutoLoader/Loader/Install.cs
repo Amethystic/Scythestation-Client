@@ -5,13 +5,11 @@ namespace SStationAutoLoader.Loader
 {
     public class Install
     {
-        public static string ModLoc = $"{MelonUtils.GameDirectory}\\Mods";
-        public static string MOD = $"{ModLoc}\\ScytheStation.dll";
+        public static string Mod = $"{MelonUtils.GameDirectory}\\Mods";
+        public static string MOD = $"{Mod}\\ScytheStation.dll";
         public static void Init()
         {
-            MelonLogger.Msg(ConsoleColor.Yellow, "Checking for updates");
-            UpdateManager.B(MOD);
-            MelonLogger.Msg(ConsoleColor.Green, "Done!");
+            MelonLogger.Msg(ConsoleColor.Yellow, "Checking for updates"); UpdateManager.B(MOD);
         }
     }
 }

@@ -27,6 +27,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Main.cs~RF1c81b9c.TMP\**" />
+    <EmbeddedResource Remove="Main.cs~RF1c81b9c.TMP\**" />
+    <None Remove="Main.cs~RF1c81b9c.TMP\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\0Harmony.dll</HintPath>
     </Reference>

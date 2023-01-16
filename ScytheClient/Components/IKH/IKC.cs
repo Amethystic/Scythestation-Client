@@ -15,34 +15,34 @@ namespace ScytheStation.Components.IKH
 			{
 				return;
 			}
-			if (this.vrik == null)
+			if (vrik == null)
 			{
-				this.vrik = base.gameObject.GetComponentInChildren<VRIK>();
+				vrik = base.gameObject.GetComponentInChildren<VRIK>();
 			}
 			if (RuntimeConfig.tPose)
 			{
-				this.vrik.animator.enabled = false;
+				vrik.animator.enabled = false;
 			}
 			if (RuntimeConfig.twist)
 			{
-				this.vrik.fixTransforms = false;
-				this.vrik.animator.enabled = false;
+				vrik.fixTransforms = false;
+				vrik.animator.enabled = false;
 			}
 			if (RuntimeConfig.noNeck)
 			{
-				this.vrik.solver.hasNeck = false;
+				vrik.solver.hasNeck = false;
 			}
 			if (RuntimeConfig.noChest)
 			{
-				this.vrik.solver.hasChest = false;
+				vrik.solver.hasChest = false;
 			}
 			if (RuntimeConfig.leftArm)
 			{
-				this.vrik.solver.leftArm.positionWeight = 1f;
+				vrik.solver.leftArm.positionWeight = 1f;
 			}
 			if (RuntimeConfig.rightArm)
 			{
-				this.vrik.solver.rightArm.positionWeight = 1f;
+				vrik.solver.rightArm.positionWeight = 1f;
 			}
 		}
 		private VRIK vrik;
