@@ -51,13 +51,13 @@ namespace ScytheStation
             Directories.ValidateFolders();
             MelonUtils.SetConsoleTitle($"ScytheStation [v{Version}]");
             Patches.Init();
+            Core.Discord.Manager.InitRPC();
         }
 
         public override void OnApplicationLateStart()
         {
             // load u faggot
             VRC.Integrations.DiscordManager.field_Private_Static_Int64_0.Equals(false);
-            Core.Discord.Manager.InitRPC();
             Etc.D();
             Settings.DiscordRPCOn();
             Etc.C();
@@ -76,7 +76,6 @@ namespace ScytheStation
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
             // Scene Initiates
-            Functions.GameControls.Capto60();
         }
 
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
@@ -137,6 +136,7 @@ namespace ScytheStation
         public override void OnApplicationQuit()
         {
             //MelonPreferences.Save(); // Stop using this please
+            Functions.GameControls.Capto60();
             Settings.DiscordRPCOff();
             Process.GetCurrentProcess().Kill();
         }
