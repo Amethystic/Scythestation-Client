@@ -20,7 +20,7 @@ namespace ScytheStation.Core.Etc
         }
         public static void C()
         {
-            MelonLogger.Msg(ConsoleColor.Blue, "[CREDITS] Thanks Scrim#0069 (Vanix / EzBase Dev), plasma#1337 (ScytheStation User [Code Helper] / Meowengine Dev), Residnt (IKFunnies Dev), And Blaze#6666 (Deob Maps / ETC) / xAstroBoy#1337 (Setting up). Hope you have a nice day! (More will be added shortly)");
+            MelonLogger.Msg(ConsoleColor.Blue, "[CREDITS] Thanks Scrim#0069 (Vanix / EzBase Dev), plasma#1337 (ScytheStation User [Code Helper] / Meowengine Dev), Residnt (IKFunnies Dev), And Blaze#6666 (Deob Maps / ETC) / xAstroBoy#1337 / CriticalSociety#6453 (Love u <3). Hope you have a nice day! (More will be added shortly)");
         }
         public static void D()
         {

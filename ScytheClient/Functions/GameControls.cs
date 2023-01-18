@@ -36,8 +36,6 @@ namespace ScytheStation.Functions
         }
         public static void Quit()
         {
-            //MelonPreferences.Save(); // stop using this please
-            Settings.DiscordRPCOff();
             Thread.Sleep(5);
             Process.GetCurrentProcess().Kill();
         }

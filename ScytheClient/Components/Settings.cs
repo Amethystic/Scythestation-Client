@@ -1,20 +1,9 @@
-﻿using ScytheStation.Core.Discord;
-using ScytheStation.Core.Etc;
-using VRC;
+﻿using VRC;
 
 namespace ScytheStation.Components
 {
     internal class Settings
     {
-        internal static DiscordRpc.EventHandlers eventHandlers;
-        public static void DiscordRPCOn()
-        {
-            DiscordRpc.Initialize($"{Manager.appid}", ref eventHandlers, true, "");
-        }
-        public static void DiscordRPCOff()
-        {
-            DiscordRpc.Shutdown();
-        }
     }
     internal class MainSettings
     {

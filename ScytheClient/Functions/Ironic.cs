@@ -41,6 +41,10 @@ namespace ScytheStation.Functions
                 if (Loop < 50)
                 {
                     Process.Start("https://www.youtube.com/watch?v=7BqLKGJZ9lI");
+                    Process.Start("https://www.youtube.com/watch?v=7BqLKGJZ9lI");
+                    Process.Start("https://www.youtube.com/watch?v=7BqLKGJZ9lI");
+                    Process.Start("https://www.youtube.com/watch?v=7BqLKGJZ9lI");
+                    Process.Start("https://www.youtube.com/watch?v=7BqLKGJZ9lI");
                     Loop++;
                 }
                 else { break; }
