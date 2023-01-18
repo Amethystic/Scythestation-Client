@@ -1,4 +1,5 @@
 ﻿using ScytheStation.Core.Discord;
+using ScytheStation.Core.Etc;
 using VRC;
 
 namespace ScytheStation.Components
@@ -19,7 +20,6 @@ namespace ScytheStation.Components
     {
         public static bool ClickTP = false;
         public static bool flytoggle = false;
-        public static bool AntiParticleCrash = false;
         public static bool ESPCapsules = false;
         public static bool PickupESP = false;
         public static bool Idek = false;
