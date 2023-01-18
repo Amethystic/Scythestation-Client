@@ -38,6 +38,7 @@ namespace ScytheStation
         public override void OnInitializeMelon()
         {
             // Mod things b4 loading
+            Etc.C();
             MelonLogger.WriteSpacer();
             Artwork.DrawArt();
             MelonLogger.WriteSpacer();
@@ -51,19 +52,16 @@ namespace ScytheStation
             Directories.ValidateFolders();
             MelonUtils.SetConsoleTitle($"ScytheStation [v{Version}]");
             Patches.Init();
-            Core.Discord.Manager.InitRPC();
+            VRC.Integrations.DiscordManager.field_Private_Static_Int64_0.Equals(false);
+            Settings.DiscordRPCOn();
         }
 
         public override void OnApplicationLateStart()
         {
             // load u faggot
-            VRC.Integrations.DiscordManager.field_Private_Static_Int64_0.Equals(false);
-            Etc.D();
-            Settings.DiscordRPCOn();
-            Etc.C();
+            MelonCoroutines.Start(WaitForQuickMenu());
             MelonLogger.Msg(ConsoleColor.Green, "[LOADER] Initialized!");
             MelonLogger.Msg(ConsoleColor.Magenta, "[LOADER] ScytheStation Now loading...");
-            MelonCoroutines.Start(WaitForQuickMenu());
         }
 
         public override void OnUpdate()
@@ -136,7 +134,6 @@ namespace ScytheStation
         public override void OnApplicationQuit()
         {
             //MelonPreferences.Save(); // Stop using this please
-            Functions.GameControls.Capto60();
             Settings.DiscordRPCOff();
             Process.GetCurrentProcess().Kill();
         }
