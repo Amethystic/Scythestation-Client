@@ -23,7 +23,6 @@ namespace ScytheStation.Core.FileManager
             if (!Directory.Exists($"{Folder}\\Configs")) { Directory.CreateDirectory($"{Folder}\\Configs"); FCount++; }
             if (!Directory.Exists($"{Folder}\\Dependencies")) { Directory.CreateDirectory($"{Folder}\\Dependencies"); FCount++; }
             if (!Directory.Exists($"{Folder}\\Misc")) { Directory.CreateDirectory($"{Folder}\\Misc"); FCount++; }
-            if (!Directory.Exists($"{Folder}\\Loading")) { Directory.CreateDirectory($"{Folder}\\Misc\\Loading"); FCount++; }
             if (!Directory.Exists($"{Folder}\\Images")) { Directory.CreateDirectory($"{Folder}\\Dependencies\\Images"); FCount++; }
         }
         public static void ValidateFolders() { if (FCount != 0) { MelonLogger.Msg($"[LOADER] Created {FCount} Folders!"); } }

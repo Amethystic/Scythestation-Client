@@ -19,9 +19,9 @@ namespace ScytheStation.Functions
             {
                 MainSettings.Run = true;
 
-                Networking.LocalPlayer.SetWalkSpeed(NewSpeedValue);
-                Networking.LocalPlayer.SetRunSpeed(NewSpeedValue);
-                Networking.LocalPlayer.SetStrafeSpeed(NewSpeedValue);
+                Networking.LocalPlayer.SetWalkSpeed(20f);
+                Networking.LocalPlayer.SetRunSpeed(20f);
+                Networking.LocalPlayer.SetStrafeSpeed(30f);
             }
             else if (MainSettings.Run == false)
             {
