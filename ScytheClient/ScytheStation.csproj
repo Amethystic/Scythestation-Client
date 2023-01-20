@@ -33,6 +33,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Menus\Game.cs~RF27de0e.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\0Harmony.dll</HintPath>
     </Reference>

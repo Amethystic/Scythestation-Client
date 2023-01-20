@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -71,10 +72,10 @@ namespace ApolloCore.API.QM
 
         public void SetImage(Sprite newImg)
         {
-            MainButton.transform.Find("Icon").GetComponent<UnityEngine.UI.Image>().sprite = newImg;
-            MainButton.transform.Find("Icon").GetComponent<UnityEngine.UI.Image>().overrideSprite = newImg;
-            MainButton.transform.Find("Icon").GetComponent<UnityEngine.UI.Image>().color = Color.white;
-            MainButton.transform.Find("Icon").GetComponent<UnityEngine.UI.Image>().m_Color = Color.white;
+            MainButton.transform.Find("Icon").GetComponent<Image>().sprite = newImg;
+            MainButton.transform.Find("Icon").GetComponent<Image>().overrideSprite = newImg;
+            MainButton.transform.Find("Icon").GetComponent<Image>().color = Color.white;
+            MainButton.transform.Find("Icon").GetComponent<Image>().m_Color = Color.white;
         }
 
         public void SetToolTip(string newText)

@@ -33,8 +33,7 @@ namespace ScytheStation.Functions
                                     HighlightsFX.field_Private_Static_HighlightsFX_0.Method_Public_Void_Renderer_Boolean_0(component, player);
                                 }
                             }
-                        }
-                        catch { MelonLogger.Msg(ConsoleColor.DarkBlue, "[VISUALS] Failed to start ESP On Players"); }
+                        } catch { MelonLogger.Msg(ConsoleColor.DarkBlue, "[VISUALS] Failed to start ESP On Players"); }
                     }
                 } else if (MainSettings.ESPCapsules == false) { MainSettings.ESPCapsules = false; HighlightsFX.field_Private_Static_HighlightsFX_0.enabled = false; MelonLogger.Msg(ConsoleColor.DarkBlue, "[VISUALS] ESP Off"); }
             }

@@ -25,7 +25,7 @@ namespace ApolloCore.API.QM
         {
             try
             {
-                UnityEngine.Object.Destroy(button);
+                Object.Destroy(button);
             }
             catch { }
         }

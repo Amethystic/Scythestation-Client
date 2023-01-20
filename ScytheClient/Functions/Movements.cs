@@ -9,6 +9,7 @@ namespace ScytheStation.Functions
     {
         // Fly = Replaced
         // Speedhack = Replaced n simpler
+        // Click tp?? idk scrim prob puts this on every client he does so, it dont matter.
         public static float NewSpeedValue = 10f;
         public static int speed = 25;
         public static float FlySpeed = 5f;
@@ -18,18 +19,16 @@ namespace ScytheStation.Functions
             if (MainSettings.Run == true)
             {
                 MainSettings.Run = true;
-
-                Networking.LocalPlayer.SetWalkSpeed(20f);
-                Networking.LocalPlayer.SetRunSpeed(20f);
-                Networking.LocalPlayer.SetStrafeSpeed(30f);
+                Networking.LocalPlayer.SetWalkSpeed(Networking.LocalPlayer.GetWalkSpeed() * 20f);
+                Networking.LocalPlayer.SetRunSpeed(Networking.LocalPlayer.GetRunSpeed() * 20f);
+                Networking.LocalPlayer.SetStrafeSpeed(Networking.LocalPlayer.GetStrafeSpeed() * 30f);
             }
             else if (MainSettings.Run == false)
             {
                 MainSettings.Run = false;
-
-                Networking.LocalPlayer.SetWalkSpeed(2f);
-                Networking.LocalPlayer.SetRunSpeed(4f);
-                Networking.LocalPlayer.SetStrafeSpeed(2f);
+                Networking.LocalPlayer.SetWalkSpeed(Networking.LocalPlayer.GetWalkSpeed() * 2f);
+                Networking.LocalPlayer.SetRunSpeed(Networking.LocalPlayer.GetRunSpeed() * 4f);
+                Networking.LocalPlayer.SetStrafeSpeed(Networking.LocalPlayer.GetStrafeSpeed() * 2f);
             }
         }
 		public static void FlyOn()

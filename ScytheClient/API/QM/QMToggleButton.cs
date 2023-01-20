@@ -9,7 +9,7 @@ namespace ApolloCore.API.QM
     {
         protected TextMeshProUGUI btnTextComp;
         protected Button btnComp;
-        protected UnityEngine.UI.Image btnImageComp;
+        protected Image btnImageComp;
         protected bool currentState;
         protected Action OnAction;
         protected Action OffAction;
@@ -43,7 +43,7 @@ namespace ApolloCore.API.QM
             btnComp = button.GetComponentInChildren<Button>(true);
             btnComp.onClick = new Button.ButtonClickedEvent();
             btnComp.onClick.AddListener(new Action(HandleClick));
-            btnImageComp = button.transform.Find("Icon").GetComponentInChildren<UnityEngine.UI.Image>(true);
+            btnImageComp = button.transform.Find("Icon").GetComponentInChildren<Image>(true);
 
             initShift[0] = 0;
             initShift[1] = 0;

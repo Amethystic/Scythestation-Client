@@ -8,17 +8,25 @@ namespace ScytheStation.Menus
 {
     internal class MenuManager
     {
-        public const string MenuIdent = "";
+        // Call all your menus in here yes this is messy but screw you
+
         public static QMTabMenu tabMenu;
         public static Sprite TabIcon = (Environment.CurrentDirectory + "\\ScytheStation\\Dependencies\\Images\\scythestation.png").LoadSpriteFromDisk();
         public static void Init()
         {
-            MenuManager.tabMenu = new QMTabMenu($"{Main.Name} By {Main.Author}", $"{Main.N2}", MenuManager.TabIcon);
             MelonLogger.Msg(ConsoleColor.Gray, "[LOADER] Initializing Menu...");
-            SecondaryMenu.Init(MenuManager.tabMenu);
+
+            MenuManager.tabMenu = new QMTabMenu($"{Main.Name} By {Main.Author}", $"{Main.N2}", MenuManager.TabIcon);
+
+            Ironic.Init(MenuManager.tabMenu);
+            Game.Init(MenuManager.tabMenu);
+            Movement.Init(MenuManager.tabMenu);
+            Self.Init(MenuManager.tabMenu);
+            VisualM.Init(MenuManager.tabMenu);
+            GameWorlds.Init(MenuManager.tabMenu);
+
             MelonLogger.Msg(ConsoleColor.Green, "[LOADER] Menu Initialized!");
             MelonLogger.WriteSpacer();
-            //Call all your menus in here yes this is messy but screw you
         }
     }
 }
