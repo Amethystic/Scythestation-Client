@@ -12,7 +12,7 @@ using UnityEngine.Networking;
 using ScytheStation.Core.FileManager;
 using ScytheStation.Core.Etc;
 
-[assembly: MelonInfo(typeof(ScytheStation.Main), "ScytheStation", "2.4", "Scythe Innovation's (Unpasting Process #3)")]
+[assembly: MelonInfo(typeof(ScytheStation.Main), "ScytheStation", "2.4", "Scythe Innovation's (Unpasting Process #4)")]
 [assembly: MelonGame("VRChat", "VRChat")]
 [assembly: MelonAuthorColor(ConsoleColor.Magenta)]
 [assembly: MelonColor(ConsoleColor.DarkMagenta)]
@@ -49,20 +49,23 @@ namespace ScytheStation
             Directories.CreateFolders();
             Directories.ValidateFolders();
             Installer.Init();
+            MelonCoroutines.Start(WaitForQuickMenu());
         }
-        public override void OnGUI()
+        private static IEnumerator WaitForQuickMenu()
         {
-            if (!GameInitialized || GameObject.Find("QuickMenuLoader") != null)
+            while (!GameInitialized || UnityEngine.Object.FindObjectOfType<VRC.UI.Elements.QuickMenu>() == null)
             {
                 GameInitialized = true;
+                new WaitForSeconds(0.259f); //waits just incase
+                MenuManager.Init();
                 MelonLogger.Msg(ConsoleColor.Gray, "[LOADER] Initiating Logs...");
                 MelonLogger.WriteSpacer();
                 MelonLogger.Msg(ConsoleColor.Gray, "---------------------------------------------------");
                 MelonLogger.Msg(ConsoleColor.Gray, "|                 Logs Initiated!                 |");
                 MelonLogger.Msg(ConsoleColor.Gray, "---------------------------------------------------");
                 MelonLogger.WriteSpacer();
-                MenuManager.Init();
             }
+            yield return null;
         }
         public override void OnLateInitializeMelon()
         {

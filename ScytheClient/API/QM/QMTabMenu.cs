@@ -57,7 +57,7 @@ namespace ApolloCore.API.QM
             MenuTabComp.GetComponent<StyleElement>().field_Private_Selectable_0 = MenuTabComp.GetComponent<Button>();
             BadgeObject = MainButton.transform.GetChild(0).gameObject;
             BadgeText = BadgeObject.GetComponentInChildren<TextMeshProUGUI>();
-            MainButton.GetComponent<Button>().onClick.AddListener(new System.Action(() =>
+            MainButton.GetComponent<Button>().onClick.AddListener(new Action(() =>
             {
                 MenuObject.SetActive(true);
                 MenuTabComp.GetComponent<StyleElement>().field_Private_Selectable_0 = MenuTabComp.GetComponent<Button>();

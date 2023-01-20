@@ -9,9 +9,9 @@ namespace ScytheStation.Menus
     internal class MenuManager
     {
         // Call all your menus in here yes this is messy but screw you
-
+        public const string MenuIdent = "";
         public static QMTabMenu tabMenu;
-        public static Sprite TabIcon = (Environment.CurrentDirectory + "\\ScytheStation\\Dependencies\\Images\\scythestation.png").LoadSpriteFromDisk();
+        public static Sprite TabIcon = $"{Environment.CurrentDirectory}\\ScytheStation\\Dependencies\\Images\\scythestation.png".LoadSpriteFromDisk();
         public static void Init()
         {
             MelonLogger.Msg(ConsoleColor.Gray, "[LOADER] Initializing Menu...");

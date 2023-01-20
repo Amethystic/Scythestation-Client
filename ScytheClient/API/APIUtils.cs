@@ -1,4 +1,5 @@
 ﻿using System;
+using ScytheStation.Menus;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Elements;
@@ -7,7 +8,7 @@ namespace ApolloCore.API
 {
     public static class APIUtils
     {
-        internal const string Identifier = "Apollo";
+        internal const string Identifier = MenuManager.MenuIdent;
         private static readonly System.Random rnd = new();
         private static VRC.UI.Elements.QuickMenu _quickMenu;
         private static MenuStateController _menuStateController;
