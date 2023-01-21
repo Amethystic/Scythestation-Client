@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Elements;
 using VRC.UI.Elements.Menus;
-using static VRC.UI.Elements.UIPage;
 using Object = UnityEngine.Object;
 
 namespace ApolloCore.API.QM

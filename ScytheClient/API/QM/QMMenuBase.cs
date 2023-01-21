@@ -2,7 +2,6 @@
 using TMPro;
 using UnityEngine;
 using VRC.UI.Elements;
-using Object = UnityEngine.Object;
 
 namespace ApolloCore.API.QM
 {
@@ -28,7 +27,7 @@ namespace ApolloCore.API.QM
             {
                 if (MenuObject.transform.GetChild(i).name != "Header_H1" && MenuObject.transform.GetChild(i).name != "ScrollRect")
                 {
-                    Object.Destroy(MenuObject.transform.GetChild(i).gameObject);
+                    UnityEngine.Object.Destroy(MenuObject.transform.GetChild(i).gameObject);
                 }
             }
         }

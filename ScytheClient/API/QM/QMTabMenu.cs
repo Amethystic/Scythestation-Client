@@ -1,4 +1,4 @@
-﻿using static System.Net.Mime.MediaTypeNames;
+﻿using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -18,7 +18,7 @@ namespace ApolloCore.API.QM
         protected TextMeshProUGUI BadgeText;
         protected MenuTab MenuTabComp;
 
-        public QMTabMenu(string ToolTipText, string MenuTitle, Sprite ButtonImage)
+        public QMTabMenu(string ToolTipText, string MenuTitle, Sprite ButtonImage = null)
         {
             Initialize(ToolTipText, MenuTitle, ButtonImage);
         }
@@ -72,15 +72,15 @@ namespace ApolloCore.API.QM
 
         public void SetImage(Sprite newImg)
         {
-            MainButton.transform.Find("Icon").GetComponent<UnityEngine.UI.Image>().sprite = newImg;
-            MainButton.transform.Find("Icon").GetComponent<UnityEngine.UI.Image>().overrideSprite = newImg;
-            MainButton.transform.Find("Icon").GetComponent<UnityEngine.UI.Image>().color = Color.white;
-            MainButton.transform.Find("Icon").GetComponent<UnityEngine.UI.Image>().m_Color = Color.white;
+            MainButton.transform.Find("Icon").GetComponent<Image>().sprite = newImg;
+            MainButton.transform.Find("Icon").GetComponent<Image>().overrideSprite = newImg;
+            MainButton.transform.Find("Icon").GetComponent<Image>().color = Color.white;
+            MainButton.transform.Find("Icon").GetComponent<Image>().m_Color = Color.white;
         }
 
         public void SetToolTip(string newText)
         {
-            MainButton.GetComponent<UiTooltip>().field_Public_String_0 = newText;
+            MainButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = newText;
         }
 
         public void SetIndex(int newPosition)

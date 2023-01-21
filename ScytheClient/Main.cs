@@ -33,6 +33,10 @@ namespace ScytheStation
 
         /*Module Listing lol*/
         public static List<Module> Mod = new List<Module>();
+        public override void OnApplicationStart()
+        {
+            MelonLogger.Msg("To the station we go");
+        }
         public override void OnInitializeMelon()
         {
             // Mod things b4 loading
@@ -49,13 +53,28 @@ namespace ScytheStation
             Directories.CreateFolders();
             Directories.ValidateFolders();
             Installer.Init();
-            MelonCoroutines.Start(WaitForUI());
         }
         public override void OnLateInitializeMelon()
         {
             // Unneeded thingy dont wrry ab it ;)
             MelonLogger.Msg(ConsoleColor.Magenta, "[GAME] Late Start :|");
         }
+        public override void OnGUI()
+        {
+            if (!GameInitialized && UnityEngine.Object.FindObjectOfType<VRC.UI.Elements.QuickMenu>() != null) 
+            {
+                GameInitialized = true;
+                new WaitForSeconds(5.259f); //waits just incase
+                MenuManager.Init();
+                MelonLogger.Msg(ConsoleColor.Gray, "[LOADER] Initiating Logs...");
+                MelonLogger.WriteSpacer();
+                MelonLogger.Msg(ConsoleColor.Gray, "---------------------------------------------------");
+                MelonLogger.Msg(ConsoleColor.Gray, "|                  Logs Initiated!                |");
+                MelonLogger.Msg(ConsoleColor.Gray, "---------------------------------------------------");
+                MelonLogger.WriteSpacer();
+            }
+        }
+
         public override void OnUpdate()
         {
             // Hittin up every frames phone
@@ -65,13 +84,13 @@ namespace ScytheStation
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
             // Scene Loads
-            MelonLogger.Msg(ConsoleColor.Gray, "[GAME] Scene loaded!");
+            MelonLogger.Msg(ConsoleColor.Gray, "[GAME] World loaded!");
         }
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
             // Scene Initiates
             MelonCoroutines.Start(Music());
-            MelonLogger.Msg(ConsoleColor.Gray, "[GAME] Initializing Scene...");
+            MelonLogger.Msg(ConsoleColor.Gray, "[GAME] Initializing World...");
         }
         public IEnumerator Music()
         {
@@ -97,21 +116,6 @@ namespace ScytheStation
         public override void OnApplicationQuit()
         {
             Process.GetCurrentProcess().Kill();
-        }
-        private static IEnumerator WaitForUI()
-        {
-            GameInitialized = true;
-            while (!GameInitialized && UnityEngine.Object.FindObjectOfType<VRC.UI.Elements.QuickMenu>() == null) yield return null;
-            {
-                new WaitForSeconds(0.259f); //waits just incase
-                MenuManager.Init();
-                MelonLogger.Msg(ConsoleColor.Gray, "[LOADER] Initiating Logs...");
-                MelonLogger.WriteSpacer();
-                MelonLogger.Msg(ConsoleColor.Gray, "---------------------------------------------------");
-                MelonLogger.Msg(ConsoleColor.Gray, "|                  Logs Initiated!                |");
-                MelonLogger.Msg(ConsoleColor.Gray, "---------------------------------------------------");
-                MelonLogger.WriteSpacer();
-            } yield break;
         }
     }
 }

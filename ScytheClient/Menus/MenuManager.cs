@@ -26,7 +26,7 @@ namespace ScytheStation.Menus
 
                 MelonLogger.Msg(ConsoleColor.Green, $"[MENUMANAGER] {C} Menus Initialized!");
                 MelonLogger.WriteSpacer();
-            } catch { MelonLogger.Error("[MENUMANAGER] Failed to initialize Menu..."); MelonLogger.WriteSpacer(); }
+            } catch { MelonLogger.Error("[MENUMANAGER] Failed to initialize Menu... (You might have a possible chance of crashing)"); MelonLogger.WriteSpacer(); }
         }
     }
 }
