@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
+using VRC.UI.Elements.Tooltips;
 
 namespace ApolloCore.API.QM
 {
@@ -25,7 +26,7 @@ namespace ApolloCore.API.QM
         {
             try
             {
-                Object.Destroy(button);
+                UnityEngine.Object.Destroy(button);
             }
             catch { }
         }

@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using System;
 
-namespace ScytheStation.Core
+namespace ScytheStation.Patches
 {
     public class Patch
     {
@@ -10,7 +10,7 @@ namespace ScytheStation.Core
 
         class PatchInstance
         {
-            public static HarmonyLib.Harmony Inst = new HarmonyLib.Harmony("Patches");
+            public static HarmonyLib.Harmony Inst = new HarmonyLib.Harmony("Patch");
         }
         public class EasyPatching
         {

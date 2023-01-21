@@ -1,5 +1,6 @@
 ﻿using ApolloCore.API.QM;
-
+using System;
+using MelonLoader;
 
 namespace ScytheStation.Menus
 {
@@ -13,6 +14,7 @@ namespace ScytheStation.Menus
             { Functions.Visuals.PlayerESP.ESPToggle(); }, delegate
             { Functions.Visuals.PlayerESP.ESPToggle(); }, "Highlights players with capsules");
             // VISUAL MENU //
+            MelonLogger.Msg(ConsoleColor.Green, "[MENUS] VisualManager Loaded", MenuManager.C++);
         }
     }
 }

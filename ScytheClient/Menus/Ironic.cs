@@ -1,4 +1,6 @@
 ﻿using ApolloCore.API.QM;
+using System;
+using MelonLoader;
 
 namespace ScytheStation.Menus
 {
@@ -13,6 +15,7 @@ namespace ScytheStation.Menus
             new QMSingleButton(AnotherMenu1, 3, 0, "Unban Tutorial", delegate { Functions.UnbanTut.UnbanTutorial(); }, "How to get unbanned 101");
             new QMSingleButton(AnotherMenu1, 4, 0, "Jackson", delegate { Functions.Jackson.MichealJackson(); }, "Heehee");
             // IRONIC MENU //
+            MelonLogger.Msg(ConsoleColor.Green, "[MENUS] IronicFunnies Loaded", MenuManager.C++);
         }
     }
 }

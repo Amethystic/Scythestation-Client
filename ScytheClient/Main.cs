@@ -49,23 +49,7 @@ namespace ScytheStation
             Directories.CreateFolders();
             Directories.ValidateFolders();
             Installer.Init();
-            MelonCoroutines.Start(WaitForQuickMenu());
-        }
-        private static IEnumerator WaitForQuickMenu()
-        {
-            while (!GameInitialized || UnityEngine.Object.FindObjectOfType<VRC.UI.Elements.QuickMenu>() == null)
-            {
-                GameInitialized = true;
-                new WaitForSeconds(0.259f); //waits just incase
-                MenuManager.Init();
-                MelonLogger.Msg(ConsoleColor.Gray, "[LOADER] Initiating Logs...");
-                MelonLogger.WriteSpacer();
-                MelonLogger.Msg(ConsoleColor.Gray, "---------------------------------------------------");
-                MelonLogger.Msg(ConsoleColor.Gray, "|                 Logs Initiated!                 |");
-                MelonLogger.Msg(ConsoleColor.Gray, "---------------------------------------------------");
-                MelonLogger.WriteSpacer();
-            }
-            yield return null;
+            MelonCoroutines.Start(WaitForUI());
         }
         public override void OnLateInitializeMelon()
         {
@@ -113,6 +97,21 @@ namespace ScytheStation
         public override void OnApplicationQuit()
         {
             Process.GetCurrentProcess().Kill();
+        }
+        private static IEnumerator WaitForUI()
+        {
+            GameInitialized = true;
+            while (!GameInitialized && UnityEngine.Object.FindObjectOfType<VRC.UI.Elements.QuickMenu>() == null) yield return null;
+            {
+                new WaitForSeconds(0.259f); //waits just incase
+                MenuManager.Init();
+                MelonLogger.Msg(ConsoleColor.Gray, "[LOADER] Initiating Logs...");
+                MelonLogger.WriteSpacer();
+                MelonLogger.Msg(ConsoleColor.Gray, "---------------------------------------------------");
+                MelonLogger.Msg(ConsoleColor.Gray, "|                  Logs Initiated!                |");
+                MelonLogger.Msg(ConsoleColor.Gray, "---------------------------------------------------");
+                MelonLogger.WriteSpacer();
+            } yield break;
         }
     }
 }

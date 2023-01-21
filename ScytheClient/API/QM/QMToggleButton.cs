@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ApolloCore.API.QM
 {
@@ -9,7 +10,7 @@ namespace ApolloCore.API.QM
     {
         protected TextMeshProUGUI btnTextComp;
         protected Button btnComp;
-        protected Image btnImageComp;
+        protected UnityEngine.UI.Image btnImageComp;
         protected bool currentState;
         protected Action OnAction;
         protected Action OffAction;
@@ -43,7 +44,7 @@ namespace ApolloCore.API.QM
             btnComp = button.GetComponentInChildren<Button>(true);
             btnComp.onClick = new Button.ButtonClickedEvent();
             btnComp.onClick.AddListener(new Action(HandleClick));
-            btnImageComp = button.transform.Find("Icon").GetComponentInChildren<Image>(true);
+            btnImageComp = button.transform.Find("Icon").GetComponentInChildren<UnityEngine.UI.Image>(true);
 
             initShift[0] = 0;
             initShift[1] = 0;

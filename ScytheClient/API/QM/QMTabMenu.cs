@@ -1,4 +1,4 @@
-﻿using System;
+﻿using static System.Net.Mime.MediaTypeNames;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -18,7 +18,7 @@ namespace ApolloCore.API.QM
         protected TextMeshProUGUI BadgeText;
         protected MenuTab MenuTabComp;
 
-        public QMTabMenu(string ToolTipText, string MenuTitle, Sprite ButtonImage = null)
+        public QMTabMenu(string ToolTipText, string MenuTitle, Sprite ButtonImage)
         {
             Initialize(ToolTipText, MenuTitle, ButtonImage);
         }
@@ -57,7 +57,7 @@ namespace ApolloCore.API.QM
             MenuTabComp.GetComponent<StyleElement>().field_Private_Selectable_0 = MenuTabComp.GetComponent<Button>();
             BadgeObject = MainButton.transform.GetChild(0).gameObject;
             BadgeText = BadgeObject.GetComponentInChildren<TextMeshProUGUI>();
-            MainButton.GetComponent<Button>().onClick.AddListener(new Action(() =>
+            MainButton.GetComponent<Button>().onClick.AddListener(new System.Action(() =>
             {
                 MenuObject.SetActive(true);
                 MenuTabComp.GetComponent<StyleElement>().field_Private_Selectable_0 = MenuTabComp.GetComponent<Button>();
@@ -72,15 +72,15 @@ namespace ApolloCore.API.QM
 
         public void SetImage(Sprite newImg)
         {
-            MainButton.transform.Find("Icon").GetComponent<Image>().sprite = newImg;
-            MainButton.transform.Find("Icon").GetComponent<Image>().overrideSprite = newImg;
-            MainButton.transform.Find("Icon").GetComponent<Image>().color = Color.white;
-            MainButton.transform.Find("Icon").GetComponent<Image>().m_Color = Color.white;
+            MainButton.transform.Find("Icon").GetComponent<UnityEngine.UI.Image>().sprite = newImg;
+            MainButton.transform.Find("Icon").GetComponent<UnityEngine.UI.Image>().overrideSprite = newImg;
+            MainButton.transform.Find("Icon").GetComponent<UnityEngine.UI.Image>().color = Color.white;
+            MainButton.transform.Find("Icon").GetComponent<UnityEngine.UI.Image>().m_Color = Color.white;
         }
 
         public void SetToolTip(string newText)
         {
-            MainButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = newText;
+            MainButton.GetComponent<UiTooltip>().field_Public_String_0 = newText;
         }
 
         public void SetIndex(int newPosition)

@@ -5,8 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Elements;
 using VRC.UI.Elements.Menus;
+using static VRC.UI.Elements.UIPage;
 using Object = UnityEngine.Object;
-using TransitionType = VRC.UI.Elements.UIPage.TransitionType;
 
 namespace ApolloCore.API.QM
 {
@@ -25,12 +25,6 @@ namespace ApolloCore.API.QM
         public QMNestedButton(QMNestedButton location, float posX, float posY, string btnText, string toolTipText, string menuTitle, bool halfButton = false)
         {
             btnQMLoc = location.GetMenuName();
-            Initialize(false, btnText, posX, posY, toolTipText, menuTitle, halfButton);
-
-        }
-        public QMNestedButton(string location, float posX, float posY, string btnText, string toolTipText, string menuTitle, bool halfButton = false, bool tiny = false, bool icons = false, Sprite icon = null)
-        {
-            btnQMLoc = location;
             Initialize(false, btnText, posX, posY, toolTipText, menuTitle, halfButton);
         }
 
@@ -87,7 +81,7 @@ namespace ApolloCore.API.QM
         public void OpenMe()
         {
             MenuObject.SetActive(true);
-            APIUtils.MenuStateControllerInstance.Method_Public_Void_String_UIContext_Boolean_TransitionType_0(MenuPage.field_Public_String_0, null, false, TransitionType.Left);
+            APIUtils.MenuStateControllerInstance.Method_Public_Void_String_UIContext_Boolean_TransitionType_0(MenuPage.field_Public_String_0, null, false, UIPage.TransitionType.Left);
         }
 
         public void CloseMe()

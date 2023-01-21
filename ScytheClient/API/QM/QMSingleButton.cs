@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ApolloCore.API.QM
 {
@@ -56,12 +57,12 @@ namespace ApolloCore.API.QM
         private void Initialize(float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip)
         {
             button = UnityEngine.Object.Instantiate(APIUtils.GetQMButtonTemplate(), APIUtils.QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/" + btnQMLoc).transform, true);
-            button.transform.Find("Badge_MMJump").gameObject.SetActive(false);
+            button.transform.Find("Badge_MMJump").gameObject.SetActive(true);
             button.name = $"{APIUtils.Identifier}-Single-Button-{APIUtils.RandomNumbers()}";
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().fontSize = 30;
             button.GetComponent<RectTransform>().sizeDelta = new Vector2(200, 176);
             button.GetComponent<RectTransform>().anchoredPosition = new Vector2(-68, -250);
-            button.transform.Find("Icon").GetComponentInChildren<Image>().gameObject.SetActive(false);
+            button.transform.Find("Icon").GetComponentInChildren<UnityEngine.UI.Image>().gameObject.SetActive(false);
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition += new Vector2(0, 50);
 
             initShift[0] = 0;
@@ -77,8 +78,8 @@ namespace ApolloCore.API.QM
 
         public void SetBackgroundImage(Sprite newImg)
         {
-            button.transform.Find("Background").GetComponent<Image>().sprite = newImg;
-            button.transform.Find("Background").GetComponent<Image>().overrideSprite = newImg;
+            button.transform.Find("Background").GetComponent<UnityEngine.UI.Image>().sprite = newImg;
+            button.transform.Find("Background").GetComponent<UnityEngine.UI.Image>().overrideSprite = newImg;
             RefreshButton();
         }
 
@@ -110,9 +111,9 @@ namespace ApolloCore.API.QM
             button.GetComponent<Button>().onClick.Invoke();
         }
 
-        public Image GetBackgroundImage()
+        public UnityEngine.UI.Image GetBackgroundImage()
         {
-            return button.transform.Find("Background").GetComponent<Image>();
+            return button.transform.Find("Background").GetComponent<UnityEngine.UI.Image>();
         }
 
         private void RefreshButton()

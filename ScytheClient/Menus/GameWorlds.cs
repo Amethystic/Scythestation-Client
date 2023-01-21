@@ -1,4 +1,7 @@
 ﻿using ApolloCore.API.QM;
+using ScytheStation.Menus;
+using MelonLoader;
+using System;
 
 namespace ScytheStation.Menus
 {
@@ -49,6 +52,7 @@ namespace ScytheStation.Menus
             new QMSingleButton(GameMenu3, 3, 0, "Force End", delegate { Functions.GameControls.FE(); }, "Wow!");
             // -0--------------------------------8-
             // GAMEWORLD MENU //
+            MelonLogger.Msg(ConsoleColor.Green, "[MENUS] GameWorldManager Loaded", MenuManager.C++);
         }
     }
 }

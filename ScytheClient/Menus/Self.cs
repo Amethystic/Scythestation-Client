@@ -1,4 +1,6 @@
 ﻿using ApolloCore.API.QM;
+using System;
+using MelonLoader;
 
 namespace ScytheStation.Menus
 {
@@ -12,6 +14,7 @@ namespace ScytheStation.Menus
             new QMSingleButton(AnotherMenu4, 2, 0, "Rep ScytheStation", delegate { Functions.Self.DefaultAVI(); }, "ScytheStation Time");
             new QMSingleButton(AnotherMenu4, 3, 0, "Change by ID", delegate { Functions.Self.AVIID(); }, "Change Avatars by ID");
             // SELF MENU //
+            MelonLogger.Msg(ConsoleColor.Green, "[MENUS] LocalPlayerManager Loaded", MenuManager.C++);
         }
     }
 }

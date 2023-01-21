@@ -44,7 +44,6 @@ namespace ScytheStation.Components.IKH
 			{
 				vrik.solver.rightArm.positionWeight = 1f;
 			}
-		}
-		private VRIK vrik;
+		} private VRIK vrik;
 	}
 }

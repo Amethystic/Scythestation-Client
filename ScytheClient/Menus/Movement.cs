@@ -20,6 +20,7 @@ namespace ScytheStation.Menus
             { Functions.Movements.ClickTPToggle(); MelonLogger.Msg(ConsoleColor.Blue, "[MC] [ON] Click anywhere to teleport"); }, delegate
             { Functions.Movements.ClickTPToggle(); MelonLogger.Msg(ConsoleColor.DarkBlue, "[MC] [OFF] Ok then fuck u then"); }, "This makes u teleport by clicking places lol (Ctrl + Mousebutton0 (Idk neither))");
             // MOVEMENT MENU //
+            MelonLogger.Msg(ConsoleColor.Green, "[MENUS] MovementManager Loaded", MenuManager.C++);
         }
     }
 }

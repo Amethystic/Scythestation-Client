@@ -23,6 +23,7 @@ namespace ScytheStation.Menus
             new QMSingleButton(AnotherMenu2, 4, 0, "Get world ID", delegate { Functions.GameControls.WorldID(); }, "Grabs the world ID");
             /* Settings Buttons */
             // GAME MENU //
+            MelonLogger.Msg(ConsoleColor.Green, "[MENUS] GameManager Loaded", MenuManager.C++);
         }
     }
 }

@@ -61,65 +61,11 @@
     <Reference Include="bHapticsLib">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\bHapticsLib.dll</HintPath>
     </Reference>
-    <Reference Include="Il2CppMono.Security">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppMono.Security.dll</HintPath>
-    </Reference>
     <Reference Include="Il2Cppmscorlib">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
     </Reference>
-    <Reference Include="Il2CppNewtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppNewtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Il2CppSystem">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Buffers">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Collections.Immutable">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Collections.Immutable.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Configuration">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Core">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Diagnostics.StackTrace">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Diagnostics.StackTrace.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Globalization.Extensions">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Globalization.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.IO.Compression">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.IO.Compression.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Memory">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Numerics.Vectors">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Runtime">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Runtime.CompilerServices.Unsafe">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Runtime.Serialization">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Runtime.Serialization.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Threading.Tasks.Extensions">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.ValueTuple">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Xml">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Xml.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Xml.Linq">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Xml.Linq.dll</HintPath>
     </Reference>
     <Reference Include="IndexRange">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\IndexRange.dll</HintPath>
@@ -156,9 +102,6 @@
     </Reference>
     <Reference Include="UnhollowerBaseLib">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\UnhollowerBaseLib.dll</HintPath>
-    </Reference>
-    <Reference Include="UnhollowerRuntimeLib">
-      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\UnhollowerRuntimeLib.dll</HintPath>
     </Reference>
     <Reference Include="UniTask">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\UniTask.dll</HintPath>
@@ -385,6 +328,9 @@
     <Reference Include="UnityEngine.XRModule">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.XRModule.dll</HintPath>
     </Reference>
+    <Reference Include="ValueTupleBridge">
+      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\ValueTupleBridge.dll</HintPath>
+    </Reference>
     <Reference Include="VRC.Collections">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\VRC.Collections.dll</HintPath>
     </Reference>
@@ -459,6 +405,12 @@
     </Reference>
     <Reference Include="VRCSDKBase">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\VRCSDKBase.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\websocket-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\WindowsBase.dll</HintPath>
     </Reference>
   </ItemGroup>
 
