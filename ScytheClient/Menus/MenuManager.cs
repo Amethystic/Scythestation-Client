@@ -3,11 +3,13 @@ using MelonLoader;
 using UnityEngine;
 using ApolloCore.API.QM;
 using ScytheStation.API.Utils;
+using Obfuscation = System.Reflection.ObfuscationAttribute;
 
 namespace ScytheStation.Menus
 {
     internal class MenuManager
     {   // Call all your menus in here yes this is messy but screw you
+        [Obfuscation(Exclude = false)]
         public const string MenuIdent = "i";
         public static Sprite TabIcon = $"{Environment.CurrentDirectory}\\ScytheStation\\Dependencies\\Images\\scythestation.png".LoadSpriteFromDisk();
         public static int C = 0;

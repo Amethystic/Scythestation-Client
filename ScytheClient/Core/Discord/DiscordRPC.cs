@@ -1,14 +1,16 @@
 ﻿using System;
 using ScytheStation.Core.FileManager;
+using Obfuscation = System.Reflection.ObfuscationAttribute;
 
 namespace ScytheStation.Core.Discord
 {
     internal static class Manager
     {
+        [Obfuscation(Exclude = false)]
         internal static DiscordRpc.RichPresence presence;
         internal static DiscordRpc.EventHandlers eventHandlers;
 
-        public static string RPC = $"{Directories.MDir}\\Dependencies\\discord-rpc.dll";
+        public static string RPC = Environment.CurrentDirectory + $"{Directories.MDir}\\Dependencies\\discord-rpc.dll";
         public static string appid = "981033663301029949";
         public static string CREDITS = $"ScytheStation {Main.Version}";
         public static string GAMEIMGAE = "scythestation";
@@ -32,7 +34,6 @@ namespace ScytheStation.Core.Discord
             presence.startTimestamp = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
             presence.partyId = Guid.NewGuid().ToString();
             presence.spectateSecret = "";
-
             try
             {
                 DiscordRpc.Initialize($"{appid}", ref eventHandlers, true, "");

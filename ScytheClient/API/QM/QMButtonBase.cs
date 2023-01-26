@@ -1,14 +1,13 @@
 ﻿using System.Linq;
 using UnityEngine;
-using VRC.UI.Elements.Tooltips;
 
 namespace ApolloCore.API.QM
 {
     public class QMButtonBase
     {
-        protected GameObject button;
-        protected string btnQMLoc;
-        protected int[] initShift = { 0, 0 };
+        public GameObject button;
+        public string btnQMLoc;
+        public int[] initShift = { 0, 0 };
 
         public GameObject GetGameObject() => button;
 
@@ -26,7 +25,7 @@ namespace ApolloCore.API.QM
         {
             try
             {
-                UnityEngine.Object.Destroy(button);
+                Object.Destroy(button);
             }
             catch { }
         }

@@ -9,16 +9,16 @@ namespace ApolloCore.API
     public static class APIUtils
     {
         internal const string Identifier = MenuManager.MenuIdent;
-        private static readonly System.Random rnd = new();
-        private static VRC.UI.Elements.QuickMenu _quickMenu;
-        private static MenuStateController _menuStateController;
-        private static VRCUiPopupManager _vrcUiPopupManager;
-        private static Sprite _onSprite;
-        private static Sprite _offSprite;
-        private static GameObject _userInterface;
-        private static GameObject _qmButtonTemplate;
-        private static GameObject _qmMenuTemplate;
-        private static GameObject _qmTabTemplate;
+        public static readonly System.Random rnd = new();
+        public static VRC.UI.Elements.QuickMenu _quickMenu;
+        public static MenuStateController _menuStateController;
+        public static VRCUiPopupManager _vrcUiPopupManager;
+        public static Sprite _onSprite;
+        public static Sprite _offSprite;
+        public static GameObject _userInterface;
+        public static GameObject _qmButtonTemplate;
+        public static GameObject _qmMenuTemplate;
+        public static GameObject _qmTabTemplate;
 
         public static VRC.UI.Elements.QuickMenu QuickMenuInstance
         {

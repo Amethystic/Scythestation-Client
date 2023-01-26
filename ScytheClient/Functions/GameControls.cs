@@ -3,17 +3,25 @@ using System.Threading;
 using System.Diagnostics;
 using MelonLoader;
 using UnityEngine;
+using Obfuscation = System.Reflection.ObfuscationAttribute;
 using VRC.Core;
 using ScytheStation.Components.Extensions;
 using ScytheStation.Core.Wrappers;
 using ScytheStation.Components;
-using VRC.Udon;
 using System.Collections.Generic;
+using VRC.Udon;
+using System.Runtime.InteropServices;
+using UnityEngine.UI;
+
 
 namespace ScytheStation.Functions
 {
     internal class GameControls
     {
+        [Obfuscation(Exclude = false)]
+        public static Process mainProcess = null;
+        [DllImport("kernel32.dll", CallingConvention = CallingConvention.StdCall)]
+        public static extern bool SetProcessAffinityMask(IntPtr hProcess, IntPtr dwProcessAffinityMask);
         public static void LagGame()
         {
             Application.targetFrameRate = 1;
@@ -21,10 +29,6 @@ namespace ScytheStation.Functions
         public static void Capto60()
         {
             Application.targetFrameRate = 60;
-        }
-        public static void UnLagGame()
-        {
-            Application.targetFrameRate = 900;
         }
         public static void UnCapLol()
         {
@@ -39,10 +43,40 @@ namespace ScytheStation.Functions
             Thread.Sleep(5);
             Process.GetCurrentProcess().Kill();
         }
-
+        public static void ChangeGameProcessPriority()
+        {
+            if (GameCtrl.HighPrior == true)
+            {
+                mainProcess.PriorityClass = ProcessPriorityClass.High;
+            }
+            else
+            {
+                mainProcess.PriorityClass = ProcessPriorityClass.Normal;
+            }
+        }
+        public static void ChangeGameCoreAffinity()
+        {
+            long num = 0L;
+            int num2 = Environment.ProcessorCount - 1;
+            int num3 = (!GameCtrl.SkitHyperThread) ? 1 : 2;
+            for (int i = 0; i < Environment.ProcessorCount; i++)
+            {
+                bool flag = num2 <= 0;
+                if (flag)
+                {
+                    break;
+                }
+                num |= 1L << num2;
+                num2 -= num3;
+            }
+            SetProcessAffinityMask(mainProcess.Handle, new IntPtr(num));
+        }
         // World Bs
         public static bool Murderwallhack = false;
         public static bool doorscold = true;
+        private static GameObject blindHud;
+        private static GameObject flashbangHud;
+        private static GameObject deathHud;
         public static void WorldID()
         {
             if (WorldWrappers.GetLocation() != "")
@@ -54,20 +88,6 @@ namespace ScytheStation.Functions
         }
 
         // World Bs (MURDER)
-        public static void BystanderWin()
-        {
-            foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
-            {
-                udonBehaviour.SendCustomNetworkEvent(0, "SyncVictoryB");
-            }
-        }
-        public static void MurderWin()
-        {
-            foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
-            {
-                udonBehaviour.SendCustomNetworkEvent(0, "SyncVictoryM");
-            }
-        }
         public static void blindall()
         {
             if (WorldWrappers.MurderWorld())
@@ -109,6 +129,17 @@ namespace ScytheStation.Functions
                 gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "SwitchDown");
             }
         }
+        public static void unflickthelights()
+        {
+            List<GameObject> list = new List<GameObject>
+            {
+                GameObject.Find("Game Logic").transform.Find("Switch Boxes/Switchbox (0)").gameObject, GameObject.Find("Game Logic").transform.Find("Switch Boxes/Switchbox (1)").gameObject, GameObject.Find("Game Logic").transform.Find("Switch Boxes/Switchbox (2)").gameObject, GameObject.Find("Game Logic").transform.Find("Switch Boxes/Switchbox (3)").gameObject
+            };
+            foreach (GameObject gameObject in list)
+            {
+                gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "SwitchUp");
+            }
+        }
         public static void shootweapon()
         {
             GameObject.Find("/Game Logic").transform.Find("Weapons/Revolver").gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "SyncFire");
@@ -137,45 +168,24 @@ namespace ScytheStation.Functions
                 }
             }
         }
-        public static void SpamGun()
+        public static void opendoors()
         {
             if (WorldWrappers.MurderWorld())
             {
-                Game.SpamGun = true;
-                // Peebo29 [From https://www.tutorialsteacher.com/csharp/csharp-for-loop]
-                if (Game.SpamGun == true)
+                foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
                 {
-                    int Loop = 0;
-                    foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
-                    {
-                        if (Loop < 100)
-                        {
-                            GameObject.Find("/Game Logic").transform.Find("Weapons/Revolver").gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "SyncFire");
-                            Loop++;
-                        } else { break; }
-                    }
-                } else if (Game.SpamGun == false) { Game.SpamGun = false; }
+                    udonBehaviour.SendCustomNetworkEvent(0, "SyncOpen");
+                }
             }
         }
-        public static void SpamBlind()
+        public static void lockdoors()
         {
             if (WorldWrappers.MurderWorld())
             {
-                Game.SpamBlind = true;
-                // By Peebo29 [From https://www.tutorialsteacher.com/csharp/csharp-for-loop]
-                if (Game.SpamBlind == true)
+                foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
                 {
-                    int Loop = 0;
-                    foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
-                    {
-                        if (Loop < 100)
-                        {
-                            udonBehaviour.SendCustomNetworkEvent(0, "OnLocalPlayerFlashbanged");
-                            udonBehaviour.SendCustomNetworkEvent(0, "OnLocalPlayerBlinded");
-                            Loop++;
-                        } else { break; }
-                    }
-                } else if (Game.SpamBlind == false) { Game.SpamBlind = false; }
+                    udonBehaviour.SendCustomNetworkEvent(0, "SyncLock");
+                }
             }
         }
         public static void LemmeCDem()
@@ -186,6 +196,46 @@ namespace ScytheStation.Functions
                 {
                     udonBehaviour.SendCustomNetworkEvent(0, "OnLocalPlayerAssignedRole");
                 }
+            }
+        }
+        public static void FixMurderAntiKillscreen(bool Toggle)
+        {
+            if (Game.AntiKS == true)
+            {
+                if (WorldWrappers.MurderWorld())
+                {
+                    CacheAnnoyingGameObjects();
+                    bool flag = blindHud != null;
+                    if (flag)
+                    {
+                        blindHud.transform.localScale = (Toggle ? new Vector3(0f, 0f, 0f) : new Vector3(1f, 1f, 1f));
+                        blindHud.active = false;
+                    }
+                    bool flag2 = flashbangHud != null;
+                    if (flag2)
+                    {
+                        flashbangHud.transform.localScale = (Toggle ? new Vector3(0f, 0f, 0f) : new Vector3(1f, 1f, 1f));
+                        flashbangHud.active = false;
+                    }
+                    bool flag3 = deathHud != null;
+                    if (flag3)
+                    {
+                        deathHud.transform.localScale = (Toggle ? new Vector3(0f, 0f, 0f) : new Vector3(1f, 1f, 1f));
+                        deathHud.active = false;
+                    }
+                }
+            }
+            else
+            {
+                Game.AntiKS.Value = false;
+            }
+        }
+        public static void ShowAllRoles()
+        {
+            GameObject gameObject = GameObject.Find("Game Logic");
+            if (gameObject)
+            {
+                gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "OnLocalPlayerAssignedRole");
             }
         }
         // World Bs (AMONG US)
@@ -219,13 +269,23 @@ namespace ScytheStation.Functions
                 }
             }
         }
-        public static void GiveSussy()
+        public static void GiveSussyAll()
         {
             if (WorldWrappers.Amongunsworld())
             {
                 foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
                 {
                     udonBehaviour.SendCustomNetworkEvent(0, "SyncAssignM");
+                }
+            }
+        }
+        public static void GiveNonSussyAll()
+        {
+            if (WorldWrappers.Amongunsworld())
+            {
+                foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+                {
+                    udonBehaviour.SendCustomNetworkEvent(0, "SyncAssignB");
                 }
             }
         }
@@ -239,6 +299,13 @@ namespace ScytheStation.Functions
                     udonBehaviour.SendCustomNetworkEvent(0, "SyncDoSabotageReactor");
                     udonBehaviour.SendCustomNetworkEvent(0, "SyncDoSabotageOxygen");
                     udonBehaviour.SendCustomNetworkEvent(0, "SyncDoSabotageLights");
+                    udonBehaviour.SendCustomNetworkEvent(0, "SyncDoSabotageDoorsCafeteria");
+                    udonBehaviour.SendCustomNetworkEvent(0, "SyncDoSabotageDoorsLower");
+                    udonBehaviour.SendCustomNetworkEvent(0, "SyncDoSabotageDoorsStorage");
+                    udonBehaviour.SendCustomNetworkEvent(0, "SyncDoSabotageDoorsMedbay");
+                    udonBehaviour.SendCustomNetworkEvent(0, "SyncDoSabotageDoorsUpper");
+                    udonBehaviour.SendCustomNetworkEvent(0, "SyncDoSabotageDoorsSecurity");
+                    udonBehaviour.SendCustomNetworkEvent(0, "SyncDoSabotageDoorsElectrical");
                 }
             }
         }
@@ -248,14 +315,117 @@ namespace ScytheStation.Functions
             {
                 foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
                 {
-                    udonBehaviour.SendCustomNetworkEvent(0, "SyncRepairComms");
-                    udonBehaviour.SendCustomNetworkEvent(0, "SyncRepairReactor");
-                    udonBehaviour.SendCustomNetworkEvent(0, "SyncRepairOxygen");
-                    udonBehaviour.SendCustomNetworkEvent(0, "SyncRepairLights");
+                    udonBehaviour.SendCustomNetworkEvent(0, "CancelAllSabotage");
+                }
+            }
+        }
+        public static void EmergencyMeeting()
+        {
+            GameObject gameObject = GameObject.Find("Game Logic");
+            if (gameObject)
+            {
+                gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "SyncMeeting");
+                gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "StartMeeting");
+                gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "EmergencyMeeting");
+                gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "SyncEmergencyMeeting");
+            }
+        }
+        public static void AllTasksComplete()
+        {
+            GameObject gameObject = GameObject.Find("Game Logic");
+            if (gameObject)
+            {
+                gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "OnLocalPlayerCompletedTask");
+            }
+        }
+        // Keep Running
+        public static void BreakGame()
+        {
+            if (WorldWrappers.KeepRunning())
+            {
+                foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+                {
+                    udonBehaviour.SendCustomNetworkEvent(0, "heartbeatFail");
+                }
+            }
+        }
+        public static void FixGame()
+        {
+            if (WorldWrappers.KeepRunning())
+            {
+                foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+                {
+                    udonBehaviour.SendCustomNetworkEvent(0, "heartbeatResume");
+                }
+            }
+        }
+        public static void StartRunGame()
+        {
+            if (WorldWrappers.KeepRunning())
+            {
+                foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+                {
+                    udonBehaviour.SendCustomNetworkEvent(0, "StartButtonCallback");
+                }
+            }
+        }
+        public static void EndRunGame()
+        {
+            if (WorldWrappers.KeepRunning())
+            {
+                foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+                {
+                    udonBehaviour.SendCustomNetworkEvent(0, "AbortGameButtonCallback");
+                }
+            }
+        }
+        public static void Darkness()
+        {
+            if (WorldWrappers.KeepRunning())
+            {
+                foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+                {
+                    udonBehaviour.SendCustomNetworkEvent(0, "PPCB_BloomDarken");
+                }
+            }
+        }
+        public static void Brightness()
+        {
+            if (WorldWrappers.KeepRunning())
+            {
+                foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+                {
+                    udonBehaviour.SendCustomNetworkEvent(0, "PPCB_Bloom");
+                }
+            }
+        }
+        public static void RespawnAll()
+        {
+            if (WorldWrappers.KeepRunning())
+            {
+                foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+                {
+                    udonBehaviour.SendCustomNetworkEvent(0, "respawnSelf");
+                }
+            }
+        }
+        public static void DoSomethingWithnewtarget()
+        {
+            if (WorldWrappers.KeepRunning())
+            {
+                foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+                {
+                    udonBehaviour.SendCustomNetworkEvent(0, "UNE_FetchNewTarget");
                 }
             }
         }
         // Main Game World Bs
+        public static void CacheAnnoyingGameObjects()
+        {
+            blindHud = GameObject.Find("Game Logic/Player HUD/Blind HUD Anim");
+            flashbangHud = GameObject.Find("Game Logic/Player HUD/Flashbang HUD Anim");
+            deathHud = GameObject.Find("Game Logic/Player HUD/Death HUD Anim");
+        }
         public static void KillAll()
         {
             foreach (GameObject gameObject in Resources.FindObjectsOfTypeAll<GameObject>())
@@ -278,6 +448,47 @@ namespace ScytheStation.Functions
             foreach (UdonBehaviour udonBehaviour in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
             {
                 udonBehaviour.SendCustomNetworkEvent(0, "SyncAbort");
+            }
+        }
+        public static void AssignSelfMurder()
+        {
+            string value = VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject.GetComponent<VRCPlayer>()._player.ToString();
+            for (int i = 0; i < 24; i++)
+            {
+                string text = "Player Node (" + i.ToString() + ")";
+                if (GameObject.Find("Game Logic/Game Canvas/Game In Progress/Player List/Player List Group/Player Entry (" + i.ToString() + ")/Player Name Text").GetComponent<Text>().text.Equals(value))
+                {
+                    GameObject.Find(text).GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "SyncAssignM");
+                }
+            }
+        }
+        public static void AssignSelfBystander()
+        {
+            string value = VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject.GetComponent<VRCPlayer>()._player.ToString();
+            for (int i = 0; i < 24; i++)
+            {
+                string text = "Player Node (" + i.ToString() + ")";
+                if (GameObject.Find("Game Logic/Game Canvas/Game In Progress/Player List/Player List Group/Player Entry (" + i.ToString() + ")/Player Name Text").GetComponent<Text>().text.Equals(value))
+                {
+                    MelonLogger.Msg(text);
+                    GameObject.Find(text).GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "SyncAssignB");
+                }
+            }
+        }
+        public static void Win()
+        {
+            GameObject gameObject = GameObject.Find("Game Logic");
+            if (gameObject)
+            {
+                gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "SyncVictoryB");
+            }
+        }
+        public static void OtherWin()
+        {
+            GameObject gameObject = GameObject.Find("Game Logic");
+            if (gameObject)
+            {
+                gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "SyncVictoryM");
             }
         }
     }

@@ -2,53 +2,32 @@
 using VRC.SDKBase;
 using ScytheStation.Components;
 using VRC;
+using Obfuscation = System.Reflection.ObfuscationAttribute;
 
 namespace ScytheStation.Functions
 {
     internal class Movements
     {
+        [Obfuscation(Exclude = false)]
         // Fly = Replaced
         // Speedhack = Replaced n simpler
         // Click tp?? idk scrim prob puts this on every client he does so, it dont matter.
         public static float NewSpeedValue = 10f;
-        public static int speed = 25;
-        public static float FlySpeed = 5f;
+        public static float FlySpeed = 2;
         public static Vector3 origGrav = default(Vector3);
-        public static void SpeedRunToggle()
+        public static void FlyToggle()
         {
-            if (MainSettings.Run == true)
-            {
-                MainSettings.Run = true;
-                Networking.LocalPlayer.SetWalkSpeed(Networking.LocalPlayer.GetWalkSpeed() * 20f);
-                Networking.LocalPlayer.SetRunSpeed(Networking.LocalPlayer.GetRunSpeed() * 20f);
-                Networking.LocalPlayer.SetStrafeSpeed(Networking.LocalPlayer.GetStrafeSpeed() * 30f);
-            }
-            else if (MainSettings.Run == false)
-            {
-                MainSettings.Run = false;
-                Networking.LocalPlayer.SetWalkSpeed(Networking.LocalPlayer.GetWalkSpeed() * 2f);
-                Networking.LocalPlayer.SetRunSpeed(Networking.LocalPlayer.GetRunSpeed() * 4f);
-                Networking.LocalPlayer.SetStrafeSpeed(Networking.LocalPlayer.GetStrafeSpeed() * 2f);
-            }
-        }
-		public static void FlyOn()
-        {
-            MainSettings.flytoggle = true;
-
-            if (MainSettings.flytoggle == true)
+            if (MainSettings.flytoggle)
             {
                 VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<CharacterController>().enabled = false;
+                VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<Collider>().enabled = false;
                 origGrav = Physics.gravity;
                 Physics.gravity = Vector3.zero;
             }
-        }
-        public static void FlyOff()
-        {
-            MainSettings.flytoggle = false;
-
-            if (MainSettings.flytoggle == false)
+            else
             {
                 VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<CharacterController>().enabled = true;
+                VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<Collider>().enabled = true;
                 Physics.gravity = origGrav;
             }
         }
@@ -110,9 +89,7 @@ namespace ScytheStation.Functions
         // SCRIIAAAAMM!!!!!!!
         public static void ClickTPToggle()
         {
-            MainSettings.ClickTP = true;
-
-            if (MainSettings.ClickTP == true)
+            if (MainSettings.ClickTP)
             {
                 if (RoomManager.field_Internal_Static_ApiWorld_0 != null && RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
                 {
@@ -122,7 +99,7 @@ namespace ScytheStation.Functions
                         if (Physics.Raycast(ray, out RaycastHit raycastHit)) VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position = raycastHit.point;
                     }
                 }
-            } else { MainSettings.ClickTP = false; }
+            }
         }
 	}
 }

@@ -7,12 +7,12 @@ namespace ApolloCore.API.QM
 {
     public class QMToggleButton : QMButtonBase
     {
-        protected TextMeshProUGUI btnTextComp;
-        protected Button btnComp;
-        protected Image btnImageComp;
-        protected bool currentState;
-        protected Action OnAction;
-        protected Action OffAction;
+        public TextMeshProUGUI btnTextComp;
+        public Button btnComp;
+        public Image btnImageComp;
+        public bool currentState;
+        public Action OnAction;
+        public Action OffAction;
 
         public QMToggleButton(QMNestedButton location, float btnXPos, float btnYPos, string btnText, Action onAction, Action offAction, string btnToolTip, bool defaultState = false)
         {

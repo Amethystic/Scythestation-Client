@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using System;
+using Obfuscation = System.Reflection.ObfuscationAttribute;
 
 namespace ScytheStation.Patches
 {
@@ -7,7 +8,7 @@ namespace ScytheStation.Patches
     {
         //Patches by Pyro
         //https://github.com/LimeAndPyro
-
+        [Obfuscation(Exclude = false)]
         class PatchInstance
         {
             public static HarmonyLib.Harmony Inst = new HarmonyLib.Harmony("Patch");

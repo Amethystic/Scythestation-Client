@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using VRC.UI.Elements;
 
@@ -7,11 +6,11 @@ namespace ApolloCore.API.QM
 {
     public class QMMenuBase
     {
-        protected string btnQMLoc;
-        protected GameObject MenuObject;
-        protected TextMeshProUGUI MenuTitleText;
-        protected UIPage MenuPage;
-        protected string MenuName;
+        public string btnQMLoc;
+        public GameObject MenuObject;
+        public TextMeshProUGUI MenuTitleText;
+        public UIPage MenuPage;
+        public string MenuName;
 
         public string GetMenuName() => MenuName;
 
@@ -27,7 +26,7 @@ namespace ApolloCore.API.QM
             {
                 if (MenuObject.transform.GetChild(i).name != "Header_H1" && MenuObject.transform.GetChild(i).name != "ScrollRect")
                 {
-                    UnityEngine.Object.Destroy(MenuObject.transform.GetChild(i).gameObject);
+                    Object.Destroy(MenuObject.transform.GetChild(i).gameObject);
                 }
             }
         }

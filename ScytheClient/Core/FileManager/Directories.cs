@@ -1,11 +1,13 @@
 ﻿using System.IO;
 using System;
 using MelonLoader;
+using Obfuscation = System.Reflection.ObfuscationAttribute;
 
 namespace ScytheStation.Core.FileManager
 {
     internal class Directories
     {
+        [Obfuscation(Exclude = false)]
         public static string GDir = Environment.CurrentDirectory;
         public static string MDir = $"{GDir}\\Mods";
         public static string Folder = $"{GDir}\\ScytheStation";
@@ -25,6 +27,7 @@ namespace ScytheStation.Core.FileManager
             if (!Directory.Exists($"{Folder}\\Misc")) { Directory.CreateDirectory($"{Folder}\\Misc"); FCount++; }
             if (!Directory.Exists($"{Folder}\\Loading")) { Directory.CreateDirectory($"{Folder}\\Misc\\Loading"); FCount++; }
             if (!Directory.Exists($"{Folder}\\Images")) { Directory.CreateDirectory($"{Folder}\\Dependencies\\Images"); FCount++; }
+            if (!Directory.Exists($"{GDir}\\UserData\\MelonStartScreen\\Themes\\ScytheStation")) { Directory.CreateDirectory($"{GDir}\\UserData\\MelonStartScreen\\Themes\\ScytheStation"); FCount++; }
         }
         public static void ValidateFolders() { if (FCount != 0) { MelonLogger.Msg($"[LOADER] Created {FCount} Folders!"); } }
     }

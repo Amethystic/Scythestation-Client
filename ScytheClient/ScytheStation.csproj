@@ -33,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="2oplhdnm.uco~" />
     <None Remove="Menus\Game.cs~RF27de0e.TMP" />
   </ItemGroup>
 
@@ -61,6 +62,9 @@
     <Reference Include="bHapticsLib">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\bHapticsLib.dll</HintPath>
     </Reference>
+    <Reference Include="DataModel">
+      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\DataModel.dll</HintPath>
+    </Reference>
     <Reference Include="Il2Cppmscorlib">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
     </Reference>
@@ -73,6 +77,7 @@
     <Reference Include="MelonLoader">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Cecil">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Mono.Cecil.dll</HintPath>
     </Reference>
@@ -93,6 +98,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Photon-DotNet">
+      <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\Photon-DotNet.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\System.Windows.Forms.dll</HintPath>

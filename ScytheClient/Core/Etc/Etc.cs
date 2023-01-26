@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using ScytheStation;
 using MelonLoader;
 
 namespace ScytheStation.Core.Etc
@@ -20,7 +15,7 @@ namespace ScytheStation.Core.Etc
         }
         public static void C()
         {
-            MelonLogger.Msg(ConsoleColor.Blue, "[CREDITS] Thanks Scrim#0069 (Vanix / EzBase Dev), plasma#1337 (ScytheStation User [Code Helper] / Meowengine Dev), Residnt (IKFunnies Dev), And Blaze#6666 (Deob Maps / ETC) / xAstroBoy#1337 / CriticalSociety#6453 (Love u <3). Hope you have a nice day!");
+            MelonLogger.Msg(ConsoleColor.Blue, "[CREDITS] Thanks Scrim#0069 (Vanix / EzBase Dev), plasma#1337 (ScytheStation User [Code Helper] / Meowengine Dev), Residnt (IKFunnies Dev), And Blaze#6666 (Deob Maps / ETC) / xAstroBoy#1337 / CriticalSociety#6453 (Love u <3) / _1254 (Fly). Hope you have a nice day!");
         }
     }
 }

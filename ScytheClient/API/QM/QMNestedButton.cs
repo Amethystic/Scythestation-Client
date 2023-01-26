@@ -11,9 +11,9 @@ namespace ApolloCore.API.QM
 {
     public class QMNestedButton : QMMenuBase
     {
-        protected bool IsMenuRoot;
-        protected GameObject BackButton;
-        protected QMSingleButton MainButton;
+        public bool IsMenuRoot;
+        public GameObject BackButton;
+        public QMSingleButton MainButton;
 
         public QMNestedButton(QMTabMenu location, float posX, float posY, string btnText, string toolTipText, string menuTitle, bool halfButton = false)
         {

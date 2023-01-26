@@ -4,38 +4,137 @@ using System.Collections.Generic;
 using MelonLoader;
 using UnityEngine;
 using ScytheStation.Menus;
+using ScytheStation.Components;
 using ScytheStation.Core;
 using ScytheStation.Functions;
-using System.Collections;
 using System.IO;
+using System.Collections;
 using UnityEngine.Networking;
 using ScytheStation.Core.FileManager;
 using ScytheStation.Core.Etc;
+using VRC.Integrations;
+using System.Runtime.InteropServices;
+using ExitGames.Client.Photon;
+using NetworkSanity.Core;
+using Photon.Realtime;
+using UnhollowerBaseLib;
+using VRC.Core;
+using Obfuscation = System.Reflection.ObfuscationAttribute;
 
-[assembly: MelonInfo(typeof(ScytheStation.Main), "ScytheStation", "2.4", "Scythe Innovation's (Unpasting Process #4)")]
+[assembly: MelonInfo(typeof(ScytheStation.Main), "ScytheStation", "2.6", "Scythe Innovation's (Unpasting Process #4)")]
 [assembly: MelonGame("VRChat", "VRChat")]
 [assembly: MelonAuthorColor(ConsoleColor.Magenta)]
 [assembly: MelonColor(ConsoleColor.DarkMagenta)]
 
-// Credits to Scrim & Lime&Pyro
+// Credits to Scrim & Lime&Pyro & pocketnone & Requi
 // Thanks to xAstroBoy 4 helping :P
 namespace ScytheStation
 {
     public class Main : MelonMod
     {
+        [Obfuscation(Exclude = false)]
         /*Public Static Strings*/
-
-        public static string Version = "2.4";
+        public static string Version = "2.6";
         public static string Name = $"<color=#fc0ac0><b>ScytheStation</b></color> [v{Version}]";
         public static string Author = "Scythe Innovation's";
         public static string N2 = $"<color=#f50a70><b>S</b></color><color=#e10af5><b>c</b></color><color=#b60af5><b>y</b></color><color=#8f0af5><b>t</b></color><color=#5c0af5><b>h</b></color><color=#2d0af5><b>e</b></color> <color=#fcfcfc><b>[v{Version}]</b></color>";
         public static bool GameInitialized = false;
+        public static string MusicLocation = $"{Directories.Folder}\\Misc\\Loading\\Load.ogg";
+        internal const string Nameinitials = "ScytheStation";
+        internal static string Directory = Path.Combine(System.IO.Directory.GetCurrentDirectory(), Nameinitials);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate void EventDelegate(IntPtr thisPtr, IntPtr eventDataPtr, IntPtr nativeMethodInfo);
+        private readonly List<object> _ourPinnedDelegates = new();
+        private static readonly List<ISanitizer> Sanitizers = new List<ISanitizer>();
+        public new static HarmonyLib.Harmony Harmony { get; private set; }
 
         /*Module Listing lol*/
         public static List<Module> Mod = new List<Module>();
+#pragma warning disable CS0672 // Member overrides obsolete member
+
         public override void OnApplicationStart()
+#pragma warning restore CS0672 // Member overrides obsolete member
         {
-            MelonLogger.Msg("To the station we go");
+            // Unneeded thingy dont wrry ab it ;)
+            MelonLogger.Msg("[GAME START] To the station we go");
+            Harmony = HarmonyInstance;
+            IEnumerable<Type> types;
+            try
+            {
+                types = MelonAssembly.Assembly.GetExportedTypes();
+            }
+            finally
+            {
+            }
+            foreach (var t in types)
+            {
+                if (t.IsAbstract)
+                    continue;
+                if (!typeof(ISanitizer).IsAssignableFrom(t))
+                    continue;
+
+                var sanitizer = Activator.CreateInstance(t) as ISanitizer;
+                Sanitizers.Add(sanitizer);
+                MelonLogger.Msg($"[NS INTERGRATION] Added new Sanitizer: {t.Name}");
+            }
+            unsafe
+            {
+                var originalMethodPtr = *(IntPtr*)(IntPtr)UnhollowerUtils.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.OnEvent))).GetValue(null);
+
+                EventDelegate originalDelegate = null;
+
+                void OnEventDelegate(IntPtr thisPtr, IntPtr eventDataPtr, IntPtr nativeMethodInfo)
+                {
+                    if (eventDataPtr == IntPtr.Zero)
+                    {
+                        originalDelegate(thisPtr, eventDataPtr, nativeMethodInfo);
+                        return;
+                    }
+
+                    try
+                    {
+                        var eventData = new EventData(eventDataPtr);
+                        if (OnEventPatch(new LoadBalancingClient(thisPtr), eventData))
+                            originalDelegate(thisPtr, eventDataPtr, nativeMethodInfo);
+                    }
+                    catch (Exception ex)
+                    {
+                        originalDelegate(thisPtr, eventDataPtr, nativeMethodInfo);
+                        MelonLogger.Error(ex.Message);
+                    }
+                }
+
+                var patchDelegate = new EventDelegate(OnEventDelegate);
+                _ourPinnedDelegates.Add(patchDelegate);
+
+                MelonUtils.NativeHookAttach((IntPtr)(&originalMethodPtr), Marshal.GetFunctionPointerForDelegate(patchDelegate));
+                originalDelegate = Marshal.GetDelegateForFunctionPointer<EventDelegate>(originalMethodPtr);
+            }
+            unsafe
+            {
+                var originalMethodPtr = *(IntPtr*)(IntPtr)UnhollowerUtils.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(typeof(VRCNetworkingClient).GetMethod(nameof(VRCNetworkingClient.OnEvent))).GetValue(null);
+
+                EventDelegate originalDelegate = null;
+
+                void OnEventDelegate(IntPtr thisPtr, IntPtr eventDataPtr, IntPtr nativeMethodInfo)
+                {
+                    if (eventDataPtr == IntPtr.Zero)
+                    {
+                        originalDelegate(thisPtr, eventDataPtr, nativeMethodInfo);
+                        return;
+                    }
+
+                    var eventData = new EventData(eventDataPtr);
+                    if (VRCNetworkingClientOnPhotonEvent(eventData))
+                        originalDelegate(thisPtr, eventDataPtr, nativeMethodInfo);
+                }
+
+                var patchDelegate = new EventDelegate(OnEventDelegate);
+                _ourPinnedDelegates.Add(patchDelegate);
+
+                MelonUtils.NativeHookAttach((IntPtr)(&originalMethodPtr), Marshal.GetFunctionPointerForDelegate(patchDelegate));
+                originalDelegate = Marshal.GetDelegateForFunctionPointer<EventDelegate>(originalMethodPtr);
+            }
         }
         public override void OnInitializeMelon()
         {
@@ -53,6 +152,8 @@ namespace ScytheStation
             Directories.CreateFolders();
             Directories.ValidateFolders();
             Installer.Init();
+            Core.Discord.Manager.InitRPC();
+            DiscordSettings.Discord();
         }
         public override void OnLateInitializeMelon()
         {
@@ -61,11 +162,13 @@ namespace ScytheStation
         }
         public override void OnGUI()
         {
-            if (!GameInitialized && UnityEngine.Object.FindObjectOfType<VRC.UI.Elements.QuickMenu>() != null) 
+            if (!GameInitialized && UnityEngine.Object.FindObjectOfType<VRC.UI.Elements.QuickMenu>() != null)
             {
                 GameInitialized = true;
-                new WaitForSeconds(5.259f); //waits just incase
+                new WaitForSeconds(0.7f); //waits just incase
                 MenuManager.Init();
+                Settings.Load();
+                Settings.StartAutosave();
                 MelonLogger.Msg(ConsoleColor.Gray, "[LOADER] Initiating Logs...");
                 MelonLogger.WriteSpacer();
                 MelonLogger.Msg(ConsoleColor.Gray, "---------------------------------------------------");
@@ -74,12 +177,14 @@ namespace ScytheStation
                 MelonLogger.WriteSpacer();
             }
         }
-
         public override void OnUpdate()
         {
             // Hittin up every frames phone
             Movements.OnUpdate();
             Movements.ClickTPToggle();
+            Exploits.AllowCloning();
+            Visuals.ESPToggle();
+            Settings2.BindingSupport();
         }
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
@@ -89,6 +194,7 @@ namespace ScytheStation
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
             // Scene Initiates
+            DiscordManager.field_Private_Static_Int64_0.Equals(false);
             MelonCoroutines.Start(Music());
             MelonLogger.Msg(ConsoleColor.Gray, "[GAME] Initializing World...");
         }
@@ -96,7 +202,7 @@ namespace ScytheStation
         {
             Etc.B();
             AudioSource audioSource = new AudioSource();
-            UnityWebRequest uwr = UnityWebRequest.Get("file://" + Path.Combine(Environment.CurrentDirectory, $"{Directories.Folder}\\Misc\\Loading\\Load.ogg"));
+            UnityWebRequest uwr = UnityWebRequest.Get("file://" + $"{MusicLocation}");
             uwr.SendWebRequest();
             while (!uwr.isDone) { yield return null; }
             AudioClip audiofile = WebRequestWWW.InternalCreateAudioClipUsingDH(uwr.downloadHandler, uwr.url, false, false, 0);
@@ -115,7 +221,29 @@ namespace ScytheStation
         }
         public override void OnApplicationQuit()
         {
+            // Quit Fix
+            Settings.StopAutosave();
+            Settings.Save();
+            DiscordSettings.Discord2();
             Process.GetCurrentProcess().Kill();
+        }
+        private static bool OnEventPatch(LoadBalancingClient loadBalancingClient, EventData eventData)
+        {
+            foreach (var sanitizer in Sanitizers)
+            {
+                if (sanitizer.OnPhotonEvent(loadBalancingClient, eventData))
+                    return false;
+            }
+            return true;
+        }
+        private static bool VRCNetworkingClientOnPhotonEvent(EventData eventData)
+        {
+            foreach (var sanitizer in Sanitizers)
+            {
+                if (sanitizer.VRCNetworkingClientOnPhotonEvent(eventData))
+                    return false;
+            }
+            return true;
         }
     }
 }

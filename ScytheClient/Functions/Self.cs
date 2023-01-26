@@ -5,14 +5,16 @@ using ScytheStation.Components.IKH;
 using ScytheStation.Components.Extensions;
 using UnityEngine;
 using VRC;
+using Obfuscation = System.Reflection.ObfuscationAttribute;
 
 namespace ScytheStation.Functions
 {
     internal class Self
     {
+        [Obfuscation(Exclude = false)]
         public static void TPOSE()
         {
-            if (RuntimeConfig.tPose == true)
+            if (RuntimeConfig.tPose)
             {
                 MelonLogger.Msg(ConsoleColor.Blue, "[PLC] [TP] Hehe");
                 Animator field_Internal_Animator_ = Player.Method_Internal_Static_Player_0()._vrcplayer.field_Internal_Animator_0;

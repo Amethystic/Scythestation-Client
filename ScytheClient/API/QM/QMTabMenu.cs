@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,17 +12,17 @@ namespace ApolloCore.API.QM
 {
     public class QMTabMenu : QMMenuBase
     {
-        protected GameObject MainButton;
-        protected GameObject BadgeObject;
-        protected TextMeshProUGUI BadgeText;
-        protected MenuTab MenuTabComp;
+        public GameObject MainButton;
+        public GameObject BadgeObject;
+        public TextMeshProUGUI BadgeText;
+        public MenuTab MenuTabComp;
 
         public QMTabMenu(string ToolTipText, string MenuTitle, Sprite ButtonImage = null)
         {
             Initialize(ToolTipText, MenuTitle, ButtonImage);
         }
 
-        private void Initialize(string ToolTipText, string MenuTitle, Sprite ButtonImage)
+        public void Initialize(string ToolTipText, string MenuTitle, Sprite ButtonImage)
         {
             MenuName = $"{APIUtils.Identifier}-TabMenu-{APIUtils.RandomNumbers()}";
             MenuObject = Object.Instantiate(APIUtils.GetQMMenuTemplate(), APIUtils.GetQMMenuTemplate().transform.parent);
@@ -101,7 +100,6 @@ namespace ApolloCore.API.QM
             BadgeObject.SetActive(showing);
             BadgeText.text = text;
         }
-
         public GameObject GetMainButton() => MainButton;
     }
 }
