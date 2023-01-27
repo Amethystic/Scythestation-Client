@@ -36,6 +36,7 @@ namespace ScytheStation.Components
                 if (Input.GetKeyDown(KeyCode.G))
                 {
                     MainSettings.ESPCapsules.Value = !MainSettings.ESPCapsules;
+                    MainSettings.IESP.Value = !MainSettings.IESP;
                 }
             }
         }
@@ -57,6 +58,7 @@ namespace ScytheStation.Components
         public static SaveProperty<bool> flytoggle = new("flytoggle", false);
         public static SaveProperty<bool> ESPCapsules = new("ESPCapsules", false);
         public static SaveProperty<bool> NPESP = new("NPESP", false);
+        public static SaveProperty<bool> IESP = new("IESP", false);
         public static SaveProperty<bool> Idek = new("Idek", false);
         public static SaveProperty<bool> LogEvents = new("LogEvents", false);
         public static SaveProperty<bool> keybinds = new("keybinds", false);

@@ -22,6 +22,11 @@ namespace ScytheStation.Functions
         public static Process mainProcess = null;
         [DllImport("kernel32.dll", CallingConvention = CallingConvention.StdCall)]
         public static extern bool SetProcessAffinityMask(IntPtr hProcess, IntPtr dwProcessAffinityMask);
+        public static void OpenSite()
+        {
+            Process.Start($"{Main.Site}");
+            MelonLogger.Msg(ConsoleColor.Green, $"[GC] Directing to {Main.Site}");
+        }
         public static void LagGame()
         {
             Application.targetFrameRate = 1;

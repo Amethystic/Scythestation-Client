@@ -18,6 +18,7 @@ namespace ScytheStation.Menus
             new QMSingleButton(AnotherMenu2, 2, 3f, "<color=#fa0702><b>Quick LogOut</b></color>", delegate { MelonLogger.Msg("[GC] Buh bye"); Notificator.WriteHudMessage($"[GC] Buh bye"); Functions.GameControls.LogOut(); }, "Logs you out lol?");
             new QMSingleButton(AnotherMenu2, 3, 3f, "<color=#03fc0b><b>Save Config</b></color>", delegate { MelonLogger.Msg("[GC] Config Saved"); Components.Settings2.SaveSettings(); }, "Save");
             new QMSingleButton(AnotherMenu2, 4, 3f, "<color=#fcf403><b>Load Config</b></color>", delegate { MelonLogger.Msg("[GC] Config Loaded"); Components.Settings2.LoadSettings(); }, "Load");
+            new QMSingleButton(AnotherMenu2, 4, 3, "<color=#b83275><b>Open Site</b></color>", delegate { Functions.GameControls.OpenSite(); }, "Opens our site");
             /* Main Settings Buttons */
             /* Settings Buttons */
             new QMToggleButton(AnotherMenu2, 1, 0, "Lag yo ass out!", delegate

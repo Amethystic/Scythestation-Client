@@ -16,6 +16,9 @@ namespace ScytheStation.Menus
             new QMToggleButton(AnotherMenu5, 1, 0, "Visualize all Players", delegate
             { Components.MainSettings.ESPCapsules.Value = true; MelonLogger.Msg(ConsoleColor.Blue, "[VISUALS] ESP On"); Notificator.WriteHudMessage($"[VISUALS] I see you"); }, delegate
             { Components.MainSettings.ESPCapsules.Value = false; MelonLogger.Msg(ConsoleColor.DarkBlue, "[VISUALS] ESP Off"); Notificator.WriteHudMessage($"[VISUALS] Im blind"); }, "Highlights players with capsules");
+            new QMToggleButton(AnotherMenu5, 2, 0, "Visualize all Items", delegate
+            { Components.MainSettings.IESP.Value = true; MelonLogger.Msg(ConsoleColor.Blue, "[VISUALS] IESP On"); Notificator.WriteHudMessage($"[VISUALS] I see things"); }, delegate
+            { Components.MainSettings.IESP.Value = false; MelonLogger.Msg(ConsoleColor.DarkBlue, "[VISUALS] IESP Off"); Notificator.WriteHudMessage($"[VISUALS] Im blinded"); }, "Highlights Items with renderers");
             // VISUAL MENU //
             MelonLogger.Msg(ConsoleColor.Green, "[MENUS] VisualManager Loaded", MenuManager.C++);
         }

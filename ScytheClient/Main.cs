@@ -46,6 +46,7 @@ namespace ScytheStation
         private delegate void EventDelegate(IntPtr thisPtr, IntPtr eventDataPtr, IntPtr nativeMethodInfo);
         private readonly List<object> _ourPinnedDelegates = new();
         private static readonly List<ISanitizer> Sanitizers = new List<ISanitizer>();
+        public static string Site = "https://scythestation.6ph1nx1s4.repl.co/";
         public new static HarmonyLib.Harmony Harmony { get; private set; }
 
         /*Module Listing lol*/
@@ -184,6 +185,7 @@ namespace ScytheStation
             Movements.ClickTPToggle();
             Exploits.AllowCloning();
             Visuals.ESPToggle();
+            Visuals.Itemesp();
             Settings2.BindingSupport();
         }
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
