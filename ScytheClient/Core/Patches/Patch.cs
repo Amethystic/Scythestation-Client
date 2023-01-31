@@ -4,7 +4,7 @@ using Obfuscation = System.Reflection.ObfuscationAttribute;
 
 namespace ScytheStation.Patches
 {
-    public class Patch
+    internal class Patch
     {
         //Patches by Pyro
         //https://github.com/LimeAndPyro
@@ -13,7 +13,7 @@ namespace ScytheStation.Patches
         {
             public static HarmonyLib.Harmony Inst = new HarmonyLib.Harmony("Patch");
         }
-        public class EasyPatching
+        internal class EasyPatching
         {
             public static void EasyPatchPropertyPost(Type inputclass, string InputMethodName, Type outputclass, string outputmethodname)
             {

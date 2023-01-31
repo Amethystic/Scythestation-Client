@@ -62,6 +62,9 @@ namespace ScytheStation.Components
         public static SaveProperty<bool> Idek = new("Idek", false);
         public static SaveProperty<bool> LogEvents = new("LogEvents", false);
         public static SaveProperty<bool> keybinds = new("keybinds", false);
+        public static SaveProperty<bool> Nameplates = new("Nameplates", false);
+        public static SaveProperty<bool> PlayerAppearenceLog = new("PlayerAppearenceLog", false);
+        public static bool E1 = false;
     }
     internal class Game
     {
@@ -73,7 +76,7 @@ namespace ScytheStation.Components
         public static SaveProperty<bool> HighPrior = new("HighPrior", false);
         public static SaveProperty<bool> SkitHyperThread = new("SkitHyperThread", false);
     }
-    public class UserStruct
+    internal class UserStruct
     {
         public string userId { get; set; }
         public Player player { get; set; }

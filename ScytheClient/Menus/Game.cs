@@ -2,13 +2,11 @@
 using MelonLoader;
 using System;
 using ScytheStation.API.Utils;
-using Obfuscation = System.Reflection.ObfuscationAttribute;
 
 namespace ScytheStation.Menus
 {
     internal class Game
     {
-        [Obfuscation(Exclude = false)]
         public static void Init(QMTabMenu menu)
         {
             // GAME MENU //
@@ -36,6 +34,9 @@ namespace ScytheStation.Menus
             new QMToggleButton(AnotherMenu2, 3, 1, "Skip HyperThread", delegate
             { Components.GameCtrl.SkitHyperThread.Value = true; MelonLogger.Msg(ConsoleColor.Green, "[GC] Hyperthread Skipped"); Notificator.WriteHudMessage($"[GC] Hyperthread Skipped"); }, delegate
             { Components.GameCtrl.SkitHyperThread.Value = false; MelonLogger.Msg(ConsoleColor.DarkGreen, "[GC] Hyperthread UnSkipped"); Notificator.WriteHudMessage($"[GC] Hyperthread UnSkipped"); }, "Messes with affinity");
+            new QMToggleButton(AnotherMenu2, 4, 1, "Log Player L/J Events", delegate
+            { Components.MainSettings.PlayerAppearenceLog.Value = true; MelonLogger.Msg(ConsoleColor.Green, "[GC] Started Logging"); Notificator.WriteHudMessage($"[GC] Started Logging"); }, delegate
+            { Components.MainSettings.PlayerAppearenceLog.Value = false; MelonLogger.Msg(ConsoleColor.DarkGreen, "[GC] Stopped Logging"); Notificator.WriteHudMessage($"[GC] Stopped Logging"); }, "Messes with our patch's logging system");
             /* Settings Buttons */
             // GAME MENU //
             MelonLogger.Msg(ConsoleColor.Green, "[MENUS] GameManager Loaded", MenuManager.C++);

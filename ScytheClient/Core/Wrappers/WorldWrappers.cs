@@ -1,13 +1,21 @@
 ﻿using System.Collections.Generic;
 using VRC;
-using Obfuscation = System.Reflection.ObfuscationAttribute;
+using VRC.SDKBase;
+using VRC.Udon;
 
 
 namespace ScytheStation.Core.Wrappers
 {
     internal class WorldWrappers
     {
-        [Obfuscation(Exclude = false)]
+
+        public static VRC_Pickup[] vrc_Pickups;
+        public static VRC_Trigger[] vrc_Triggers;
+        public static void Init()
+        {
+            vrc_Pickups = UnityEngine.Object.FindObjectsOfType<VRC_Pickup>();
+            vrc_Triggers = UnityEngine.Object.FindObjectsOfType<VRC_Trigger>();
+        }
         // idk if i can unskid this but.. ik u grabbed from foonix ngl
         internal static IEnumerable<Player> GetPlayers() { return PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.ToArray(); }
         public static string GetLocation() { return PlayerWrappers.LocalPlayer().GetAPIUser().location; }

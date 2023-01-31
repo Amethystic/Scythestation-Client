@@ -1,10 +1,7 @@
-﻿using Obfuscation = System.Reflection.ObfuscationAttribute;
-
-namespace ScytheStation.Core
+﻿namespace ScytheStation.Core
 {
     public class Module
     {
-        [Obfuscation(Exclude = false)]
         public virtual void Start()
         {
         }

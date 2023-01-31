@@ -6,9 +6,8 @@ using Obfuscation = System.Reflection.ObfuscationAttribute;
 namespace NetworkSanity.Core
 {
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct Il2CppMethodInfo
+    internal unsafe struct Il2CppMethodInfo
     {
-        [Obfuscation(Exclude = false)]
         public IntPtr methodPointer;
         public IntPtr invoker_method;
         public IntPtr name; // const char*

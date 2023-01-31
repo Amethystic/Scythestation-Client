@@ -11,7 +11,7 @@ using MelonLoader;
 
 [assembly: ComVisible(false)]
 [assembly: AssemblyTitle("ScytheStation")]
-[assembly: AssemblyVersion("6.9.6.9")]
+[assembly: AssemblyVersion("2.0.2.3")]
 [assembly: CompilationRelaxations(8)]
 [assembly: RuntimeCompatibility(WrapNonExceptionThrows = true)]
 [assembly: AssemblyCompany("Apple Inc")]
@@ -22,5 +22,5 @@ using MelonLoader;
 // The following GUID is for the ID of the typelib if this project is exposed to COM.
 
 [assembly: Guid("0ca65340-2b7d-49d3-99ce-fd7f9d4643db")]
-[assembly: AssemblyFileVersion("6.9.6.9")]
-[assembly: AssemblyInformationalVersion("6.9.6.9")] 
+[assembly: AssemblyFileVersion("2.0.2.3")]
+[assembly: AssemblyInformationalVersion("2.0.2.3")] 

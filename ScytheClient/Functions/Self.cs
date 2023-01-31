@@ -29,7 +29,7 @@ namespace ScytheStation.Functions
         public static void DefaultAVI()
         {
             MelonLogger.Msg(ConsoleColor.Blue, "[AVATAR] [REP] :D");
-            PlayerWrappers.ChangeAvatar("avtr_23a69f06-1311-442f-986c-bbe520bef6a3");
+            PlayerWrappers.ChangeAvatar("avtr_b8a5b922-faec-460e-bc36-862518bdee8f");
         }
         public static void AVIID()
         {

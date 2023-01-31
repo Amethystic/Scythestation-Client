@@ -7,7 +7,6 @@ namespace ScytheStation.API.Utils
 {
     internal class Notificator
     {
-        [Obfuscation(Exclude = false)]
         private static UserEventCarousel _ActiveCarousel { get; set; }
         internal static UserEventCarousel ActiveCarousel { get { if (_ActiveCarousel == null) { foreach (var carousel in Resources.FindObjectsOfTypeAll<UserEventCarousel>()) { if (carousel != null) { if (carousel.field_Private_List_1_MonoBehaviourPublicTMteCaSiImdiCoUnique_1.Count != 0) { return _ActiveCarousel = carousel; } } } } return _ActiveCarousel; } }
         private static Transform _User_Event_Carousel { get; set; }

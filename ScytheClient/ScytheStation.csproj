@@ -34,6 +34,7 @@
 
   <ItemGroup>
     <None Remove="2oplhdnm.uco~" />
+    <None Remove="Functions\Protections.cs~RFd706e.TMP" />
     <None Remove="Menus\Game.cs~RF27de0e.TMP" />
   </ItemGroup>
 
@@ -420,6 +421,10 @@
     <Reference Include="WindowsBase">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\steamapps\common\VRChat\MelonLoader\Managed\WindowsBase.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\Extensions\VRCPlates\" />
   </ItemGroup>
 
 </Project>

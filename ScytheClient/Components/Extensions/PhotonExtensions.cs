@@ -1,16 +1,15 @@
-﻿using Object = Il2CppSystem.Object;
-using Photon.Realtime;
-using SendOptions = ExitGames.Client.Photon.SendOptions;
+﻿using ExitGames.Client.Photon;
+using Il2CppSystem.Runtime.Serialization.Formatters.Binary;
 using Photon.Pun;
-using BinaryFormatter = System.Runtime.Serialization.Formatters.Binary.BinaryFormatter;
-using MemoryStream = System.IO.MemoryStream;
-using Obfuscation = System.Reflection.ObfuscationAttribute;
+using Photon.Realtime;
+using System;
+using System.IO;
+using UnhollowerBaseLib;
 
 namespace ScytheStation.Components.Extensions
 {
     internal class PhotonExtensions
     {
-        [Obfuscation(Exclude = false)]
         public static void OpRaiseEvent(byte code, object customObject, RaiseEventOptions RaiseEventOptions)
         {
             Object customObject2 = Serialization.FromManagedToIL2CPP<Object>(customObject);
@@ -18,87 +17,64 @@ namespace ScytheStation.Components.Extensions
         }
         public static void OpRaiseEvent(byte code, Object customObject, RaiseEventOptions RaiseEventOptions, SendOptions sendOptions)
         {
-            PhotonNetwork.Method_Public_Static_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0(code, customObject, RaiseEventOptions, sendOptions);
+            PhotonNetwork.Method_Public_Static_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0(code, (Il2CppSystem.Object)customObject, RaiseEventOptions, sendOptions);
         }
     }
-    internal static class Serialization
+    internal class Serialization
     {
-        [Obfuscation(Exclude = false)]
-        public static byte[] ToByteArray(Object obj)
+        internal static byte[] GetByteArray(int sizeInKb)
         {
-            bool flag = obj == null;
-            byte[] result;
-            if (flag)
-            {
-                result = null;
-            }
-            else
-            {
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                MemoryStream memoryStream = new MemoryStream();
-                binaryFormatter.Serialize(memoryStream, obj);
-                result = memoryStream.ToArray();
-            }
-            return result;
+            System.Random random = new System.Random();
+            byte[] array = new byte[sizeInKb * 1024];
+            random.NextBytes(array);
+            return array;
         }
-        public static byte[] ToByteArray(object obj)
+        internal static UnityEngine.Object ByteArrayToObjectUnity2(byte[] arrBytes)
         {
-            bool flag = obj == null;
-            byte[] result;
-            if (flag)
-            {
-                result = null;
-            }
-            else
-            {
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                MemoryStream memoryStream = new MemoryStream();
-                binaryFormatter.Serialize(memoryStream, obj);
-                result = memoryStream.ToArray();
-            }
-            return result;
+            Il2CppStructArray<byte> il2CppStructArray = new Il2CppStructArray<byte>((long)arrBytes.Length);
+            arrBytes.CopyTo(il2CppStructArray, 0);
+            Il2CppSystem.Object @object = new Il2CppSystem.Object(il2CppStructArray.Pointer);
+            return new UnityEngine.Object(@object.Pointer);
         }
-        public static T FromByteArray<T>(byte[] data)
+        internal static byte[] ToByteArray(Il2CppSystem.Object obj)
         {
-            bool flag = data == null;
-            T result;
-            if (flag)
-            {
-                result = default(T);
-            }
-            else
-            {
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                using (MemoryStream memoryStream = new MemoryStream(data))
-                {
-                    object obj = binaryFormatter.Deserialize(memoryStream);
-                    result = (T)((object)obj);
-                }
-            }
-            return result;
+            if (obj == null) return null;
+            var bf = new Il2CppSystem.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            var ms = new Il2CppSystem.IO.MemoryStream();
+            bf.Serialize(ms, obj);
+            return ms.ToArray();
         }
-        public static T IL2CPPFromByteArray<T>(byte[] data)
+        internal static byte[] ToByteArray(object obj)
         {
-            bool flag = data == null;
-            T result;
-            if (flag)
-            {
-                result = default(T);
-            }
-            else
-            {
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                MemoryStream memoryStream = new MemoryStream(data);
-                object obj = binaryFormatter.Deserialize(memoryStream);
-                result = (T)((object)obj);
-            }
-            return result;
+            if (obj == null) return null;
+            var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            var ms = new System.IO.MemoryStream();
+            bf.Serialize(ms, obj);
+            return ms.ToArray();
         }
-        public static T FromIL2CPPToManaged<T>(Object obj)
+        internal static T FromByteArray<T>(byte[] data)
+        {
+            if (data == null) return default(T);
+            var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            using (var ms = new System.IO.MemoryStream(data))
+            {
+                object obj = bf.Deserialize(ms);
+                return (T)obj;
+            }
+        }
+        internal static T IL2CPPFromByteArray<T>(byte[] data)
+        {
+            if (data == null) return default(T);
+            var bf = new Il2CppSystem.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            var ms = new Il2CppSystem.IO.MemoryStream(data);
+            object obj = bf.Deserialize(ms);
+            return (T)obj;
+        }
+        internal static T FromIL2CPPToManaged<T>(Il2CppSystem.Object obj)
         {
             return FromByteArray<T>(ToByteArray(obj));
         }
-        public static T FromManagedToIL2CPP<T>(object obj)
+        internal static T FromManagedToIL2CPP<T>(object obj)
         {
             return IL2CPPFromByteArray<T>(ToByteArray(obj));
         }

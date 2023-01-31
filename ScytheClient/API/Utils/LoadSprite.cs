@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ScytheStation.API.Utils
 {
-    public static class LoadSprite
+    internal static class LoadSprite
     {
         public static Sprite LoadSpriteFromDisk(this string path)
         {

@@ -27,7 +27,7 @@ namespace ScytheStation.Components.Extensions
             return RoomManager.field_Internal_Static_ApiWorld_0 != null;
         }
     }
-    public static class IUserExtension
+    internal static class IUserExtension
     {
         [Obfuscation(Exclude = false)]
         public static Player SelectedVRCPlayer() => APIUtils.GetUserInterface().transform.Find("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_SelectedUser_Local").GetComponentInChildren<SelectedUserMenuQM>().field_Private_IUser_0.prop_String_0.ReturnUserID();
