@@ -17,7 +17,6 @@ namespace VRCPlates.Patches
         {
             try
             {
-                MelonLoader.MelonLogger.Msg("[Patch] Patched Nameplates");
                 _OnPlayer.InitOnPlayer();
             }
             catch (Exception ERR) { MelonLoader.MelonLogger.Msg(ERR.Message); }

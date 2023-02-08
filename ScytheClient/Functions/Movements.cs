@@ -8,7 +8,6 @@ namespace ScytheStation.Functions
 {
     internal class Movements
     {
-        [Obfuscation(Exclude = false)]
         // Fly = Replaced
         // Speedhack = Replaced n simpler
         // Click tp?? idk scrim prob puts this on every client he does so, it dont matter.
@@ -101,5 +100,20 @@ namespace ScytheStation.Functions
                 }
             }
         }
-	}
+        public static void Speedrun()
+        {
+            if (MainSettings.SpeedRun)
+            {
+                Networking.LocalPlayer.SetWalkSpeed(Networking.LocalPlayer.GetWalkSpeed() * NewSpeedValue);
+                Networking.LocalPlayer.SetRunSpeed(Networking.LocalPlayer.GetRunSpeed() * NewSpeedValue);
+                Networking.LocalPlayer.SetStrafeSpeed(Networking.LocalPlayer.GetStrafeSpeed() * NewSpeedValue);
+            }
+            else
+            {
+                Networking.LocalPlayer.SetWalkSpeed(2f);
+                Networking.LocalPlayer.SetRunSpeed(4f);
+                Networking.LocalPlayer.SetStrafeSpeed(2f);
+            }
+        }
+    }
 }

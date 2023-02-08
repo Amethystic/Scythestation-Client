@@ -10,21 +10,21 @@ namespace ScytheStation.Components.Extensions
 {
     internal class PhotonExtensions
     {
-        public static void OpRaiseEvent(byte code, object customObject, RaiseEventOptions RaiseEventOptions)
+        public static void OpRaiseEvent(byte code, object customObject, RaiseEventOptions RaiseEventOptions, SendOptions sendOptions)
         {
-            Object customObject2 = Serialization.FromManagedToIL2CPP<Object>(customObject);
-            OpRaiseEvent(code, customObject2, RaiseEventOptions);
+            Il2CppSystem.Object customObject2 = Serialization.FromManagedToIL2CPP<Il2CppSystem.Object>(customObject);
+            PhotonExtensions.OpRaiseEvent(code, customObject2, RaiseEventOptions, sendOptions);
         }
-        public static void OpRaiseEvent(byte code, Object customObject, RaiseEventOptions RaiseEventOptions, SendOptions sendOptions)
+        public static void OpRaiseEvent(byte code, Il2CppSystem.Object customObject, RaiseEventOptions RaiseEventOptions, SendOptions sendOptions)
         {
-            PhotonNetwork.Method_Public_Static_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0(code, (Il2CppSystem.Object)customObject, RaiseEventOptions, sendOptions);
+            PhotonNetwork.Method_Private_Static_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0(code, customObject, RaiseEventOptions, sendOptions);
         }
     }
     internal class Serialization
     {
         internal static byte[] GetByteArray(int sizeInKb)
         {
-            System.Random random = new System.Random();
+            Random random = new Random();
             byte[] array = new byte[sizeInKb * 1024];
             random.NextBytes(array);
             return array;
@@ -39,7 +39,7 @@ namespace ScytheStation.Components.Extensions
         internal static byte[] ToByteArray(Il2CppSystem.Object obj)
         {
             if (obj == null) return null;
-            var bf = new Il2CppSystem.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            var bf = new BinaryFormatter();
             var ms = new Il2CppSystem.IO.MemoryStream();
             bf.Serialize(ms, obj);
             return ms.ToArray();
@@ -48,7 +48,7 @@ namespace ScytheStation.Components.Extensions
         {
             if (obj == null) return null;
             var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            var ms = new System.IO.MemoryStream();
+            var ms = new MemoryStream();
             bf.Serialize(ms, obj);
             return ms.ToArray();
         }
@@ -65,7 +65,7 @@ namespace ScytheStation.Components.Extensions
         internal static T IL2CPPFromByteArray<T>(byte[] data)
         {
             if (data == null) return default(T);
-            var bf = new Il2CppSystem.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            var bf = new BinaryFormatter();
             var ms = new Il2CppSystem.IO.MemoryStream(data);
             object obj = bf.Deserialize(ms);
             return (T)obj;

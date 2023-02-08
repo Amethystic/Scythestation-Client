@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using VRC;
 using ScytheStation.Components;
+using ScytheStation.Core.Wrappers;
 
 namespace VRCPlates
 {
@@ -15,7 +16,7 @@ namespace VRCPlates
         public int noUpdateCount = 0;
 
         public CustomNameplate(IntPtr ptr) : base(ptr) { }
-        
+
         public void Start()
         {
             if (MainSettings.Nameplates.Value)
@@ -78,7 +79,7 @@ namespace VRCPlates
             }
             try
             {
-                Nameplatext.text = $"[<color=green>{ player.GetPlatform() }</color>] | [{ status }] |<color=white>FPS:</color> { player.GetFramesColord() }|<color=white> P:</color>: { player.GetPingColord() }";
+                Nameplatext.text = $"[<color=green>{ player.GetPlatform() }</color>] | [{ status }] |<color=white> FPS:</color> { player.GetFramesColord() }|<color=white> P:</color> { player.GetPingColord() } |<color=red> Admin?:</color> { player.ClientDetect() }";
             }
             catch { }
         }

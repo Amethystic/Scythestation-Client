@@ -26,6 +26,11 @@ namespace ApolloCore.API.QM
             btnQMLoc = location.GetMenuName();
             Initialize(false, btnText, posX, posY, toolTipText, menuTitle, halfButton);
         }
+        public QMNestedButton(string location, float posX, float posY, string btnText, string toolTipText, string menuTitle, bool halfButton = false, bool tiny = false, bool icons = false, Sprite icon = null)
+        {
+            btnQMLoc = location;
+            Initialize(false, btnText, posX, posY, toolTipText, menuTitle, halfButton);
+        }
 
         private void Initialize(bool isRoot, string btnText, float btnPosX, float btnPosY, string btnToolTipText, string menuTitle, bool halfButton)
         {
@@ -34,20 +39,20 @@ namespace ApolloCore.API.QM
             MenuObject.name = MenuName;
             MenuObject.SetActive(false);
             Object.DestroyImmediate(MenuObject.GetComponent<LaunchPadQMMenu>());
-            MenuPage = MenuObject.AddComponent<UIPage>();
+            MenuPage = MenuObject.AddComponent<MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique>();
             MenuPage.field_Public_String_0 = MenuName;
             MenuPage.field_Protected_MenuStateController_0 = APIUtils.MenuStateControllerInstance;
-            MenuPage.field_Private_List_1_UIPage_0 = new();
-            MenuPage.field_Private_List_1_UIPage_0.Add(MenuPage);
-            APIUtils.MenuStateControllerInstance.field_Private_Dictionary_2_String_UIPage_0.Add(MenuName, MenuPage);
+            MenuPage.field_Private_List_1_MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique_0 = new();
+            MenuPage.field_Private_List_1_MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique_0.Add(MenuPage);
+            APIUtils.MenuStateControllerInstance.field_Private_Dictionary_2_String_MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique_0.Add(MenuName, MenuPage);
 
             IsMenuRoot = isRoot;
 
             if (IsMenuRoot)
             {
-                var list = APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_UIPage_0.ToList();
+                var list = APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique_0.ToList();
                 list.Add(MenuPage);
-                APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_UIPage_0 = list.ToArray();
+                APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique_0 = list.ToArray();
             }
 
             MenuObject.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup").DestroyChildren();
@@ -80,7 +85,7 @@ namespace ApolloCore.API.QM
         public void OpenMe()
         {
             MenuObject.SetActive(true);
-            APIUtils.MenuStateControllerInstance.Method_Public_Void_String_UIContext_Boolean_TransitionType_0(MenuPage.field_Public_String_0, null, false, UIPage.TransitionType.Left);
+            APIUtils.MenuStateControllerInstance.Method_Public_Void_String_UIContext_Boolean_EnumNPublicSealedvaNoLeRiBoIn6vUnique_0(MenuPage.field_Public_String_0, null, false, MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique.EnumNPublicSealedvaNoLeRiBoIn6vUnique.Left);
         }
 
         public void CloseMe()

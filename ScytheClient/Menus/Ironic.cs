@@ -2,13 +2,11 @@
 using System;
 using MelonLoader;
 using ScytheStation.API.Utils;
-using Obfuscation = System.Reflection.ObfuscationAttribute;
 
 namespace ScytheStation.Menus
 {
     internal class Ironic
     {
-        [Obfuscation(Exclude = false)]
         public static void Init(QMTabMenu menu)
         {
             // IRONIC MENU //

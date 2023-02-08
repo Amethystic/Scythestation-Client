@@ -29,17 +29,23 @@ namespace ApolloCore.API.QM
             MenuObject.name = MenuName;
             MenuObject.SetActive(false);
             Object.DestroyImmediate(MenuObject.GetComponent<LaunchPadQMMenu>());
-            MenuPage = MenuObject.AddComponent<UIPage>();
+            //MenuPage = MenuObject.AddComponent<UIPage>();
+            MenuPage = MenuObject.AddComponent<MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique>();
             MenuPage.field_Public_String_0 = MenuName;
             MenuPage.field_Private_Boolean_1 = true;
             MenuPage.field_Protected_MenuStateController_0 = APIUtils.MenuStateControllerInstance;
-            MenuPage.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
-            MenuPage.field_Private_List_1_UIPage_0.Add(MenuPage);
-            APIUtils.MenuStateControllerInstance.field_Private_Dictionary_2_String_UIPage_0.Add(MenuName, MenuPage);
+            //MenuPage.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
+            MenuPage.field_Private_List_1_MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique_0 = new Il2CppSystem.Collections.Generic.List<MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique>();
+            //MenuPage.field_Private_List_1_UIPage_0.Add(MenuPage);
+            MenuPage.field_Private_List_1_MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique_0.Add(MenuPage);
+            //APIUtils.MenuStateControllerInstance.field_Private_Dictionary_2_String_UIPage_0.Add(MenuName, MenuPage);
+            APIUtils.MenuStateControllerInstance.field_Private_Dictionary_2_String_MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique_0.Add(MenuName, MenuPage);
 
-            var tmpList = APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_UIPage_0.ToList();
+            //var tmpList = APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_UIPage_0.ToList();
+            var tmpList = APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique_0.ToList();
             tmpList.Add(MenuPage);
-            APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_UIPage_0 = tmpList.ToArray();
+            //APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_UIPage_0 = tmpList.ToArray();
+            APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique_0 = tmpList.ToArray();
 
             MenuObject.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup").DestroyChildren();
             MenuTitleText = MenuObject.GetComponentInChildren<TextMeshProUGUI>(true);
@@ -79,7 +85,7 @@ namespace ApolloCore.API.QM
 
         public void SetToolTip(string newText)
         {
-            MainButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = newText;
+            //MainButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = newText;
         }
 
         public void SetIndex(int newPosition)

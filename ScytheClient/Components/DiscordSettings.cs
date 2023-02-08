@@ -4,13 +4,11 @@ using MelonLoader;
 using System;
 using UnityEngine;
 using static ScytheStation.Components.Settings;
-using Obfuscation = System.Reflection.ObfuscationAttribute;
 
 namespace ScytheStation.Components
 {
     internal class DiscordSettings
     {
-        [Obfuscation(Exclude = false)]
         internal static DiscordRpc.EventHandlers eventHandlers;
         public static void Discord()
         {
@@ -38,6 +36,10 @@ namespace ScytheStation.Components
                     MainSettings.ESPCapsules.Value = !MainSettings.ESPCapsules;
                     MainSettings.IESP.Value = !MainSettings.IESP;
                 }
+                if (Input.GetKeyDown(KeyCode.H))
+                {
+                    MainSettings.SpeedRun.Value = !MainSettings.SpeedRun;
+                }
             }
         }
         public static void LoadSettings()
@@ -51,20 +53,18 @@ namespace ScytheStation.Components
             API.Utils.Notificator.WriteHudMessage("[GC] Config Saved");
         }
     }
-
     internal class MainSettings
     {
         public static SaveProperty<bool> ClickTP = new("ClickTP", false);
         public static SaveProperty<bool> flytoggle = new("flytoggle", false);
         public static SaveProperty<bool> ESPCapsules = new("ESPCapsules", false);
-        public static SaveProperty<bool> NPESP = new("NPESP", false);
         public static SaveProperty<bool> IESP = new("IESP", false);
+        public static SaveProperty<bool> SpeedRun = new("SpeedRun", false);
         public static SaveProperty<bool> Idek = new("Idek", false);
         public static SaveProperty<bool> LogEvents = new("LogEvents", false);
         public static SaveProperty<bool> keybinds = new("keybinds", false);
         public static SaveProperty<bool> Nameplates = new("Nameplates", false);
         public static SaveProperty<bool> PlayerAppearenceLog = new("PlayerAppearenceLog", false);
-        public static bool E1 = false;
     }
     internal class Game
     {
@@ -80,5 +80,9 @@ namespace ScytheStation.Components
     {
         public string userId { get; set; }
         public Player player { get; set; }
+    }
+    internal class MenuCustomizationSettings
+    {
+        public static SaveProperty<bool> HideApiButtonBG = new("HideApiButtonBG", false);
     }
 }

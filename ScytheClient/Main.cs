@@ -19,10 +19,12 @@ using UnhollowerRuntimeLib;
 using VRCPlates.Patches;
 using NetworkSanity.Core;
 using Photon.Realtime;
+using VRCPlates;
 using UnhollowerBaseLib;
 using VRC.Core;
+using ScytheStation.Components.Extensions;
 
-[assembly: MelonInfo(typeof(ScytheStation.Main), "ScytheStation", "2.6", "Scythe Innovation's (Unpasting Process #4)")]
+[assembly: MelonInfo(typeof(ScytheStation.Main), "ScytheStation", "2.7", "Scythe Innovation's (Unpasting Process #4)")]
 [assembly: MelonGame("VRChat", "VRChat")]
 [assembly: MelonAuthorColor(ConsoleColor.Magenta)]
 [assembly: MelonColor(ConsoleColor.DarkMagenta)]
@@ -35,7 +37,7 @@ namespace ScytheStation
     {
         /*Public Static Strings*/
         public new static HarmonyLib.Harmony Harmony { get; private set; }
-        public static string Version = "2.6";
+        public static string Version = "2.7";
         public static string Name = $"<color=#fc0ac0><b>ScytheStation</b></color> [v{Version}]";
         public static string Author = "Scythe Innovation's";
         public static string N2 = $"<color=#f50a70><b>S</b></color><color=#e10af5><b>c</b></color><color=#b60af5><b>y</b></color><color=#8f0af5><b>t</b></color><color=#5c0af5><b>h</b></color><color=#2d0af5><b>e</b></color> <color=#fcfcfc><b>[v{Version}]</b></color>";
@@ -173,7 +175,7 @@ namespace ScytheStation
             Core.Patches.Patches.Init();
             VRCPlatesPatches.InitPatches();
             Core.Discord.Manager.InitRPC();
-            ClassInjector.RegisterTypeInIl2Cpp<VRCPlates.CustomNameplate>();
+            ClassInjector.RegisterTypeInIl2Cpp<CustomNameplate>();
             DiscordSettings.Discord();
         }
         public override void OnLateInitializeMelon()
@@ -205,27 +207,26 @@ namespace ScytheStation
             {
                 Movements.OnUpdate();
             }
-            catch (Exception ex) { MelonLogger.Error($"\n---------------------------------------------------\n[OnUpdate Error | Fly (IGNORE THIS ERROR, IT WORKS FINE)]\n{ex}\n---------------------------------------------------"); }
+            catch (Exception ex) { MelonLogger.Error($"\n------------------------------------------------------------------------------------------------------\n[OnUpdate Error | Fly (IGNORE THIS ERROR, IT WORKS FINE)]\n{ex}\n------------------------------------------------------------------------------------------------------"); }
             try
             {
                 Movements.ClickTPToggle();
             }
-            catch (Exception ex) { MelonLogger.Error($"\n---------------------------------------------------\n[OnUpdate Error | ClickTP (IGNORE THIS ERROR, IT WORKS FINE)]\n{ex}\n---------------------------------------------------"); }
-            try
-            {
-                Exploits.AllowCloning();
-            }
-            catch (Exception ex) { MelonLogger.Error($"\n---------------------------------------------------\n[OnUpdate Error | ForceCloning (IGNORE THIS ERROR, IT WORKS FINE)]\n{ex}\n---------------------------------------------------"); }
+            catch (Exception ex) { MelonLogger.Error($"\n------------------------------------------------------------------------------------------------------\n[OnUpdate Error | ClickTP (IGNORE THIS ERROR, IT WORKS FINE)]\n{ex}\n------------------------------------------------------------------------------------------------------"); }
             try
             {
                 Visuals.ESPToggle();
             }
-            catch (Exception ex) { MelonLogger.Error($"\n---------------------------------------------------\n[OnUpdate Error | ESP (IGNORE THIS ERROR, IT WORKS FINE)]\n{ex}\n---------------------------------------------------"); }
+            catch (Exception ex) { MelonLogger.Error($"\n------------------------------------------------------------------------------------------------------\n[OnUpdate Error | ESP (IGNORE THIS ERROR, IT WORKS FINE)]\n{ex}\n------------------------------------------------------------------------------------------------------"); }
             try
             {
                 Settings2.BindingSupport();
             }
-            catch (Exception ex) { MelonLogger.Error($"\n---------------------------------------------------\n[OnUpdate Error | Binding Support (IGNORE THIS ERROR, IT WORKS FINE)]\n{ex}\n---------------------------------------------------"); }
+            catch (Exception ex) { MelonLogger.Error($"\n------------------------------------------------------------------------------------------------------\n[OnUpdate Error | Binding Support (IGNORE THIS ERROR, IT WORKS FINE)]\n{ex}\n------------------------------------------------------------------------------------------------------"); }
+            if (Exploits.ItemOrbitToggle == true)
+            {
+                Exploits.ItemOrbit(IUserExtension.SelectedVRCPlayer());
+            }
         }
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
@@ -241,11 +242,10 @@ namespace ScytheStation
             {
                 MelonCoroutines.Start(Music());
             }
-            catch(Exception ex) { MelonLogger.Error($"\n---------------------------------------------------\n[OnSceneWasInitialized Error | Music (IGNORE THIS ERROR, IT WORKS FINE)]\n{ex}\n---------------------------------------------------"); }
+            catch(Exception ex) { MelonLogger.Error($"\n------------------------------------------------------------------------------------------------------\n[OnSceneWasInitialized Error | Music (IGNORE THIS ERROR, IT WORKS FINE)]\n{ex}\n------------------------------------------------------------------------------------------------------"); }
         }
         public IEnumerator Music()
         {
-            Etc.B();
             AudioSource audioSource = new AudioSource();
             UnityWebRequest uwr = UnityWebRequest.Get("file://" + $"{MusicLocation}");
             uwr.SendWebRequest();

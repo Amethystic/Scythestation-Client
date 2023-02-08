@@ -5,25 +5,30 @@ using ScytheStation.Components.IKH;
 using ScytheStation.Components.Extensions;
 using UnityEngine;
 using VRC;
-using Obfuscation = System.Reflection.ObfuscationAttribute;
 
 namespace ScytheStation.Functions
 {
     internal class Self
     {
-        [Obfuscation(Exclude = false)]
         public static void TPOSE()
         {
             if (RuntimeConfig.tPose)
             {
-                MelonLogger.Msg(ConsoleColor.Blue, "[PLC] [TP] Hehe");
-                Animator field_Internal_Animator_ = Player.Method_Internal_Static_Player_0()._vrcplayer.field_Internal_Animator_0;
-                field_Internal_Animator_.enabled = !field_Internal_Animator_.enabled;
+                if (Player.prop_Player_0.transform.Find("ForwardDirection/Avatar").GetComponent<Animator>().enabled == true)
+                    Player.prop_Player_0.transform.Find("ForwardDirection/Avatar").GetComponent<Animator>().enabled = false;
+                else if (Player.prop_Player_0.transform.Find("ForwardDirection/Avatar").GetComponent<Animator>().enabled == false)
+                {
+                    Player.prop_Player_0.transform.Find("ForwardDirection/Avatar").GetComponent<Animator>().enabled = true;
+                }
             }
             else
             {
-                MelonLogger.Msg(ConsoleColor.DarkBlue, "[PLC] [TP] Aw");
-                RuntimeConfig.tPose = false;
+                if (Player.prop_Player_0.transform.Find("ForwardDirection/Avatar").GetComponent<Animator>().enabled == false)
+                    Player.prop_Player_0.transform.Find("ForwardDirection/Avatar").GetComponent<Animator>().enabled = true;
+                else if (Player.prop_Player_0.transform.Find("ForwardDirection/Avatar").GetComponent<Animator>().enabled == true)
+                {
+                    Player.prop_Player_0.transform.Find("ForwardDirection/Avatar").GetComponent<Animator>().enabled = false;
+                }
             }
         }
         public static void DefaultAVI()

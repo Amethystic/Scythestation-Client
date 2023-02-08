@@ -11,12 +11,12 @@ namespace ScytheStation.Core.Patches
         public static void Init()
         {
             //Where your patches are initialized IF YOU CAN'T TELL ALREADY
-            MelonLogger.Msg("Initializing Patches...");
+            MelonLogger.Msg("[PATCH] Initializing...");
 
             ScytheStation.Patches.Patch.EasyPatching.EasyPatchMethodPost(typeof(NetworkManager), "Method_Public_Void_Player_0", typeof(Patches), "Join");
             ScytheStation.Patches.Patch.EasyPatching.EasyPatchMethodPost(typeof(NetworkManager), "Method_Public_Void_Player_2", typeof(Patches), "Leave");
 
-            MelonLogger.Msg("Done!");
+            MelonLogger.Msg("[PATCH] Done!");
         }
 
         public static void Join(Player param_1)

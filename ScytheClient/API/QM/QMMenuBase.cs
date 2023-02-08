@@ -9,12 +9,12 @@ namespace ApolloCore.API.QM
         public string btnQMLoc;
         public GameObject MenuObject;
         public TextMeshProUGUI MenuTitleText;
-        public UIPage MenuPage;
+        public MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique MenuPage;
         public string MenuName;
 
         public string GetMenuName() => MenuName;
 
-        public UIPage GetMenuPage() => MenuPage;
+        public MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique GetMenuPage() => MenuPage;
 
         public GameObject GetMenuObject() => MenuObject;
 
