@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,9 +11,9 @@ namespace ApolloCore.API.QM
 {
     public class QMNestedButton : QMMenuBase
     {
-        protected bool IsMenuRoot;
-        protected GameObject BackButton;
-        protected QMSingleButton MainButton;
+        public bool IsMenuRoot;
+        public GameObject BackButton;
+        public QMSingleButton MainButton;
 
         public QMNestedButton(QMTabMenu location, float posX, float posY, string btnText, string toolTipText, string menuTitle, bool halfButton = false)
         {
@@ -23,6 +24,11 @@ namespace ApolloCore.API.QM
         public QMNestedButton(QMNestedButton location, float posX, float posY, string btnText, string toolTipText, string menuTitle, bool halfButton = false)
         {
             btnQMLoc = location.GetMenuName();
+            Initialize(false, btnText, posX, posY, toolTipText, menuTitle, halfButton);
+        }
+        public QMNestedButton(string location, float posX, float posY, string btnText, string toolTipText, string menuTitle, bool halfButton = false, bool tiny = false, bool icons = false, Sprite icon = null)
+        {
+            btnQMLoc = location;
             Initialize(false, btnText, posX, posY, toolTipText, menuTitle, halfButton);
         }
 

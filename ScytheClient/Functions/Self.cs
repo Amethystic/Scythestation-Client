@@ -12,22 +12,29 @@ namespace ScytheStation.Functions
     {
         public static void TPOSE()
         {
-            if (RuntimeConfig.tPose == true)
+            if (RuntimeConfig.tPose)
             {
-                MelonLogger.Msg(ConsoleColor.Blue, "[PLC] [TP] Hehe");
-                Animator field_Internal_Animator_ = Player.Method_Internal_Static_Player_0()._vrcplayer.field_Internal_Animator_0;
-                field_Internal_Animator_.enabled = !field_Internal_Animator_.enabled;
+                if (Player.prop_Player_0.transform.Find("ForwardDirection/Avatar").GetComponent<Animator>().enabled == true)
+                    Player.prop_Player_0.transform.Find("ForwardDirection/Avatar").GetComponent<Animator>().enabled = false;
+                else if (Player.prop_Player_0.transform.Find("ForwardDirection/Avatar").GetComponent<Animator>().enabled == false)
+                {
+                    Player.prop_Player_0.transform.Find("ForwardDirection/Avatar").GetComponent<Animator>().enabled = true;
+                }
             }
             else
             {
-                MelonLogger.Msg(ConsoleColor.DarkBlue, "[PLC] [TP] Aw");
-                RuntimeConfig.tPose = false;
+                if (Player.prop_Player_0.transform.Find("ForwardDirection/Avatar").GetComponent<Animator>().enabled == false)
+                    Player.prop_Player_0.transform.Find("ForwardDirection/Avatar").GetComponent<Animator>().enabled = true;
+                else if (Player.prop_Player_0.transform.Find("ForwardDirection/Avatar").GetComponent<Animator>().enabled == true)
+                {
+                    Player.prop_Player_0.transform.Find("ForwardDirection/Avatar").GetComponent<Animator>().enabled = false;
+                }
             }
         }
         public static void DefaultAVI()
         {
             MelonLogger.Msg(ConsoleColor.Blue, "[AVATAR] [REP] :D");
-            PlayerWrappers.ChangeAvatar("avtr_23a69f06-1311-442f-986c-bbe520bef6a3");
+            PlayerWrappers.ChangeAvatar("avtr_b8a5b922-faec-460e-bc36-862518bdee8f");
         }
         public static void AVIID()
         {

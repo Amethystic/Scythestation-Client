@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 using VRC.UI.Elements;
 using ScytheStation.Menus;
 
@@ -7,18 +8,17 @@ namespace ApolloCore.API
 {
     public static class APIUtils
     {
-        //API by WTFBlaze
         internal const string Identifier = MenuManager.MenuIdent;
-        private static readonly System.Random rnd = new();
-        private static VRC.UI.Elements.QuickMenu _quickMenu;
-        private static MenuStateController _menuStateController;
-        private static VRCUiPopupManager _vrcUiPopupManager;
-        private static Sprite _onSprite;
-        private static Sprite _offSprite;
-        private static GameObject _userInterface;
-        private static GameObject _qmButtonTemplate;
-        private static GameObject _qmMenuTemplate;
-        private static GameObject _qmTabTemplate;
+        public static readonly System.Random rnd = new();
+        public static VRC.UI.Elements.QuickMenu _quickMenu;
+        public static MenuStateController _menuStateController;
+        public static VRCUiPopupManager _vrcUiPopupManager;
+        public static Sprite _onSprite;
+        public static Sprite _offSprite;
+        public static GameObject _userInterface;
+        public static GameObject _qmButtonTemplate;
+        public static GameObject _qmMenuTemplate;
+        public static GameObject _qmTabTemplate;
 
         public static VRC.UI.Elements.QuickMenu QuickMenuInstance
         {
@@ -81,14 +81,14 @@ namespace ApolloCore.API
         public static Sprite OnIconSprite()
         {
             if (_onSprite == null)
-                _onSprite = QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Notifications/Panel_NoNotifications_Message/Icon").GetComponent<UnityEngine.UI.Image>().sprite;
+                _onSprite = QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Notifications/Panel_NoNotifications_Message/Icon").GetComponent<Image>().sprite;
             return _onSprite;
         }
 
         public static Sprite OffIconSprite()
         {
             if (_offSprite == null)
-                _offSprite = QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Settings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UI_Elements_Row_1/Button_ToggleQMInfo/Icon_Off").GetComponent<UnityEngine.UI.Image>().sprite;
+                _offSprite = QuickMenuInstance.transform.Find("CanvasGroup/Container/Window/QMParent/Menu_Settings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UI_Elements_Row_1/Button_ToggleQMInfo/Icon_Off").GetComponent<Image>().sprite;
             return _offSprite;
         }
 

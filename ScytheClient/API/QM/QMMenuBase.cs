@@ -1,17 +1,16 @@
 ﻿using TMPro;
 using UnityEngine;
 using VRC.UI.Elements;
-using Object = UnityEngine.Object;
 
 namespace ApolloCore.API.QM
 {
     public class QMMenuBase
     {
-        protected string btnQMLoc;
-        protected GameObject MenuObject;
-        protected TextMeshProUGUI MenuTitleText;
-        protected UIPage MenuPage;
-        protected string MenuName;
+        public string btnQMLoc;
+        public GameObject MenuObject;
+        public TextMeshProUGUI MenuTitleText;
+        public UIPage MenuPage;
+        public string MenuName;
 
         public string GetMenuName() => MenuName;
 

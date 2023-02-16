@@ -5,9 +5,9 @@ namespace ApolloCore.API.QM
 {
     public class QMButtonBase
     {
-        protected GameObject button;
-        protected string btnQMLoc;
-        protected int[] initShift = { 0, 0 };
+        public GameObject button;
+        public string btnQMLoc;
+        public int[] initShift = { 0, 0 };
 
         public GameObject GetGameObject() => button;
 
@@ -19,13 +19,13 @@ namespace ApolloCore.API.QM
             button.GetComponent<RectTransform>().anchoredPosition += Vector2.down * (210 * (buttonYLoc + initShift[1]));
         }
 
-        public void SetToolTip(string buttonToolTip) => button.GetComponents<VRC.UI.Elements.Tooltips.UiTooltip>().ToList().ForEach(x => x.field_Public_String_0 = buttonToolTip);
+        public void SetToolTip(string buttonToolTip) => button.GetComponents<VRC.UI.Elements.Tooltips.UiToggleTooltip>().ToList().ForEach(x => x.field_Public_String_0 = buttonToolTip);
 
         public void DestroyMe()
         {
             try
             {
-                UnityEngine.Object.Destroy(button);
+                Object.Destroy(button);
             }
             catch { }
         }
