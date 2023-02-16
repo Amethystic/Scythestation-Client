@@ -2,7 +2,6 @@
 using VRC.SDKBase;
 using ScytheStation.Components;
 using VRC;
-using Obfuscation = System.Reflection.ObfuscationAttribute;
 
 namespace ScytheStation.Functions
 {
@@ -10,23 +9,46 @@ namespace ScytheStation.Functions
     {
         // Fly = Replaced
         // Speedhack = Replaced n simpler
-        // Click tp?? idk scrim prob puts this on every client he does so, it dont matter.
         public static float NewSpeedValue = 10f;
-        public static float FlySpeed = 2;
+        public static int speed = 25;
+        public static float FlySpeed = 25f;
+        public static bool IsRunning = false;
         public static Vector3 origGrav = default(Vector3);
-        public static void FlyToggle()
+        public static void SpeedRunToggle()
         {
-            if (MainSettings.flytoggle)
+            if (MainSettings.Run == true)
+            {
+                MainSettings.Run = true;
+                Networking.LocalPlayer.SetWalkSpeed(NewSpeedValue);
+                Networking.LocalPlayer.SetRunSpeed(speed);
+                Networking.LocalPlayer.SetStrafeSpeed(speed);
+            }
+            else if (MainSettings.Run == false)
+            {
+                MainSettings.Run = false;
+                Networking.LocalPlayer.SetWalkSpeed(2f);
+                Networking.LocalPlayer.SetRunSpeed(4f);
+                Networking.LocalPlayer.SetStrafeSpeed(2f);
+            }
+        }
+		public static void FlyOn()
+        {
+            MainSettings.flytoggle = true;
+
+            if (MainSettings.flytoggle == true)
             {
                 VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<CharacterController>().enabled = false;
-                VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<Collider>().enabled = false;
                 origGrav = Physics.gravity;
                 Physics.gravity = Vector3.zero;
             }
-            else
+        }
+        public static void FlyOff()
+        {
+            MainSettings.flytoggle = false;
+
+            if (MainSettings.flytoggle == false)
             {
                 VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<CharacterController>().enabled = true;
-                VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<Collider>().enabled = true;
                 Physics.gravity = origGrav;
             }
         }
@@ -81,14 +103,14 @@ namespace ScytheStation.Functions
                         Player.prop_Player_0.transform.position += VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.up * (FlySpeed);
                     }
                     Networking.LocalPlayer.SetVelocity(Vector3.zero);
-                }
-                return;
+                } return;
             }
         }
-        // SCRIIAAAAMM!!!!!!!
         public static void ClickTPToggle()
         {
-            if (MainSettings.ClickTP)
+            MainSettings.ClickTP = true;
+
+            if (MainSettings.ClickTP == true)
             {
                 if (RoomManager.field_Internal_Static_ApiWorld_0 != null && RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
                 {
@@ -98,22 +120,7 @@ namespace ScytheStation.Functions
                         if (Physics.Raycast(ray, out RaycastHit raycastHit)) VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position = raycastHit.point;
                     }
                 }
-            }
+            } else { MainSettings.ClickTP = false; }
         }
-        public static void Speedrun()
-        {
-            if (MainSettings.SpeedRun)
-            {
-                Networking.LocalPlayer.SetWalkSpeed(Networking.LocalPlayer.GetWalkSpeed() * NewSpeedValue);
-                Networking.LocalPlayer.SetRunSpeed(Networking.LocalPlayer.GetRunSpeed() * NewSpeedValue);
-                Networking.LocalPlayer.SetStrafeSpeed(Networking.LocalPlayer.GetStrafeSpeed() * NewSpeedValue);
-            }
-            else
-            {
-                Networking.LocalPlayer.SetWalkSpeed(2f);
-                Networking.LocalPlayer.SetRunSpeed(4f);
-                Networking.LocalPlayer.SetStrafeSpeed(2f);
-            }
-        }
-    }
+	}
 }

@@ -12,40 +12,34 @@ namespace ApolloCore.API.QM
 {
     public class QMTabMenu : QMMenuBase
     {
-        public GameObject MainButton;
-        public GameObject BadgeObject;
-        public TextMeshProUGUI BadgeText;
-        public MenuTab MenuTabComp;
+        protected GameObject MainButton;
+        protected GameObject BadgeObject;
+        protected TextMeshProUGUI BadgeText;
+        protected MenuTab MenuTabComp;
 
         public QMTabMenu(string ToolTipText, string MenuTitle, Sprite ButtonImage = null)
         {
             Initialize(ToolTipText, MenuTitle, ButtonImage);
         }
 
-        public void Initialize(string ToolTipText, string MenuTitle, Sprite ButtonImage)
+        private void Initialize(string ToolTipText, string MenuTitle, Sprite ButtonImage)
         {
             MenuName = $"{APIUtils.Identifier}-TabMenu-{APIUtils.RandomNumbers()}";
             MenuObject = Object.Instantiate(APIUtils.GetQMMenuTemplate(), APIUtils.GetQMMenuTemplate().transform.parent);
             MenuObject.name = MenuName;
             MenuObject.SetActive(false);
             Object.DestroyImmediate(MenuObject.GetComponent<LaunchPadQMMenu>());
-            //MenuPage = MenuObject.AddComponent<UIPage>();
-            MenuPage = MenuObject.AddComponent<MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique>();
+            MenuPage = MenuObject.AddComponent<UIPage>();
             MenuPage.field_Public_String_0 = MenuName;
             MenuPage.field_Private_Boolean_1 = true;
             MenuPage.field_Protected_MenuStateController_0 = APIUtils.MenuStateControllerInstance;
-            //MenuPage.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
-            MenuPage.field_Private_List_1_MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique_0 = new Il2CppSystem.Collections.Generic.List<MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique>();
-            //MenuPage.field_Private_List_1_UIPage_0.Add(MenuPage);
-            MenuPage.field_Private_List_1_MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique_0.Add(MenuPage);
-            //APIUtils.MenuStateControllerInstance.field_Private_Dictionary_2_String_UIPage_0.Add(MenuName, MenuPage);
-            APIUtils.MenuStateControllerInstance.field_Private_Dictionary_2_String_MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique_0.Add(MenuName, MenuPage);
+            MenuPage.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
+            MenuPage.field_Private_List_1_UIPage_0.Add(MenuPage);
+            APIUtils.MenuStateControllerInstance.field_Private_Dictionary_2_String_UIPage_0.Add(MenuName, MenuPage);
 
-            //var tmpList = APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_UIPage_0.ToList();
-            var tmpList = APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique_0.ToList();
+            var tmpList = APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_UIPage_0.ToList();
             tmpList.Add(MenuPage);
-            //APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_UIPage_0 = tmpList.ToArray();
-            APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_MonoBehaviourPublicStBoLiBo1ObSiObEaSeUnique_0 = tmpList.ToArray();
+            APIUtils.MenuStateControllerInstance.field_Public_ArrayOf_UIPage_0 = tmpList.ToArray();
 
             MenuObject.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup").DestroyChildren();
             MenuTitleText = MenuObject.GetComponentInChildren<TextMeshProUGUI>(true);
@@ -77,15 +71,15 @@ namespace ApolloCore.API.QM
 
         public void SetImage(Sprite newImg)
         {
-            MainButton.transform.Find("Icon").GetComponent<Image>().sprite = newImg;
-            MainButton.transform.Find("Icon").GetComponent<Image>().overrideSprite = newImg;
-            MainButton.transform.Find("Icon").GetComponent<Image>().color = Color.white;
-            MainButton.transform.Find("Icon").GetComponent<Image>().m_Color = Color.white;
+            MainButton.transform.Find("Icon").GetComponent<UnityEngine.UI.Image>().sprite = newImg;
+            MainButton.transform.Find("Icon").GetComponent<UnityEngine.UI.Image>().overrideSprite = newImg;
+            MainButton.transform.Find("Icon").GetComponent<UnityEngine.UI.Image>().color = Color.white;
+            MainButton.transform.Find("Icon").GetComponent<UnityEngine.UI.Image>().m_Color = Color.white;
         }
 
         public void SetToolTip(string newText)
         {
-            //MainButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = newText;
+            MainButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = newText;
         }
 
         public void SetIndex(int newPosition)
@@ -106,6 +100,7 @@ namespace ApolloCore.API.QM
             BadgeObject.SetActive(showing);
             BadgeText.text = text;
         }
+
         public GameObject GetMainButton() => MainButton;
     }
 }

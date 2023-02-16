@@ -1,46 +1,35 @@
-﻿using System;
-using MelonLoader;
+﻿using MelonLoader;
+using System;
 using VRC;
-using ScytheStation.Components;
-using ScytheStation.API.Utils;
+using static ScytheStation.Core.Patch;
 
-namespace ScytheStation.Core.Patches
+namespace ScytheStation.Core
 {
     internal class Patches
     {
+        //Do your patching here
+        private static int Patch = 0;
         public static void Init()
         {
             //Where your patches are initialized IF YOU CAN'T TELL ALREADY
-            MelonLogger.Msg("[PATCH] Initializing...");
+            MelonLogger.Msg("[LOADER] Initializing Patches...");
 
-            ScytheStation.Patches.Patch.EasyPatching.EasyPatchMethodPost(typeof(NetworkManager), "Method_Public_Void_Player_0", typeof(Patches), "Join");
-            ScytheStation.Patches.Patch.EasyPatching.EasyPatchMethodPost(typeof(NetworkManager), "Method_Public_Void_Player_2", typeof(Patches), "Leave");
+            EasyPatching.EasyPatchMethodPost(typeof(NetworkManager), "Method_Public_Void_Player_0", typeof(Patches), "Join");
+            Patch++;
+            EasyPatching.EasyPatchMethodPost(typeof(NetworkManager), "Method_Public_Void_Player_2", typeof(Patches), "Leave");
+            Patch++;
 
-            MelonLogger.Msg("[PATCH] Done!");
+            MelonLogger.Msg($"[LOADER] Patched {Patch} Patches");
         }
 
-        public static void Join(Player param_1)
+        private static void Join(Player param_1)
         {
-            if (MainSettings.PlayerAppearenceLog.Value)
-            {
-                MelonLogger.Msg(ConsoleColor.Green, "[LOGGER] [JOIN] " + param_1.field_Private_APIUser_0.displayName);
-                Notificator.WriteHudMessage("[LOGGER] [JOIN] " + param_1.field_Private_APIUser_0.displayName);
-            }
-            else
-            {
-                MelonLogger.Msg(ConsoleColor.Red, "[LOGGER] Stopped logging");
-                Notificator.WriteHudMessage("[LOGGER] Stopped logging Player L/J Events");
-            }
+            MelonLogger.Msg(ConsoleColor.Green, "[JOIN] Player: " + param_1.field_Private_APIUser_0.displayName);
         }
 
-        public static void Leave(Player param_1)
+        private static void Leave(Player param_1)
         {
-            if (MainSettings.PlayerAppearenceLog.Value)
-            {
-                MelonLogger.Msg(ConsoleColor.Red, "[LOGGER] [LEAVE] " + param_1.field_Private_APIUser_0.displayName);
-                Notificator.WriteHudMessage("[LOGGER] [LEAVE] " + param_1.field_Private_APIUser_0.displayName);
-            }
-            else { }
+            MelonLogger.Msg(ConsoleColor.Red, "[LEFT] Player: " + param_1.field_Private_APIUser_0.displayName);
         }
     }
 }

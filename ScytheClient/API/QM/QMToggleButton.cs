@@ -7,12 +7,12 @@ namespace ApolloCore.API.QM
 {
     public class QMToggleButton : QMButtonBase
     {
-        public TextMeshProUGUI btnTextComp;
-        public Button btnComp;
-        public Image btnImageComp;
-        public bool currentState;
-        public Action OnAction;
-        public Action OffAction;
+        protected TextMeshProUGUI btnTextComp;
+        protected Button btnComp;
+        protected UnityEngine.UI.Image btnImageComp;
+        protected bool currentState;
+        protected Action OnAction;
+        protected Action OffAction;
 
         public QMToggleButton(QMNestedButton location, float btnXPos, float btnYPos, string btnText, Action onAction, Action offAction, string btnToolTip, bool defaultState = false)
         {
@@ -43,7 +43,7 @@ namespace ApolloCore.API.QM
             btnComp = button.GetComponentInChildren<Button>(true);
             btnComp.onClick = new Button.ButtonClickedEvent();
             btnComp.onClick.AddListener(new Action(HandleClick));
-            btnImageComp = button.transform.Find("Icon").GetComponentInChildren<Image>(true);
+            btnImageComp = button.transform.Find("Icon").GetComponentInChildren<UnityEngine.UI.Image>(true);
 
             initShift[0] = 0;
             initShift[1] = 0;
