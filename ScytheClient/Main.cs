@@ -24,7 +24,7 @@ using UnhollowerBaseLib;
 using VRC.Core;
 using ScytheStation.Components.Extensions;
 
-[assembly: MelonInfo(typeof(ScytheStation.Main), "ScytheStation", "2.8", "Scythe Innovation's (Unpasting Process #4)")]
+[assembly: MelonInfo(typeof(ScytheStation.Main), "ScytheStation", "2.8", "Scythe Innovation's")]
 [assembly: MelonGame("VRChat", "VRChat")]
 [assembly: MelonAuthorColor(ConsoleColor.Magenta)]
 [assembly: MelonColor(ConsoleColor.DarkMagenta)]
