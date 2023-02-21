@@ -106,7 +106,9 @@ namespace ScytheStation.Menus
                     Functions.GameControls.KillallLoop = false;
                     if (KillallLoop != null)
                     {
+#pragma warning disable CS8974 // Converting method group to non-delegate type
                         MelonCoroutines.Stop(Functions.GameControls.Killallloop);
+#pragma warning restore CS8974 // Converting method group to non-delegate type
                     }
                 }
             }, "Everyone Dies forever");
@@ -145,7 +147,9 @@ namespace ScytheStation.Menus
                     Functions.GameControls.Murder4ExplodeLoop = false;
                     if (Murder4ExplodeLoop != null)
                     {
+#pragma warning disable CS8974 // Converting method group to non-delegate type
                         MelonCoroutines.Stop(Functions.GameControls.Murder4LoopExplodeTarget);
+#pragma warning restore CS8974 // Converting method group to non-delegate type
                     }
                 }
             }, "Explode muiltiple times faggot");

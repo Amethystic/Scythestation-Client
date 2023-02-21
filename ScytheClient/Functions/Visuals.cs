@@ -14,7 +14,6 @@ namespace ScytheStation.Functions
 
         public static VRC_Trigger[] vrc_Triggers;
         // ik this is from ml but i'll replace it soon (peebo29)
-        internal GameObject nameplateCanvas;
         public static void ESPToggle()
         {
             if (MainSettings.ESPCapsules)
@@ -50,7 +49,7 @@ namespace ScytheStation.Functions
                         Il2CppArrayBase<VRC_Pickup> il2CppArrayBase = Resources.FindObjectsOfTypeAll<VRC_Pickup>();
                         foreach (VRC_Pickup vrc_Pickup in il2CppArrayBase)
                         {
-                            bool flag = !((UnityEngine.Object)vrc_Pickup == null) && !((UnityEngine.Object)vrc_Pickup.gameObject == null) && vrc_Pickup.gameObject.active && vrc_Pickup.enabled && vrc_Pickup.pickupable && !vrc_Pickup.name.Contains("ViewFinder") && !((UnityEngine.Object)HighlightsFX.field_Private_Static_HighlightsFX_0 == null);
+                            bool flag = !((Object)vrc_Pickup == null) && !((Object)vrc_Pickup.gameObject == null) && vrc_Pickup.gameObject.active && vrc_Pickup.enabled && vrc_Pickup.pickupable && !vrc_Pickup.name.Contains("ViewFinder") && !((Object)HighlightsFX.field_Private_Static_HighlightsFX_0 == null);
                             if (flag)
                             {
                                 HighlightsFX.Method_Public_Static_Void_Renderer_Boolean_PDM_0(vrc_Pickup.GetComponentInChildren<MeshRenderer>(), MainSettings.IESP);

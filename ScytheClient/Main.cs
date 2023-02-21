@@ -15,16 +15,13 @@ using ScytheStation.Core.Etc;
 using VRC.Integrations;
 using System.Runtime.InteropServices;
 using ExitGames.Client.Photon;
-using UnhollowerRuntimeLib;
-using VRCPlates.Patches;
 using NetworkSanity.Core;
 using Photon.Realtime;
-using VRCPlates;
 using UnhollowerBaseLib;
 using VRC.Core;
 using ScytheStation.Components.Extensions;
 
-[assembly: MelonInfo(typeof(ScytheStation.Main), "ScytheStation", "2.8", "Scythe Innovation's")]
+[assembly: MelonInfo(typeof(ScytheStation.Main), "ScytheStation", "2.9", "Scythe Innovation's")]
 [assembly: MelonGame("VRChat", "VRChat")]
 [assembly: MelonAuthorColor(ConsoleColor.Magenta)]
 [assembly: MelonColor(ConsoleColor.DarkMagenta)]
@@ -37,7 +34,7 @@ namespace ScytheStation
     {
         /*Public Static Strings*/
         public new static HarmonyLib.Harmony Harmony { get; private set; }
-        public static string Version = "2.8";
+        public static string Version = "2.9";
         public static string Name = $"<color=#fc0ac0><b>ScytheStation</b></color> [v{Version}]";
         public static string Author = "Scythe Innovation's";
         public static string N2 = $"<color=#f50a70><b>S</b></color><color=#e10af5><b>c</b></color><color=#b60af5><b>y</b></color><color=#8f0af5><b>t</b></color><color=#5c0af5><b>h</b></color><color=#2d0af5><b>e</b></color> <color=#fcfcfc><b>[v{Version}]</b></color>";
@@ -173,9 +170,7 @@ namespace ScytheStation
             Directories.ValidateFolders();
             Installer.Init();
             Core.Patches.Patches.Init();
-            VRCPlatesPatches.InitPatches();
             Core.Discord.Manager.InitRPC();
-            ClassInjector.RegisterTypeInIl2Cpp<CustomNameplate>();
             DiscordSettings.Discord();
         }
         public override void OnLateInitializeMelon()
@@ -232,6 +227,7 @@ namespace ScytheStation
         {
             // Scene Loads
             MelonLogger.Msg(ConsoleColor.Gray, "[GAME] World loaded!");
+            GameControls.ClearCache();
         }
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {

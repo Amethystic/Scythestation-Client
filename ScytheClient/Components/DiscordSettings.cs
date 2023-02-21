@@ -65,6 +65,7 @@ namespace ScytheStation.Components
         public static SaveProperty<bool> keybinds = new("keybinds", false);
         public static SaveProperty<bool> Nameplates = new("Nameplates", false);
         public static SaveProperty<bool> PlayerAppearenceLog = new("PlayerAppearenceLog", false);
+        public static SaveProperty<bool> AutoClearCache = new("AutoClearCache", false);
     }
     internal class Game
     {

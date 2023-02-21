@@ -2,15 +2,22 @@
 using MelonLoader;
 using VRC;
 using ScytheStation.Components;
+using UnityEngine;
+using VRC.Core;
 using ScytheStation.API.Utils;
 
 namespace ScytheStation.Core.Patches
 {
-    internal class Patches
+    internal static class Patches
     {
+        public static APIUser _Apiuser { get; set; }
+        internal static string _UserName;
+        internal static int _PlayersInLobby { get; private set; }
+        internal static GameObject _PlatePrefab { get; set; }
+        internal static GameObject _NewPlate { get; set; }
+        internal static bool NamePlatesInfo { get; private set; }
         public static void Init()
         {
-            //Where your patches are initialized IF YOU CAN'T TELL ALREADY
             MelonLogger.Msg("[PATCH] Initializing...");
 
             ScytheStation.Patches.Patch.EasyPatching.EasyPatchMethodPost(typeof(NetworkManager), "Method_Public_Void_Player_0", typeof(Patches), "Join");
@@ -23,24 +30,33 @@ namespace ScytheStation.Core.Patches
         {
             if (MainSettings.PlayerAppearenceLog.Value)
             {
-                MelonLogger.Msg(ConsoleColor.Green, "[LOGGER] [JOIN] " + param_1.field_Private_APIUser_0.displayName);
-                Notificator.WriteHudMessage("[LOGGER] [JOIN] " + param_1.field_Private_APIUser_0.displayName);
-            }
-            else
-            {
-                MelonLogger.Msg(ConsoleColor.Red, "[LOGGER] Stopped logging");
-                Notificator.WriteHudMessage("[LOGGER] Stopped logging Player L/J Events");
+                if (_Apiuser.hasModerationPowers || _Apiuser.hasSuperPowers)
+                {
+                    Notificator.WriteHudMessage($"[LOGGER] MODERATOR DETECTED [{_UserName}] A moderator has entered in your lobby.");
+                    MelonLogger.Msg("[LOGGER] MODERATOR DETECTED [" + _UserName + "]", "A moderator has entered in your lobby.");
+                }
+                else
+                {
+                    MelonLogger.Msg(ConsoleColor.Green, "[LOGGER] [JOIN] " + param_1.field_Private_APIUser_0.displayName);
+                    Notificator.WriteHudMessage("[LOGGER] [JOIN] " + param_1.field_Private_APIUser_0.displayName);
+                }
             }
         }
-
         public static void Leave(Player param_1)
         {
             if (MainSettings.PlayerAppearenceLog.Value)
             {
-                MelonLogger.Msg(ConsoleColor.Red, "[LOGGER] [LEAVE] " + param_1.field_Private_APIUser_0.displayName);
-                Notificator.WriteHudMessage("[LOGGER] [LEAVE] " + param_1.field_Private_APIUser_0.displayName);
+                if (_Apiuser.hasModerationPowers || _Apiuser.hasSuperPowers)
+                {
+                    Notificator.WriteHudMessage($"[LOGGER] MODERATOR DETECTED [{_UserName}] A moderator has left in your lobby.");
+                    MelonLogger.Msg("[LOGGER] MODERATOR DETECTED [" + _UserName + "]", "A moderator has left in your lobby.");
+                }
+                else
+                {
+                    MelonLogger.Msg(ConsoleColor.Red, "[LOGGER] [LEAVE] " + param_1.field_Private_APIUser_0.displayName);
+                    Notificator.WriteHudMessage("[LOGGER] [LEAVE] " + param_1.field_Private_APIUser_0.displayName);
+                }
             }
-            else { }
         }
     }
-}
+} 

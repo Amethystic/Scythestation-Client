@@ -37,6 +37,27 @@ namespace ScytheStation.Functions
             Process.Start($"{Main.Site}");
             MelonLogger.Msg(ConsoleColor.Green, $"[GC] Directing to {Main.Site}");
         }
+        public static void ClearCache()
+        {
+            Caching.CleanCache();
+            ApiCache.ClearCache();
+            ApiCache.ClearResponseCache();
+
+            if (MainSettings.AutoClearCache)
+            {
+                try
+                {
+                    Caching.CleanCache();
+                    ApiCache.ClearCache();
+                    ApiCache.ClearResponseCache();
+                    new WaitForSeconds(1000);
+                }
+                catch (Exception ex)
+                {
+                    MelonLogger.Error($"Failed to clear\n{ex}");
+                }
+            }
+        }
         public static void LagGame()
         {
             Application.targetFrameRate = 1;

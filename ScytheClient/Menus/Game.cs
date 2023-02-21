@@ -37,6 +37,10 @@ namespace ScytheStation.Menus
             new QMToggleButton(AnotherMenu2, 4, 1, "Log Player L/J Events", delegate
             { Components.MainSettings.PlayerAppearenceLog.Value = true; MelonLogger.Msg(ConsoleColor.Green, "[GC] Started Logging"); Notificator.WriteHudMessage($"[GC] Started Logging"); }, delegate
             { Components.MainSettings.PlayerAppearenceLog.Value = false; MelonLogger.Msg(ConsoleColor.DarkGreen, "[GC] Stopped Logging"); Notificator.WriteHudMessage($"[GC] Stopped Logging"); }, "Messes with our patch's logging system");
+            new QMToggleButton(AnotherMenu2, 1, 2, "AutoClear Cache", delegate
+            { Components.MainSettings.AutoClearCache.Value = true; MelonLogger.Msg(ConsoleColor.Green, "[GC] Started Clearing Cache in Auto"); Notificator.WriteHudMessage($"[GC] Started Clearing Cache in Auto"); }, delegate
+            { Components.MainSettings.AutoClearCache.Value = false; MelonLogger.Msg(ConsoleColor.DarkGreen, "[GC] Stopped Clearing Cache in Auto"); Notificator.WriteHudMessage($"[GC] Stopped Clearing Cache in Auto"); }, "Clears Cache in robomotion");
+            new QMSingleButton(AnotherMenu2, 2, 2, "Clear Cache", delegate { MelonLogger.Msg("[GC] Cleaned Cache"); Notificator.WriteHudMessage($"[GC] Cleaned Cache"); }, "Byebye Cache");
             /* Settings Buttons */
             // GAME MENU //
             MelonLogger.Msg(ConsoleColor.Green, "[MENUS] GameManager Loaded", MenuManager.C++);
